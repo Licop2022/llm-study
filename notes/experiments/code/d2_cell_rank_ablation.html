@@ -1,0 +1,192 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>d2_cell_rank_ablation.py · 本机源码快照</title><style>body{margin:24px;color:#182b3d;background:#f0f4f8;font:17px/1.8 system-ui}a{color:#194c75}pre{max-width:100%;overflow:auto;background:#fff;padding:20px;border:1px solid #c5d1dd;line-height:1.8}.source-line{display:block;scroll-margin-top:15px}.source-line>a{display:inline-block;min-width:4em;color:#536c80;text-decoration:none}.source-line:target{background:#fff0b5}header{display:flex;gap:20px;flex-wrap:wrap}h1{font-size:23px}</style><header><a href="../../../#experiments/d2-python-shapes">返回代码课</a><a href="../d2_cell_rank_ablation.py" download>下载源码</a></header><h1>d2_cell_rank_ablation.py</h1><p>2026-10-18 本机归档快照；没有执行这份源码。行号与本轮课程对应。</p><pre><code><span class="source-line" id="L1"><a href="#L1" aria-label="第 1 行">1</a>&quot;&quot;&quot;Train M=12/25 module-one ablations with matched data and update budgets.</span>
+<span class="source-line" id="L2"><a href="#L2" aria-label="第 2 行">2</a></span>
+<span class="source-line" id="L3"><a href="#L3" aria-label="第 3 行">3</a>N=50, training masks/scaling, seed, Adam settings and core-inference ridge</span>
+<span class="source-line" id="L4"><a href="#L4" aria-label="第 4 行">4</a>are shared. Checkpoint selection uses held-out entries WITHIN the training</span>
+<span class="source-line" id="L5"><a href="#L5" aria-label="第 5 行">5</a>prefix. Chronological validation uses observed-only independent core solves.</span>
+<span class="source-line" id="L6"><a href="#L6" aria-label="第 6 行">6</a>No temporal-test or held-out entry-test scores are computed. This is reconstruction, NOT</span>
+<span class="source-line" id="L7"><a href="#L7" aria-label="第 7 行">7</a>future forecasting; M=25 is an explicit non-paper diagnostic ablation.</span>
+<span class="source-line" id="L8"><a href="#L8" aria-label="第 8 行">8</a>&quot;&quot;&quot;</span>
+<span class="source-line" id="L9"><a href="#L9" aria-label="第 9 行">9</a></span>
+<span class="source-line" id="L10"><a href="#L10" aria-label="第 10 行">10</a>import argparse</span>
+<span class="source-line" id="L11"><a href="#L11" aria-label="第 11 行">11</a>import gc</span>
+<span class="source-line" id="L12"><a href="#L12" aria-label="第 12 行">12</a>import json</span>
+<span class="source-line" id="L13"><a href="#L13" aria-label="第 13 行">13</a>from datetime import datetime, timezone</span>
+<span class="source-line" id="L14"><a href="#L14" aria-label="第 14 行">14</a>from pathlib import Path</span>
+<span class="source-line" id="L15"><a href="#L15" aria-label="第 15 行">15</a></span>
+<span class="source-line" id="L16"><a href="#L16" aria-label="第 16 行">16</a>import numpy as np</span>
+<span class="source-line" id="L17"><a href="#L17" aria-label="第 17 行">17</a></span>
+<span class="source-line" id="L18"><a href="#L18" aria-label="第 18 行">18</a>import d2_module1_gpu</span>
+<span class="source-line" id="L19"><a href="#L19" aria-label="第 19 行">19</a>from d2_transformer_gpu import forecast_origins, load_inputs, soh_scores, window_indices</span>
+<span class="source-line" id="L20"><a href="#L20" aria-label="第 20 行">20</a></span>
+<span class="source-line" id="L21"><a href="#L21" aria-label="第 21 行">21</a></span>
+<span class="source-line" id="L22"><a href="#L22" aria-label="第 22 行">22</a>def validation_metrics(prediction, data, history=25, horizon=5):</span>
+<span class="source-line" id="L23"><a href="#L23" aria-label="第 23 行">23</a>    &quot;&quot;&quot;Capacity reconstruction metrics; use the predictor&#x27;s window weighting.&quot;&quot;&quot;</span>
+<span class="source-line" id="L24"><a href="#L24" aria-label="第 24 行">24</a>    train_end, val_end, _ = map(int, data[&#x27;boundaries&#x27;])</span>
+<span class="source-line" id="L25"><a href="#L25" aria-label="第 25 行">25</a>    expected = (*data[&#x27;X_norm&#x27;].shape[:2], val_end - train_end)</span>
+<span class="source-line" id="L26"><a href="#L26" aria-label="第 26 行">26</a>    if prediction.shape != expected or not np.isfinite(prediction).all():</span>
+<span class="source-line" id="L27"><a href="#L27" aria-label="第 27 行">27</a>        raise ValueError(&#x27;Invalid validation capacity reconstruction.&#x27;)</span>
+<span class="source-line" id="L28"><a href="#L28" aria-label="第 28 行">28</a>    offset, scale = [float(data[key][2]) for key in (&#x27;normalization_offsets&#x27;, &#x27;normalization_scales&#x27;)]</span>
+<span class="source-line" id="L29"><a href="#L29" aria-label="第 29 行">29</a>    target = data[&#x27;X_norm&#x27;][:, :, 2, train_end:val_end]</span>
+<span class="source-line" id="L30"><a href="#L30" aria-label="第 30 行">30</a>    available = data[&#x27;available&#x27;][:, :, 2, train_end:val_end]</span>
+<span class="source-line" id="L31"><a href="#L31" aria-label="第 31 行">31</a>    observed = data[&#x27;observed&#x27;][:, :, 2, train_end:val_end]</span>
+<span class="source-line" id="L32"><a href="#L32" aria-label="第 32 行">32</a>    error = (prediction - target).astype(np.float64) * scale</span>
+<span class="source-line" id="L33"><a href="#L33" aria-label="第 33 行">33</a>    curve = {}</span>
+<span class="source-line" id="L34"><a href="#L34" aria-label="第 34 行">34</a>    for name, mask in [(&#x27;available&#x27;, available), (&#x27;observed&#x27;, observed), (&#x27;hidden&#x27;, available &amp; ~observed)]:</span>
+<span class="source-line" id="L35"><a href="#L35" aria-label="第 35 行">35</a>        curve[name] = float(np.sqrt(np.mean(error[mask] ** 2))) if mask.any() else None</span>
+<span class="source-line" id="L36"><a href="#L36" aria-label="第 36 行">36</a>    cap0 = np.where(data[&#x27;available&#x27;][:, :, 2, 0], data[&#x27;X_norm&#x27;][:, :, 2, 0] * scale + offset, -np.inf).max(axis=1)</span>
+<span class="source-line" id="L37"><a href="#L37" aria-label="第 37 行">37</a>    cap0 = np.where(np.isfinite(cap0) &amp; (cap0 &gt; 0), cap0, np.nan)</span>
+<span class="source-line" id="L38"><a href="#L38" aria-label="第 38 行">38</a>    true_peak = np.where(available, target, -np.inf).max(axis=1) * scale + offset</span>
+<span class="source-line" id="L39"><a href="#L39" aria-label="第 39 行">39</a>    true_peak = np.where(available.any(axis=1) &amp; (true_peak &gt; 0), true_peak, np.nan)</span>
+<span class="source-line" id="L40"><a href="#L40" aria-label="第 40 行">40</a>    pred_peak = prediction.max(axis=1) * scale + offset</span>
+<span class="source-line" id="L41"><a href="#L41" aria-label="第 41 行">41</a>    origins = forecast_origins(data[&#x27;boundaries&#x27;], history, horizon)[&#x27;val&#x27;]</span>
+<span class="source-line" id="L42"><a href="#L42" aria-label="第 42 行">42</a>    _, target_cycles = window_indices(origins, history, horizon)</span>
+<span class="source-line" id="L43"><a href="#L43" aria-label="第 43 行">43</a>    indices = target_cycles - train_end</span>
+<span class="source-line" id="L44"><a href="#L44" aria-label="第 44 行">44</a>    with np.errstate(invalid=&#x27;ignore&#x27;, divide=&#x27;ignore&#x27;):</span>
+<span class="source-line" id="L45"><a href="#L45" aria-label="第 45 行">45</a>        truth = true_peak[:, indices].transpose(1, 2, 0) / cap0[None, None, :] * 100.</span>
+<span class="source-line" id="L46"><a href="#L46" aria-label="第 46 行">46</a>        pred = pred_peak[:, indices].transpose(1, 2, 0) / cap0[None, None, :] * 100.</span>
+<span class="source-line" id="L47"><a href="#L47" aria-label="第 47 行">47</a>    valid = np.isfinite(truth) &amp; np.isfinite(pred)</span>
+<span class="source-line" id="L48"><a href="#L48" aria-label="第 48 行">48</a>    soh = soh_scores(pred, truth, valid)</span>
+<span class="source-line" id="L49"><a href="#L49" aria-label="第 49 行">49</a>    soh[&#x27;signed_bias_pp&#x27;] = float((pred - truth)[valid].mean())</span>
+<span class="source-line" id="L50"><a href="#L50" aria-label="第 50 行">50</a>    return {&#x27;capacity_curve_rmse_mAh&#x27;: curve, &#x27;soh&#x27;: soh}</span>
+<span class="source-line" id="L51"><a href="#L51" aria-label="第 51 行">51</a></span>
+<span class="source-line" id="L52"><a href="#L52" aria-label="第 52 行">52</a></span>
+<span class="source-line" id="L53"><a href="#L53" aria-label="第 53 行">53</a>def infer_validation_capacity(a_np, b_np, data, ridge, batch, device_name):</span>
+<span class="source-line" id="L54"><a href="#L54" aria-label="第 54 行">54</a>    &quot;&quot;&quot;Frozen-factor ridge, using only observed validation capacity entries.&quot;&quot;&quot;</span>
+<span class="source-line" id="L55"><a href="#L55" aria-label="第 55 行">55</a>    import torch</span>
+<span class="source-line" id="L56"><a href="#L56" aria-label="第 56 行">56</a></span>
+<span class="source-line" id="L57"><a href="#L57" aria-label="第 57 行">57</a>    train_end, val_end, _ = map(int, data[&#x27;boundaries&#x27;])</span>
+<span class="source-line" id="L58"><a href="#L58" aria-label="第 58 行">58</a>    x = data[&#x27;X_norm&#x27;][:, :, 2, train_end:val_end]</span>
+<span class="source-line" id="L59"><a href="#L59" aria-label="第 59 行">59</a>    w_np = data[&#x27;observed&#x27;][:, :, 2, train_end:val_end]</span>
+<span class="source-line" id="L60"><a href="#L60" aria-label="第 60 行">60</a>    y_np = np.ascontiguousarray(x.transpose(2, 0, 1)).reshape(x.shape[-1], -1)</span>
+<span class="source-line" id="L61"><a href="#L61" aria-label="第 61 行">61</a>    weights = np.ascontiguousarray(w_np.transpose(2, 0, 1)).reshape(y_np.shape)</span>
+<span class="source-line" id="L62"><a href="#L62" aria-label="第 62 行">62</a>    result = np.empty_like(x)</span>
+<span class="source-line" id="L63"><a href="#L63" aria-label="第 63 行">63</a>    device = torch.device(device_name)</span>
+<span class="source-line" id="L64"><a href="#L64" aria-label="第 64 行">64</a>    with torch.no_grad():</span>
+<span class="source-line" id="L65"><a href="#L65" aria-label="第 65 行">65</a>        a, b = [torch.as_tensor(value, dtype=torch.float32, device=device) for value in (a_np, b_np)]</span>
+<span class="source-line" id="L66"><a href="#L66" aria-label="第 66 行">66</a>        design = torch.einsum(&#x27;im,jn-&gt;ijmn&#x27;, a, b).reshape(a.shape[0] * b.shape[0], -1)</span>
+<span class="source-line" id="L67"><a href="#L67" aria-label="第 67 行">67</a>        eye = ridge * torch.eye(design.shape[1], dtype=torch.float32, device=device)</span>
+<span class="source-line" id="L68"><a href="#L68" aria-label="第 68 行">68</a>        for start in range(0, len(y_np), batch):</span>
+<span class="source-line" id="L69"><a href="#L69" aria-label="第 69 行">69</a>            end = min(start + batch, len(y_np))</span>
+<span class="source-line" id="L70"><a href="#L70" aria-label="第 70 行">70</a>            weights_t = torch.as_tensor(weights[start:end], dtype=torch.float32, device=device)</span>
+<span class="source-line" id="L71"><a href="#L71" aria-label="第 71 行">71</a>            # Hide unobserved values BEFORE arithmetic. They do not enter solves.</span>
+<span class="source-line" id="L72"><a href="#L72" aria-label="第 72 行">72</a>            y = torch.as_tensor(y_np[start:end], dtype=torch.float32, device=device)</span>
+<span class="source-line" id="L73"><a href="#L73" aria-label="第 73 行">73</a>            y = torch.where(weights_t.bool(), y, 0.)</span>
+<span class="source-line" id="L74"><a href="#L74" aria-label="第 74 行">74</a>            lhs = design.T @ (design[None] * weights_t[:, :, None]) + eye</span>
+<span class="source-line" id="L75"><a href="#L75" aria-label="第 75 行">75</a>            rhs = y @ design</span>
+<span class="source-line" id="L76"><a href="#L76" aria-label="第 76 行">76</a>            coefficients = torch.linalg.solve(lhs, rhs.unsqueeze(-1)).squeeze(-1)</span>
+<span class="source-line" id="L77"><a href="#L77" aria-label="第 77 行">77</a>            decoded = coefficients @ design.T</span>
+<span class="source-line" id="L78"><a href="#L78" aria-label="第 78 行">78</a>            if not torch.isfinite(decoded).all():</span>
+<span class="source-line" id="L79"><a href="#L79" aria-label="第 79 行">79</a>                raise RuntimeError(&#x27;Non-finite capacity solve.&#x27;)</span>
+<span class="source-line" id="L80"><a href="#L80" aria-label="第 80 行">80</a>            result[:, :, start:end] = decoded.reshape(end - start, a.shape[0], b.shape[0]).permute(1, 2, 0).cpu().numpy()</span>
+<span class="source-line" id="L81"><a href="#L81" aria-label="第 81 行">81</a>            if start == 0 or end == len(y_np):</span>
+<span class="source-line" id="L82"><a href="#L82" aria-label="第 82 行">82</a>                print(f&#x27;  Validation capacity solves: {end}/{len(y_np)}&#x27;, flush=True)</span>
+<span class="source-line" id="L83"><a href="#L83" aria-label="第 83 行">83</a>    return result</span>
+<span class="source-line" id="L84"><a href="#L84" aria-label="第 84 行">84</a></span>
+<span class="source-line" id="L85"><a href="#L85" aria-label="第 85 行">85</a></span>
+<span class="source-line" id="L86"><a href="#L86" aria-label="第 86 行">86</a>def check_training_protocol(prepared, data):</span>
+<span class="source-line" id="L87"><a href="#L87" aria-label="第 87 行">87</a>    x, train, val, entry_test, available, offsets, scales, limit = prepared</span>
+<span class="source-line" id="L88"><a href="#L88" aria-label="第 88 行">88</a>    train_end = int(data[&#x27;boundaries&#x27;][0])</span>
+<span class="source-line" id="L89"><a href="#L89" aria-label="第 89 行">89</a>    if x.shape[-1] != train_end or limit != train_end:</span>
+<span class="source-line" id="L90"><a href="#L90" aria-label="第 90 行">90</a>        raise ValueError(&#x27;Training prefix does not match the existing experiment.&#x27;)</span>
+<span class="source-line" id="L91"><a href="#L91" aria-label="第 91 行">91</a>    np.testing.assert_array_equal(train, data[&#x27;observed&#x27;][:, :, :, :train_end])</span>
+<span class="source-line" id="L92"><a href="#L92" aria-label="第 92 行">92</a>    np.testing.assert_array_equal(available, data[&#x27;available&#x27;][:, :, :, :train_end])</span>
+<span class="source-line" id="L93"><a href="#L93" aria-label="第 93 行">93</a>    np.testing.assert_allclose(offsets, data[&#x27;normalization_offsets&#x27;], rtol=1e-10, atol=1e-10)</span>
+<span class="source-line" id="L94"><a href="#L94" aria-label="第 94 行">94</a>    np.testing.assert_allclose(scales, data[&#x27;normalization_scales&#x27;], rtol=1e-10, atol=1e-10)</span>
+<span class="source-line" id="L95"><a href="#L95" aria-label="第 95 行">95</a>    np.testing.assert_allclose(x, data[&#x27;X_norm&#x27;][:, :, :, :train_end], rtol=1e-6, atol=1e-6)</span>
+<span class="source-line" id="L96"><a href="#L96" aria-label="第 96 行">96</a></span>
+<span class="source-line" id="L97"><a href="#L97" aria-label="第 97 行">97</a></span>
+<span class="source-line" id="L98"><a href="#L98" aria-label="第 98 行">98</a>def main():</span>
+<span class="source-line" id="L99"><a href="#L99" aria-label="第 99 行">99</a>    parser = argparse.ArgumentParser(description=__doc__)</span>
+<span class="source-line" id="L100"><a href="#L100" aria-label="第 100 行">100</a>    parser.add_argument(&#x27;--inputs&#x27;, type=Path, required=True)</span>
+<span class="source-line" id="L101"><a href="#L101" aria-label="第 101 行">101</a>    parser.add_argument(&#x27;--data&#x27;, type=Path, default=Path(__file__).resolve().parent / &#x27;datasets&#x27; / &#x27;D2_tensor.npy&#x27;)</span>
+<span class="source-line" id="L102"><a href="#L102" aria-label="第 102 行">102</a>    parser.add_argument(&#x27;--device&#x27;, default=&#x27;cuda:0&#x27;)</span>
+<span class="source-line" id="L103"><a href="#L103" aria-label="第 103 行">103</a>    parser.add_argument(&#x27;--steps&#x27;, type=int, default=1500)</span>
+<span class="source-line" id="L104"><a href="#L104" aria-label="第 104 行">104</a>    parser.add_argument(&#x27;--lr&#x27;, type=float, default=.003)</span>
+<span class="source-line" id="L105"><a href="#L105" aria-label="第 105 行">105</a>    parser.add_argument(&#x27;--batch&#x27;, type=int, default=4)</span>
+<span class="source-line" id="L106"><a href="#L106" aria-label="第 106 行">106</a>    args = parser.parse_args()</span>
+<span class="source-line" id="L107"><a href="#L107" aria-label="第 107 行">107</a>    if args.steps &lt; 1 or args.lr &lt;= 0 or args.batch &lt; 1:</span>
+<span class="source-line" id="L108"><a href="#L108" aria-label="第 108 行">108</a>        parser.error(&#x27;Require positive steps, lr, batch.&#x27;)</span>
+<span class="source-line" id="L109"><a href="#L109" aria-label="第 109 行">109</a>    data, metadata = load_inputs(args.inputs)</span>
+<span class="source-line" id="L110"><a href="#L110" aria-label="第 110 行">110</a>    train_end, val_end, total = map(int, data[&#x27;boundaries&#x27;])</span>
+<span class="source-line" id="L111"><a href="#L111" aria-label="第 111 行">111</a>    if data[&#x27;X_norm&#x27;].shape[:2] != (25, 100):</span>
+<span class="source-line" id="L112"><a href="#L112" aria-label="第 112 行">112</a>        raise ValueError(&#x27;This diagnostic is for D2 with 25 cells and 100 samples.&#x27;)</span>
+<span class="source-line" id="L113"><a href="#L113" aria-label="第 113 行">113</a>    seed, missing, ridge = int(metadata[&#x27;seed&#x27;]), float(metadata[&#x27;missing_ratio&#x27;]), float(metadata[&#x27;ridge&#x27;])</span>
+<span class="source-line" id="L114"><a href="#L114" aria-label="第 114 行">114</a>    if ridge &lt;= 0:</span>
+<span class="source-line" id="L115"><a href="#L115" aria-label="第 115 行">115</a>        raise ValueError(&#x27;Require the positive ridge coefficient from the aligned input experiment.&#x27;)</span>
+<span class="source-line" id="L116"><a href="#L116" aria-label="第 116 行">116</a>    prepared = d2_module1_gpu.prepare_data(args.data, train_end, missing, seed, &#x27;minmax&#x27;)</span>
+<span class="source-line" id="L117"><a href="#L117" aria-label="第 117 行">117</a>    check_training_protocol(prepared, data)</span>
+<span class="source-line" id="L118"><a href="#L118" aria-label="第 118 行">118</a>    del prepared</span>
+<span class="source-line" id="L119"><a href="#L119" aria-label="第 119 行">119</a>    print(&#x27;PASS: training masks, normalized values and scaling match existing inputs.&#x27;, flush=True)</span>
+<span class="source-line" id="L120"><a href="#L120" aria-label="第 120 行">120</a>    print(&#x27;Fit M=12 and M=25 with N=50; matched seed, masks, scaling, updates, Adam and regularization.&#x27;)</span>
+<span class="source-line" id="L121"><a href="#L121" aria-label="第 121 行">121</a>    print(&#x27;Entry-validation selects checkpoints; chronological validation capacity is scored only after fitting.&#x27;)</span>
+<span class="source-line" id="L122"><a href="#L122" aria-label="第 122 行">122</a>    print(&#x27;M=25 is NOT the paper setting. This experiment does NOT train a codec/forecaster or score test periods.&#x27;, flush=True)</span>
+<span class="source-line" id="L123"><a href="#L123" aria-label="第 123 行">123</a>    out = Path(__file__).resolve().parent / &#x27;runs&#x27; / (&#x27;cell_rank_ablation_&#x27; + datetime.now(timezone.utc).strftime(&#x27;%Y%m%dT%H%M%S_%fZ&#x27;))</span>
+<span class="source-line" id="L124"><a href="#L124" aria-label="第 124 行">124</a>    out.mkdir(parents=True, exist_ok=False)</span>
+<span class="source-line" id="L125"><a href="#L125" aria-label="第 125 行">125</a>    with np.load(args.inputs, allow_pickle=False) as archive:</span>
+<span class="source-line" id="L126"><a href="#L126" aria-label="第 126 行">126</a>        old_core = archive[&#x27;G_all&#x27;][:, :, 2, train_end:val_end]</span>
+<span class="source-line" id="L127"><a href="#L127" aria-label="第 127 行">127</a>    old_pred = np.einsum(&#x27;im,jn,mnt-&gt;ijt&#x27;, data[&#x27;A&#x27;], data[&#x27;B&#x27;], old_core, optimize=True)</span>
+<span class="source-line" id="L128"><a href="#L128" aria-label="第 128 行">128</a>    scores = {&#x27;existing_M12_reference&#x27;: validation_metrics(old_pred, data)}</span>
+<span class="source-line" id="L129"><a href="#L129" aria-label="第 129 行">129</a>    np.save(out / &#x27;existing_M12_validation_capacity.npy&#x27;, old_pred, allow_pickle=False)</span>
+<span class="source-line" id="L130"><a href="#L130" aria-label="第 130 行">130</a>    checkpoints = {}</span>
+<span class="source-line" id="L131"><a href="#L131" aria-label="第 131 行">131</a>    import torch</span>
+<span class="source-line" id="L132"><a href="#L132" aria-label="第 132 行">132</a></span>
+<span class="source-line" id="L133"><a href="#L133" aria-label="第 133 行">133</a>    for rank in (12, 25):</span>
+<span class="source-line" id="L134"><a href="#L134" aria-label="第 134 行">134</a>        print(f&#x27;\nFITTING M={rank}, N=50&#x27;, flush=True)</span>
+<span class="source-line" id="L135"><a href="#L135" aria-label="第 135 行">135</a>        checkpoint_dir = d2_module1_gpu.main([</span>
+<span class="source-line" id="L136"><a href="#L136" aria-label="第 136 行">136</a>            &#x27;--data&#x27;, str(args.data), &#x27;--cycles&#x27;, str(train_end), &#x27;--ranks&#x27;, str(rank), &#x27;50&#x27;,</span>
+<span class="source-line" id="L137"><a href="#L137" aria-label="第 137 行">137</a>            &#x27;--normalization&#x27;, &#x27;minmax&#x27;, &#x27;--missing-ratio&#x27;, str(missing), &#x27;--seed&#x27;, str(seed),</span>
+<span class="source-line" id="L138"><a href="#L138" aria-label="第 138 行">138</a>            &#x27;--steps&#x27;, str(args.steps), &#x27;--lr&#x27;, str(args.lr), &#x27;--lambda-reg&#x27;, str(ridge),</span>
+<span class="source-line" id="L139"><a href="#L139" aria-label="第 139 行">139</a>            &#x27;--device&#x27;, args.device, &#x27;--skip-test-evaluation&#x27;])</span>
+<span class="source-line" id="L140"><a href="#L140" aria-label="第 140 行">140</a>        gc.collect()</span>
+<span class="source-line" id="L141"><a href="#L141" aria-label="第 141 行">141</a>        if args.device.startswith(&#x27;cuda&#x27;):</span>
+<span class="source-line" id="L142"><a href="#L142" aria-label="第 142 行">142</a>            torch.cuda.empty_cache()</span>
+<span class="source-line" id="L143"><a href="#L143" aria-label="第 143 行">143</a>        with np.load(checkpoint_dir / &#x27;module1_gpu.npz&#x27;, allow_pickle=False) as archive:</span>
+<span class="source-line" id="L144"><a href="#L144" aria-label="第 144 行">144</a>            a, b = archive[&#x27;U1&#x27;], archive[&#x27;U2&#x27;]</span>
+<span class="source-line" id="L145"><a href="#L145" aria-label="第 145 行">145</a>        fit_summary = json.loads((checkpoint_dir / &#x27;summary.json&#x27;).read_text(encoding=&#x27;utf-8&#x27;))</span>
+<span class="source-line" id="L146"><a href="#L146" aria-label="第 146 行">146</a>        if fit_summary[&#x27;entry_test_evaluated&#x27;] is not False:</span>
+<span class="source-line" id="L147"><a href="#L147" aria-label="第 147 行">147</a>            raise RuntimeError(&#x27;Unexpected test-entry evaluation in validation ablation.&#x27;)</span>
+<span class="source-line" id="L148"><a href="#L148" aria-label="第 148 行">148</a>        prediction = infer_validation_capacity(a, b, data, ridge, args.batch, args.device)</span>
+<span class="source-line" id="L149"><a href="#L149" aria-label="第 149 行">149</a>        score = validation_metrics(prediction, data)</span>
+<span class="source-line" id="L150"><a href="#L150" aria-label="第 150 行">150</a>        effective_ranks = {}</span>
+<span class="source-line" id="L151"><a href="#L151" aria-label="第 151 行">151</a>        for name, factor in [(&#x27;A&#x27;, a), (&#x27;B&#x27;, b)]:</span>
+<span class="source-line" id="L152"><a href="#L152" aria-label="第 152 行">152</a>            singular = np.linalg.svd(factor.astype(np.float64), compute_uv=False)</span>
+<span class="source-line" id="L153"><a href="#L153" aria-label="第 153 行">153</a>            effective_ranks[name] = int((singular &gt; singular[0] * 1e-6).sum())</span>
+<span class="source-line" id="L154"><a href="#L154" aria-label="第 154 行">154</a>        score.update({&#x27;best_training_prefix_entry_validation_step&#x27;: fit_summary[&#x27;best_step&#x27;],</span>
+<span class="source-line" id="L155"><a href="#L155" aria-label="第 155 行">155</a>                      &#x27;training_prefix_entry_validation_rmse&#x27;: fit_summary[&#x27;best_val_rmse&#x27;],</span>
+<span class="source-line" id="L156"><a href="#L156" aria-label="第 156 行">156</a>                      &#x27;parameter_count&#x27;: int(a.size + b.size + rank * 50 * 3 * train_end),</span>
+<span class="source-line" id="L157"><a href="#L157" aria-label="第 157 行">157</a>                      &#x27;effective_factor_ranks_at_rcond_1e_6&#x27;: effective_ranks,</span>
+<span class="source-line" id="L158"><a href="#L158" aria-label="第 158 行">158</a>                      &#x27;selected_checkpoint_at_update_budget&#x27;: fit_summary[&#x27;best_step&#x27;] == args.steps})</span>
+<span class="source-line" id="L159"><a href="#L159" aria-label="第 159 行">159</a>        scores[f&#x27;refit_M{rank}&#x27;] = score</span>
+<span class="source-line" id="L160"><a href="#L160" aria-label="第 160 行">160</a>        checkpoints[str(rank)] = str((checkpoint_dir / &#x27;module1_gpu.npz&#x27;).resolve())</span>
+<span class="source-line" id="L161"><a href="#L161" aria-label="第 161 行">161</a>        np.save(out / f&#x27;M{rank}_validation_capacity.npy&#x27;, prediction, allow_pickle=False)</span>
+<span class="source-line" id="L162"><a href="#L162" aria-label="第 162 行">162</a>        gc.collect()</span>
+<span class="source-line" id="L163"><a href="#L163" aria-label="第 163 行">163</a>        if args.device.startswith(&#x27;cuda&#x27;):</span>
+<span class="source-line" id="L164"><a href="#L164" aria-label="第 164 行">164</a>            torch.cuda.empty_cache()</span>
+<span class="source-line" id="L165"><a href="#L165" aria-label="第 165 行">165</a>    summary = {&#x27;experiment&#x27;: &#x27;module_one_cell_rank_validation_ablation_NOT_forecast&#x27;,</span>
+<span class="source-line" id="L166"><a href="#L166" aria-label="第 166 行">166</a>               &#x27;inputs&#x27;: str(args.inputs.resolve()), &#x27;raw_data&#x27;: str(args.data.resolve()),</span>
+<span class="source-line" id="L167"><a href="#L167" aria-label="第 167 行">167</a>               &#x27;seed&#x27;: seed, &#x27;missing_ratio&#x27;: missing, &#x27;normalization&#x27;: &#x27;train-observed minmax&#x27;,</span>
+<span class="source-line" id="L168"><a href="#L168" aria-label="第 168 行">168</a>               &#x27;fixed_N&#x27;: 50, &#x27;M_values&#x27;: [12, 25], &#x27;steps_per_model&#x27;: args.steps,</span>
+<span class="source-line" id="L169"><a href="#L169" aria-label="第 169 行">169</a>               &#x27;learning_rate&#x27;: args.lr, &#x27;regularization_and_core_ridge&#x27;: ridge,</span>
+<span class="source-line" id="L170"><a href="#L170" aria-label="第 170 行">170</a>               &#x27;checkpoint_selection&#x27;: &#x27;held-out entry RMSE within TRAINING prefix; not chronological validation or test&#x27;,</span>
+<span class="source-line" id="L171"><a href="#L171" aria-label="第 171 行">171</a>               &#x27;module_one_checkpoints&#x27;: checkpoints, &#x27;validation&#x27;: scores,</span>
+<span class="source-line" id="L172"><a href="#L172" aria-label="第 172 行">172</a>               &#x27;test_evaluated&#x27;: False, &#x27;codec_or_forecaster_trained&#x27;: False,</span>
+<span class="source-line" id="L173"><a href="#L173" aria-label="第 173 行">173</a>               &#x27;limitations&#x27;: [&#x27;M=25 is a non-paper diagnostic ablation&#x27;,</span>
+<span class="source-line" id="L174"><a href="#L174" aria-label="第 174 行">174</a>                               &#x27;equal update counts do not establish convergence&#x27;,</span>
+<span class="source-line" id="L175"><a href="#L175" aria-label="第 175 行">175</a>                               &#x27;parameter count and total L2 penalty change with rank&#x27;,</span>
+<span class="source-line" id="L176"><a href="#L176" aria-label="第 176 行">176</a>                               &#x27;SOH rows are same-cycle reconstruction diagnostics, not forecasts&#x27;]}</span>
+<span class="source-line" id="L177"><a href="#L177" aria-label="第 177 行">177</a>    (out / &#x27;summary.json&#x27;).write_text(json.dumps(summary, indent=2, allow_nan=False), encoding=&#x27;utf-8&#x27;)</span>
+<span class="source-line" id="L178"><a href="#L178" aria-label="第 178 行">178</a>    print(&#x27;\nVALIDATION SUMMARY: same-cycle reconstruction, NOT forecasting&#x27;)</span>
+<span class="source-line" id="L179"><a href="#L179" aria-label="第 179 行">179</a>    for name, score in scores.items():</span>
+<span class="source-line" id="L180"><a href="#L180" aria-label="第 180 行">180</a>        print(f&quot;{name:24s} | capacity curve RMSE={score[&#x27;capacity_curve_rmse_mAh&#x27;][&#x27;available&#x27;]:.3f} mAh | SOH MAE={score[&#x27;soh&#x27;][&#x27;mae_pp&#x27;]:.3f} pp | bias={score[&#x27;soh&#x27;][&#x27;signed_bias_pp&#x27;]:+.3f} pp | n={score[&#x27;soh&#x27;][&#x27;count&#x27;]}&quot;)</span>
+<span class="source-line" id="L181"><a href="#L181" aria-label="第 181 行">181</a>        if name.startswith(&#x27;refit&#x27;):</span>
+<span class="source-line" id="L182"><a href="#L182" aria-label="第 182 行">182</a>            print(&#x27;  Selected entry-validation step:&#x27;, score[&#x27;best_training_prefix_entry_validation_step&#x27;],</span>
+<span class="source-line" id="L183"><a href="#L183" aria-label="第 183 行">183</a>                  &#x27;| parameters:&#x27;, score[&#x27;parameter_count&#x27;],</span>
+<span class="source-line" id="L184"><a href="#L184" aria-label="第 184 行">184</a>                  &#x27;| effective ranks:&#x27;, score[&#x27;effective_factor_ranks_at_rcond_1e_6&#x27;],</span>
+<span class="source-line" id="L185"><a href="#L185" aria-label="第 185 行">185</a>                  &#x27;| checkpoint at update budget:&#x27;, score[&#x27;selected_checkpoint_at_update_budget&#x27;])</span>
+<span class="source-line" id="L186"><a href="#L186" aria-label="第 186 行">186</a>    print(&#x27;M=25 improves validation SOH over refit M=12:&#x27;, scores[&#x27;refit_M25&#x27;][&#x27;soh&#x27;][&#x27;mae_pp&#x27;] &lt; scores[&#x27;refit_M12&#x27;][&#x27;soh&#x27;][&#x27;mae_pp&#x27;])</span>
+<span class="source-line" id="L187"><a href="#L187" aria-label="第 187 行">187</a>    print(&#x27;No temporal/entry-test scores computed; no existing run overwritten.&#x27;)</span>
+<span class="source-line" id="L188"><a href="#L188" aria-label="第 188 行">188</a>    print(&#x27;Saved:&#x27;, out, flush=True)</span>
+<span class="source-line" id="L189"><a href="#L189" aria-label="第 189 行">189</a></span>
+<span class="source-line" id="L190"><a href="#L190" aria-label="第 190 行">190</a></span>
+<span class="source-line" id="L191"><a href="#L191" aria-label="第 191 行">191</a>if __name__ == &#x27;__main__&#x27;:</span>
+<span class="source-line" id="L192"><a href="#L192" aria-label="第 192 行">192</a>    main()</span></code></pre></html>

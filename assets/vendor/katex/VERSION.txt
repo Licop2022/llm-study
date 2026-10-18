@@ -1,0 +1,3 @@
+KaTeX 0.19.0
+Source: https://cdn.jsdelivr.net/npm/katex@0.19.0/
+Checksums: https://katex.org/docs/browser.html

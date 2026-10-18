@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#386b76">
+  <meta name="description" content="从论文到理解：个人 LLM 量化与张量学习记录、概念库与方法比较。">
+  <title>研究工作台 · 文献学习空间</title>
+  <link rel="icon" href="assets/gdut-logo-footer.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="english.css">
+  <link rel="stylesheet" href="reading-ui.css">
+  <link rel="stylesheet" href="workspace.css">
+  <link rel="stylesheet" href="experiments.css">
+  <script defer src="assets/vendor/katex/katex.min.js"></script>
+  <script defer src="data.js"></script>
+  <script defer src="english-data.js"></script>
+  <script defer src="todo-core.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="workspace-brand" href="#overview"><img src="assets/gdut-logo-header.png" alt="广东工业大学" width="1000" height="228"></a>
+    <div class="workspace-name">研究工作台</div>
+    <nav id="navigation" aria-label="主导航"></nav>
+    <section id="workspace-library" class="workspace-library" aria-label="侧栏文库"></section>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button mobile-menu" id="menu-button" aria-label="展开学习导航" aria-expanded="false"></button>
+      <div class="breadcrumb">学习空间 <span>/</span> <strong id="page-label">学习总览</strong></div>
+      <div class="workspace-top-actions"><button id="search-button" class="search-trigger"><span id="search-icon"></span><span>检索学习资料</span><kbd>/</kbd></button><button class="button small" data-action="workspace-schedule" id="workspace-schedule-toggle" aria-expanded="false">学习日程</button></div>
+    </header>
+    <div id="todo-reminders" hidden></div>
+    <div class="learning-layout">
+      <main id="main" tabindex="-1"></main>
+      <aside id="study-schedule" class="study-schedule" aria-label="按日期查看学习记录"></aside>
+    </div>
+    <span id="updated-date" hidden></span>
+  </div>
+  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title"><div id="detail-content"></div></dialog>
+  <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+    <div class="search-dialog-head"><label for="global-search" id="search-title">搜索学习库</label><button class="icon-button" data-action="close-search" aria-label="关闭搜索">×</button></div>
+    <input id="global-search" type="search" placeholder="试试：输出误差、AWQ、closed-form" autocomplete="off">
+    <div id="search-results" class="search-results"></div>
+  </dialog>
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript>请启用 JavaScript，以使用概念卡片和学习记录功能。论文原件保存在 papers 文件夹。</noscript>
+</body>
+</html>
