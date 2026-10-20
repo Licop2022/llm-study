@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T11:52:06.008Z",
+  "generatedAt": "2026-10-20T02:34:29.291Z",
   "counts": {
     "papers": 14,
     "concepts": 45,
@@ -12,18 +12,18 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 3202,
-      "sha256": "f728d9c9a3de89c6c3c77bab06f4b353aedf1d63f252549ff3910b105dcbfc0a"
+      "bytes": 3339,
+      "sha256": "fa6af6d66ef7b14ed87af0a2d73ac72a73fdcbed3c1c792b970ec60c1ca97109"
     },
     {
       "path": "app.js",
-      "bytes": 86004,
-      "sha256": "af91a68b6474b422780d605444433737cf01ec5da9fdad6fa198e986cbacb746"
+      "bytes": 86668,
+      "sha256": "bf460a97714542addfb3179f7e987268bc730364c7aeb0096b0fe8f6b030ff40"
     },
     {
       "path": "data.js",
-      "bytes": 261422,
-      "sha256": "956e96956e5fd7c231d12ec07e6b2f9fc0cd8b7d913eb528380718a741febfb8"
+      "bytes": 270746,
+      "sha256": "582e0910584ee75f992c3465e451c3c1cb9152df1df70da3c4bafb114615ba17"
     },
     {
       "path": "english-data.js",
@@ -34,6 +34,11 @@
       "path": "todo-core.js",
       "bytes": 2776,
       "sha256": "37fee4099a4643eb8dbbe133fcc99280518766c68fb54abf4be712a858d75780"
+    },
+    {
+      "path": "math-text.js",
+      "bytes": 1551,
+      "sha256": "5868ead03914375c6e4ea28b1dde993182102de4b0f4df858e498f5c23678b49"
     },
     {
       "path": "styles.css",
@@ -52,8 +57,8 @@
     },
     {
       "path": "workspace.css",
-      "bytes": 46653,
-      "sha256": "c2a74f5f00d2904cdfad11a0d5a34cf19350a8683bbab08da145a9767b1fecd0"
+      "bytes": 47048,
+      "sha256": "b18e136f71fab2aefe0d1335349b404696be0f7ae94c70621ca6e71ea3def7b1"
     },
     {
       "path": "experiments.css",
