@@ -1,7 +1,7 @@
 /* 稳定 ID 与 importOrder 保留个人记录和首次导入顺序。 */
 window.STUDY_DATA = {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20",
+  "updatedAt": "2026-10-23",
   "title": "LLM 量化与张量学习",
   "notation": "统一采用行样本约定：X ∈ ℝᴺˣᵐ，W ∈ ℝᵐˣⁿ，Y = XW。Wq 表示量化并反量化后的浮点等效权重；原论文的矩阵朝向可能不同。引用页码均为 PDF 物理页码。",
   "papers": [
@@ -1000,6 +1000,97 @@ window.STUDY_DATA = {
         "limit": "模型 / 数据范围；因子量化；实际内核实现"
       },
       "source": "本地 arXiv v3 第 4–10 页，§4.1 / §5、表 7–9。导读为原文整理；用户声明已读，未提供完成日期。"
+    },
+    {
+      "id": "attention-2017",
+      "name": "Transformer",
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani et al.",
+      "year": 2017,
+      "venue": "NIPS 2017",
+      "arxiv": "1706.03762",
+      "phase": "P1",
+      "category": "模型基础",
+      "pdf": "papers/P1_量化基础/Attention-Is-All-You-Need.pdf",
+      "pages": 15,
+      "version": "arXiv v7 · 2023-08-02",
+      "initialStatus": "read",
+      "color": "sage",
+      "tags": [
+        "Transformer",
+        "注意力",
+        "编码器—解码器"
+      ],
+      "concepts": [
+        "tr-attention",
+        "tr-heads",
+        "tr-roles",
+        "tr-mask",
+        "tr-position",
+        "tr-ffn",
+        "tr-postnorm",
+        "tr-permutation",
+        "tr-convolution",
+        "tr-dropout",
+        "tr-bleu",
+        "tr-decoding",
+        "output-error",
+        "opt-layernorm"
+      ],
+      "tagline": "用注意力、逐位置前馈网络与位置编码构建序列转换架构。",
+      "question": "怎样减少序列建模的逐位置串行依赖，同时保持机器翻译质量？",
+      "mechanism": "原始编码器—解码器 Transformer：编码器自注意力；解码器带掩码自注意力与交叉注意力；各层含逐位置 FFN、残差及 Post-LN。词嵌入加入正弦位置编码，训练使用右移目标。",
+      "formula": "Attention(Q,K,V)=softmax(QKᵀ/√d_k)V",
+      "latex": "\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}(QK^{\\mathsf T}/\\sqrt{d_k})V",
+      "evidence": "PDF 第 8 页表 2：英德测试集 base 27.3 BLEU、big 28.4；英法表中 big 为 41.8，但同页正文写 41.0，保留版本内差异。第 9 页表 3 是开发集消融；单头 24.9、base 25.8，不能与测试表直接混读。",
+      "caveat": "原论文是编码器—解码器翻译架构，不是现代仅解码器 LLM 的完整实现。表 1 的注意力核心复杂度不含所有投影/FFN；训练并行不等于自回归生成并行，也不证明低位量化或长期外推效果。",
+      "reading": [
+        {
+          "page": 2,
+          "label": "问题与整体架构"
+        },
+        {
+          "page": 3,
+          "label": "图 1 · 编码器、解码器与 Post-LN"
+        },
+        {
+          "page": 4,
+          "label": "式 1 · 缩放点积注意力"
+        },
+        {
+          "page": 5,
+          "label": "多头、交叉注意力、FFN"
+        },
+        {
+          "page": 6,
+          "label": "位置编码与复杂度表"
+        },
+        {
+          "page": 8,
+          "label": "训练与翻译结果"
+        },
+        {
+          "page": 9,
+          "label": "开发集消融"
+        }
+      ],
+      "checks": [
+        "写出 Q、K、V 及输出的维度，指出 softmax 方向。",
+        "解释缩放因子所依赖的独立零均值示意假设。",
+        "为什么右移目标和掩码需要配合？",
+        "原始 Post-LN 与现代 Pre-LN 有什么区别？",
+        "为什么这篇论文不能直接证明量化推理加速？"
+      ],
+      "comparison": {
+        "target": "序列转换模型架构",
+        "objective": "并行训练与翻译质量",
+        "statistic": "学习到的 Q/K/V 与位置输入",
+        "operation": "注意力、FFN、残差与归一化",
+        "calibration": "端到端训练；不是 PTQ 校准算法",
+        "extra": "注意力分数随序列长度二次增长",
+        "limit": "任务、架构与协议限制；不是量化方法"
+      },
+      "source": "用户提供的本地 arXiv v7，15 页；原文 §3–6、表 1–3。用户已读，未额外填写完成日期、掌握度或实验结果。"
     }
   ],
   "concepts": [
@@ -1505,7 +1596,7 @@ window.STUDY_DATA = {
       "english": "Calibration data",
       "group": "激活感知",
       "summary": "用少量代表性输入估计量化所需的统计或选择参数；与测试集分开。",
-      "explanation": "SmoothQuant 用输入幅度，GPTQ 用 Gram 矩阵，AWQ 用幅度与输出对照，QERA 用非中心二阶矩。校准目标改善不能自动推出测试分布上同等改善。",
+      "explanation": "SmoothQuant 用输入幅度，GPTQ 用 Gram 矩阵，AWQ 用幅度与输出对照，QERA 用非中心二阶矩。校准目标改善不能自动推出测试分布上同等改善。 用户新增截图中的 Calibration-Aware 指利用校准输入信息感知实际误差；这是方法属性，不是独立的量化算法名称。",
       "formula": "R̂ = X_calibᵀ X_calib / N",
       "latex": "\\widehat R=\\frac1N X_{calib}^\\top X_{calib}",
       "misconception": "使用校准数据不等于微调；样本数量增加也不自动保证任务效果单调改善。",
@@ -1567,12 +1658,16 @@ window.STUDY_DATA = {
           "text": "校准输入只有 [1,0] 和 [−1,0] 时，估计二阶矩为 diag(1,0)。第二个输入方向完全没被覆盖，因此校准目标无法判断该方向的权重误差是否重要。测试时若出现 [0,10]，遗漏就可能显现。",
           "latex": ""
         },
-        "connection": "这既解释了加权补偿为什么能适应任务，也解释了为什么需要区分校准集、验证集和测试集。原文中的样本数还应和序列长度一起记录。",
+        "connection": "这既解释了加权补偿为什么能适应任务，也解释了为什么需要区分校准集、验证集和测试集。原文中的样本数还应和序列长度一起记录。 新截图中的 Calibration-Aware（校准感知）表示利用校准输入的统计或输出误差指导处理，是方法属性而不是独立算法名。",
         "check": {
           "question": "使用校准数据估计二阶矩，是否一定需要任务标签？",
           "answer": "不一定。输入激活的统计通常可由无标签前向计算得到；是否还用监督目标，要看具体方法。"
         }
-      }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-19_132643_484.png"
+      ],
+      "collected": true
     },
     {
       "id": "output-error",
@@ -1610,6 +1705,10 @@ window.STUDY_DATA = {
         {
           "paper": "eora",
           "page": 4
+        },
+        {
+          "paper": "attention-2017",
+          "page": 5
         }
       ],
       "importOrder": 9,
@@ -2168,6 +2267,10 @@ window.STUDY_DATA = {
         {
           "paper": "zeroquant-v2",
           "page": 9
+        },
+        {
+          "paper": "attention-2017",
+          "page": 8
         }
       ],
       "captures": [
@@ -3822,6 +3925,10 @@ window.STUDY_DATA = {
         {
           "paper": "zeroquant-v2",
           "page": 4
+        },
+        {
+          "paper": "attention-2017",
+          "page": 3
         }
       ],
       "captures": [
@@ -4196,6 +4303,750 @@ window.STUDY_DATA = {
           "answer": "若按稠密格式保存并调用普通稠密内核，很多零值仍参与读取和计算；是否跳过它们取决于格式与内核支持。"
         }
       }
+    },
+    {
+      "id": "tr-attention",
+      "name": "缩放点积注意力",
+      "english": "Scaled dot-product attention",
+      "group": "Transformer 基础",
+      "summary": "用查询与键的相似度决定对值的加权，再除以键维度平方根稳定分数尺度。",
+      "explanation": "注意力像按当前问题检索资料：查询表示想找什么，键表示每份资料的索引，值表示最终要取回的内容。匹配分数与被混合的内容是不同对象；输出是值向量的加权和，而不是把分数本身作为新特征。",
+      "formula": "用查询与键的相似度决定对值的加权，再除以键维度平方根稳定分数尺度。",
+      "latex": "\\operatorname{Attention}(Q,K,V)=\\operatorname{softmax}(QK^{\\mathsf T}/\\sqrt{d_k})V",
+      "misconception": "不必。自注意力中三者通常由同一输入经过不同投影得到；交叉注意力的查询与键值来自不同序列。",
+      "question": "Q、K、V 是否必须是同一个矩阵？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "related": [
+        "tr-heads",
+        "tr-roles",
+        "tr-mask"
+      ],
+      "importOrder": 46,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "注意力像按当前问题检索资料：查询表示想找什么，键表示每份资料的索引，值表示最终要取回的内容。匹配分数与被混合的内容是不同对象；输出是值向量的加权和，而不是把分数本身作为新特征。",
+        "symbols": [
+          [
+            "\\(Q\\)",
+            "查询矩阵，查询数乘键维度。"
+          ],
+          [
+            "\\(K,V\\)",
+            "键和值的行数相同，特征维度可以不同。"
+          ],
+          [
+            "\\(d_k\\)",
+            "查询与键的特征维度，不是序列长度。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "先匹配，再逐行归一化",
+            "text": "\\(QK^{\\mathsf T}\\) 的每行对应一个查询与全部键的匹配。softmax 沿键的方向进行，因此每行权重非负且和为一；随后乘值矩阵，得到每个查询自己的输出。",
+            "latex": "A=\\operatorname{softmax}_{\\rm row}(QK^{\\mathsf T}/\\sqrt{d_k}),\\quad Y=AV"
+          },
+          {
+            "title": "为什么要除以平方根",
+            "text": "在查询和键分量独立、零均值、单位方差的示意假设下，点积方差随维度线性增加。缩放让该方差回到一的量级，缓解 softmax 过于尖锐的问题；实际训练分布不必严格满足这些假设。",
+            "latex": "\\operatorname{Var}(q\\cdot k)=d_k,\\quad \\operatorname{Var}((q\\cdot k)/\\sqrt{d_k})=1"
+          }
+        ],
+        "example": {
+          "text": "教学算例：令一个查询得到的两个缩放分数均为零，两个值向量分别是 \\([2,0]\\) 与 \\([0,4]\\)。softmax 给出相同权重，输出是两者的平均；注意力可以产生原值集合中没有的新向量。",
+          "latex": "[1/2,1/2]\\begin{bmatrix}2&0\\\\0&4\\end{bmatrix}=[1,2]"
+        },
+        "connection": "这解释了量化为什么需要关注层输出：查询或键的扰动先改变 softmax 权重，值的扰动则直接改变被混合的内容；它们的误差传播机制不同。",
+        "check": {
+          "question": "Q、K、V 是否必须是同一个矩阵？",
+          "answer": "不必。自注意力中三者通常由同一输入经过不同投影得到；交叉注意力的查询与键值来自不同序列。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-19_220610_049.png",
+        "专有名词/ScreenShot_2026-10-20_094753_590.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "tr-heads",
+      "name": "多头注意力与拼接投影",
+      "english": "Multi-head attention",
+      "group": "Transformer 基础",
+      "summary": "在不同学习到的子空间分别计算注意力，拼接后通过输出投影恢复模型维度。",
+      "explanation": "多头不是重复计算同一张注意力表。每个头有自己的查询、键和值投影，因此可以学习不同的匹配关系。拼接保留各头的不同通道，随后输出投影把它们组合成下一个子层可接收的表示。",
+      "formula": "在不同学习到的子空间分别计算注意力，拼接后通过输出投影恢复模型维度。",
+      "latex": "W^O\\in\\mathbb R^{hd_v\\times d_{model}}",
+      "misconception": "不是。表 3 在保持计算量的设置下显示头数过多也会降低 BLEU；头数与每头维度需要一起考察。",
+      "question": "头数越多是否一定越好？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "related": [
+        "tr-attention",
+        "tr-ffn"
+      ],
+      "importOrder": 47,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "多头不是重复计算同一张注意力表。每个头有自己的查询、键和值投影，因此可以学习不同的匹配关系。拼接保留各头的不同通道，随后输出投影把它们组合成下一个子层可接收的表示。",
+        "symbols": [
+          [
+            "\\(h\\)",
+            "头数；base 模型为 8。"
+          ],
+          [
+            "\\(d_{model}\\)",
+            "base 模型维度 512。"
+          ],
+          [
+            "\\(d_k=d_v\\)",
+            "base 每头维度 64。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "投影到不同子空间",
+            "text": "输入先乘每个头自己的投影矩阵；虽然来源可能相同，投影参数不同，所以不能直接把三路特征认作相同数值。每个头再独立进行缩放点积注意力。",
+            "latex": "H_i=\\operatorname{Attention}(QW_i^Q,KW_i^K,VW_i^V)"
+          },
+          {
+            "title": "拼接与输出映射",
+            "text": "拼接沿特征维度进行，保留查询位置的行数；输出投影将拼接宽度映射回模型维度，便于残差相加。增加头数时论文同时缩小每头维度，而不是让总宽度无限增加。",
+            "latex": "Y=\\operatorname{Concat}(H_1,\\ldots,H_h)W^O"
+          }
+        ],
+        "example": {
+          "text": "教学算例：两个头各有两个特征，某位置的输出分别为 [1,2] 与 [3,4]。拼接得到四维向量而不是两个向量相加；还要乘输出矩阵才能恢复所需维度。",
+          "latex": "\\operatorname{Concat}([1,2],[3,4])=[1,2,3,4]"
+        },
+        "connection": "查询、键、值和输出投影都是量化论文常处理的线性层。必须区分单个投影层的误差与整个注意力模块经过 softmax 后的误差。",
+        "check": {
+          "question": "头数越多是否一定越好？",
+          "answer": "不是。表 3 在保持计算量的设置下显示头数过多也会降低 BLEU；头数与每头维度需要一起考察。"
+        }
+      }
+    },
+    {
+      "id": "tr-roles",
+      "name": "自注意力与交叉注意力",
+      "english": "Self-attention and cross-attention",
+      "group": "Transformer 基础",
+      "summary": "区别来自查询、键和值的来源，而不是是否使用同一个注意力公式。",
+      "explanation": "自注意力让一个序列内部交换信息，交叉注意力则让一个序列向另一个序列取信息。论文的编码器、解码器自注意力和编码器—解码器注意力都使用多头机制，但连接关系及可见位置并不相同。",
+      "formula": "区别来自查询、键和值的来源，而不是是否使用同一个注意力公式。",
+      "latex": "A\\in\\mathbb R^{n_q\\times n_k}",
+      "misconception": "不一定。即使它们来自同一输入，也可使用不同参数的投影，所以数值和语义角色都不能直接合并。",
+      "question": "自注意力里的 Q 与 K 形状相同，是否数值也相同？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "related": [
+        "tr-attention",
+        "tr-mask"
+      ],
+      "importOrder": 48,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "自注意力让一个序列内部交换信息，交叉注意力则让一个序列向另一个序列取信息。论文的编码器、解码器自注意力和编码器—解码器注意力都使用多头机制，但连接关系及可见位置并不相同。",
+        "symbols": [
+          [
+            "\\(n_q\\)",
+            "查询序列长度。"
+          ],
+          [
+            "\\(n_k\\)",
+            "键值序列长度。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "由来源确定注意力类型",
+            "text": "编码器自注意力的查询、键和值来自上一层编码器表示。交叉注意力中，查询来自解码器，而键和值来自编码器的输出；键和值必须逐行对应相同的源位置。",
+            "latex": "Q\\in\\mathbb R^{n_q\\times d_k},\\ K\\in\\mathbb R^{n_k\\times d_k},\\ V\\in\\mathbb R^{n_k\\times d_v}"
+          },
+          {
+            "title": "由查询数确定输出行数",
+            "text": "注意力先生成查询数乘键数的权重矩阵，再与键数乘值维度的矩阵相乘。输出保留查询位置，而不必与输入源序列具有相同长度；这一点可以直接通过矩阵维度核对。",
+            "latex": "(n_q\\times n_k)(n_k\\times d_v)=n_q\\times d_v"
+          }
+        ],
+        "example": {
+          "text": "教学算例：解码器有 2 个查询位置，编码器有 3 个源位置。交叉注意力表是 2×3；若值维度为 4，输出是 2×4。输出的两行分别服务于两个解码位置。",
+          "latex": "(2\\times3)(3\\times4)=2\\times4"
+        },
+        "connection": "这能帮助定位校准数据到底来自哪个模块，也能防止把编码器—解码器架构直接当成现代仅解码器语言模型的完整结构。",
+        "check": {
+          "question": "自注意力里的 Q 与 K 形状相同，是否数值也相同？",
+          "answer": "不一定。即使它们来自同一输入，也可使用不同参数的投影，所以数值和语义角色都不能直接合并。"
+        }
+      }
+    },
+    {
+      "id": "tr-mask",
+      "name": "因果掩码与右移输入",
+      "english": "Causal mask and shifted targets",
+      "group": "Transformer 基础",
+      "summary": "屏蔽未来位置，并将解码器目标输入右移，防止训练时提前看到待预测答案。",
+      "explanation": "训练时整句目标文本已经存在，但预测当前位置时不能使用未来答案。掩码限制注意力连接，右移输入使当前位置拿到前一个目标符号。两者共同实现自回归训练；仅仅并行计算并不意味着可以读取未来。",
+      "formula": "屏蔽未来位置，并将解码器目标输入右移，防止训练时提前看到待预测答案。",
+      "latex": "M_{ij}=\\begin{cases}0&j\\le i\\\\-\\infty&j>i\\end{cases}",
+      "misconception": "加性掩码允许位置通常为 0，禁止位置为负无穷。0/1 布尔掩码需由实现转换，不能直接当作同一种加性矩阵。",
+      "question": "掩码是否应该把允许位置写成 1 再直接加到分数上？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 3
+        }
+      ],
+      "related": [
+        "tr-roles",
+        "tr-decoding"
+      ],
+      "importOrder": 49,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "训练时整句目标文本已经存在，但预测当前位置时不能使用未来答案。掩码限制注意力连接，右移输入使当前位置拿到前一个目标符号。两者共同实现自回归训练；仅仅并行计算并不意味着可以读取未来。",
+        "symbols": [
+          [
+            "\\(M_{ij}\\)",
+            "允许连接取零，禁止连接取负无穷。"
+          ],
+          [
+            "\\(t\\)",
+            "目标预测位置。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "在 softmax 之前屏蔽",
+            "text": "将非法连接的分数设为负无穷后，其指数为零，softmax 就不会分配权重。直接在 softmax 之后删掉概率会破坏归一化，除非额外重归一化。",
+            "latex": "A=\\operatorname{softmax}(QK^{\\mathsf T}/\\sqrt{d_k}+M)"
+          },
+          {
+            "title": "训练并行不等于生成并行",
+            "text": "有了右移目标和因果掩码，训练可以一次计算多个位置的损失。生成时下一个输入符号尚未得到，仍然需要依次产生目标，因此不能把训练并行性当作一步生成整句的保证。",
+            "latex": "p(y\\mid x)=\\prod_t p(y_t\\mid y_{<t},x)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：长度三的解码输入依次为起始符、目标一、目标二。第三个位置可以看见这三项输入，但待预测的是目标三；它并未提前看到自己的答案。",
+          "latex": "M=\\begin{bmatrix}0&-\\infty&-\\infty\\\\0&0&-\\infty\\\\0&0&0\\end{bmatrix}"
+        },
+        "connection": "比较推理加速时，需要区分并行处理已知上下文与逐 token 生成；同一个量化设置在这两种阶段的瓶颈可能不同。",
+        "check": {
+          "question": "掩码是否应该把允许位置写成 1 再直接加到分数上？",
+          "answer": "加性掩码允许位置通常为 0，禁止位置为负无穷。0/1 布尔掩码需由实现转换，不能直接当作同一种加性矩阵。"
+        }
+      }
+    },
+    {
+      "id": "tr-position",
+      "name": "位置编码与位置嵌入",
+      "english": "Positional encoding and embedding",
+      "group": "Transformer 基础",
+      "summary": "把与位置有关的向量加入 token 表示，让无循环的模型获得顺序信息。",
+      "explanation": "相同词向量出现在不同位置时，需要额外的信息区分顺序。论文将位置向量与词嵌入相加，使用不同频率的正弦与余弦；同时比较了学习得到的位置嵌入。位置编码是额外输入，不是注意力矩阵里自动出现的序号。",
+      "formula": "把与位置有关的向量加入 token 表示，让无循环的模型获得顺序信息。",
+      "latex": "X_{input}=X_{embed}+PE",
+      "misconception": "该论文表 3 的两种设置表现接近；这只是给定翻译任务与训练设置的证据，不是所有模型上的普遍排序。",
+      "question": "学习位置嵌入一定显著优于固定正弦编码吗？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "related": [
+        "tr-permutation",
+        "tr-attention"
+      ],
+      "importOrder": 50,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "相同词向量出现在不同位置时，需要额外的信息区分顺序。论文将位置向量与词嵌入相加，使用不同频率的正弦与余弦；同时比较了学习得到的位置嵌入。位置编码是额外输入，不是注意力矩阵里自动出现的序号。",
+        "symbols": [
+          [
+            "\\(p\\)",
+            "位置索引。"
+          ],
+          [
+            "\\(i\\)",
+            "正弦/余弦对的频率索引。"
+          ],
+          [
+            "\\(d\\)",
+            "位置向量维度，与模型维度相同。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "不同维度使用不同频率",
+            "text": "偶数维使用正弦，奇数维使用余弦；每对维度共享同一频率。由于维度与嵌入一致，二者可相加，而不是必须沿特征轴拼接成双倍宽度。",
+            "latex": "PE(p,2i)=\\sin(p/10000^{2i/d}),\\quad PE(p,2i+1)=\\cos(p/10000^{2i/d})"
+          },
+          {
+            "title": "相对位移可以表示为旋转",
+            "text": "正弦与余弦的加法公式使固定偏移对应一个二维线性变换。这提供学习相对位置的可能性；论文提出外推动机，但不能由代数性质直接证明任意长序列的任务表现。",
+            "latex": "\\sin((p+k)\\omega)=\\sin(p\\omega)\\cos(k\\omega)+\\cos(p\\omega)\\sin(k\\omega)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：位置为零时，每一对正弦和余弦分量均为 [0,1]。不同频率此时仍给出相同初值，随后才随位置以不同速度变化；这不意味着所有位置具有相同表示。",
+          "latex": "PE(0)=[0,1,0,1,\\ldots]"
+        },
+        "connection": "位置向量改变后续投影层看到的激活分布，因此与校准输入有关。本文采用相加的正弦编码，不能把它误称为后续模型的 RoPE。",
+        "check": {
+          "question": "学习位置嵌入一定显著优于固定正弦编码吗？",
+          "answer": "该论文表 3 的两种设置表现接近；这只是给定翻译任务与训练设置的证据，不是所有模型上的普遍排序。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-20_210404_924.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "tr-ffn",
+      "name": "逐位置前馈网络",
+      "english": "Position-wise feed-forward network",
+      "group": "Transformer 基础",
+      "summary": "对每个位置独立使用同一组两层线性映射，在两层之间使用 ReLU。",
+      "explanation": "注意力负责不同位置之间的信息交换，逐位置前馈网络负责对每个位置的通道特征做非线性变换。参数在同一层的所有位置共享，但不同层不共享；原始 Transformer 的激活是 ReLU，不应自动替换成现代模型的门控结构。",
+      "formula": "对每个位置独立使用同一组两层线性映射，在两层之间使用 ReLU。",
+      "latex": "\\operatorname{FFN}(x)=\\max(0,xW_1+b_1)W_2+b_2",
+      "misconception": "不是。同一层各位置使用同一组参数；不同层才使用不同参数。",
+      "question": "逐位置是否表示每个 token 拥有自己的一套参数？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "related": [
+        "tr-postnorm",
+        "output-error"
+      ],
+      "importOrder": 51,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "注意力负责不同位置之间的信息交换，逐位置前馈网络负责对每个位置的通道特征做非线性变换。参数在同一层的所有位置共享，但不同层不共享；原始 Transformer 的激活是 ReLU，不应自动替换成现代模型的门控结构。",
+        "symbols": [
+          [
+            "\\(W_1\\)",
+            "模型维度乘中间维度。"
+          ],
+          [
+            "\\(W_2\\)",
+            "中间维度乘模型维度。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "扩张特征，再加入非线性",
+            "text": "base 模型先从 512 维映射到 2048 维，对负分量使用 ReLU 截断。非线性使两层不能一般性地合并成一个线性矩阵，这正是它与纯低秩因子乘积的差别。",
+            "latex": "H=\\max(0,XW_1+b_1)"
+          },
+          {
+            "title": "恢复维度并逐位置应用",
+            "text": "第二层将中间特征映射回模型维度，便于残差相加。不同位置使用相同权重，但没有在这一步按序列位置求和，因此它本身不是跨位置的信息混合模块。",
+            "latex": "Y=HW_2+b_2"
+          }
+        ],
+        "example": {
+          "text": "教学算例：忽略偏置，令输入 [1,−2]，第一层为单位矩阵，第二层为全一列向量。ReLU 后为 [1,0]，输出为 1；若省去非线性，直接相乘则得到 −1。",
+          "latex": "[1,-2]\\xrightarrow{\\operatorname{ReLU}}[1,0]\\xrightarrow{[1,1]^{\\mathsf T}}1"
+        },
+        "connection": "前馈网络的大矩阵是量化与低秩补偿的重要对象；分层重构时应核对校准激活在非线性之前还是之后采集。",
+        "check": {
+          "question": "逐位置是否表示每个 token 拥有自己的一套参数？",
+          "answer": "不是。同一层各位置使用同一组参数；不同层才使用不同参数。"
+        }
+      }
+    },
+    {
+      "id": "tr-postnorm",
+      "name": "残差连接与 Post-LN",
+      "english": "Residual connection and Post-LN",
+      "group": "Transformer 基础",
+      "summary": "原论文在子层输出与输入相加之后使用 LayerNorm。",
+      "explanation": "残差连接给子层提供一条保留输入的路径，但不是不经过后续变换的绝对直通。原论文先相加再归一化；这决定子层输出扰动如何进入下一步。阅读现代架构时，应先确认归一化在子层之前还是之后。",
+      "formula": "原论文在子层输出与输入相加之后使用 LayerNorm。",
+      "latex": "\\operatorname{LN}(x+f(x))\\ne x+f(\\operatorname{LN}(x))",
+      "misconception": "本地原文 §3.1 写的是先残差相加再 LayerNorm，即 Post-LN；不能混用后续架构的记忆。",
+      "question": "原始 Transformer 是否使用 Pre-LN？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 3
+        }
+      ],
+      "related": [
+        "opt-layernorm",
+        "tr-ffn"
+      ],
+      "importOrder": 52,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "残差连接给子层提供一条保留输入的路径，但不是不经过后续变换的绝对直通。原论文先相加再归一化；这决定子层输出扰动如何进入下一步。阅读现代架构时，应先确认归一化在子层之前还是之后。",
+        "symbols": [
+          [
+            "\\(x\\)",
+            "子层输入。"
+          ],
+          [
+            "\\(f(x)\\)",
+            "注意力或前馈子层的输出，需与输入形状匹配。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "相加要求维度相同",
+            "text": "残差是在对应元素上相加，输入与子层输出必须具备相同模型维度。注意力中的输出投影和前馈网络的第二层都服务于维度恢复，而不是可随意省略的装饰步骤。",
+            "latex": "u=x+f(x)"
+          },
+          {
+            "title": "归一化位置影响计算图",
+            "text": "论文将相加结果送入 LayerNorm，而常见 Pre-LN 把归一化放在子层之前。两者一般不相等，不能只凭都含有残差和归一化就复用同一套误差传播解释。",
+            "latex": "y=\\operatorname{LayerNorm}(x+f(x))"
+          }
+        ],
+        "example": {
+          "text": "教学算例：忽略稳定常数且仿射参数为单位时，输入 [1,3] 加子层输出 [1,1] 得 [2,4]，按均值和方差归一化后为 [−1,1]。可见残差输入在后续仍会被变换。",
+          "latex": "\\mu=3,\\quad \\sigma^2=1,\\quad ([2,4]-3)/1=[-1,1]"
+        },
+        "connection": "复用已读 OPT LayerNorm 卡片时，应把架构位置与论文中的具体观察区分开；归一化参数变化也可能改变量化的激活范围。",
+        "check": {
+          "question": "原始 Transformer 是否使用 Pre-LN？",
+          "answer": "本地原文 §3.1 写的是先残差相加再 LayerNorm，即 Post-LN；不能混用后续架构的记忆。"
+        }
+      }
+    },
+    {
+      "id": "tr-permutation",
+      "name": "自注意力的置换等变性",
+      "english": "Permutation equivariance",
+      "group": "Transformer 基础",
+      "summary": "无位置输入、无固定因果掩码的自注意力，对 token 重排会产生对应重排的输出。",
+      "explanation": "把 token 按同一规则重新排列，如果输出也只按相同规则重新排列，就称为置换等变。它不同于输出完全不变的置换不变性。这是解释为什么需要位置输入的一种教学推论，不是论文单独列出的命名定理。",
+      "formula": "无位置输入、无固定因果掩码的自注意力，对 token 重排会产生对应重排的输出。",
+      "latex": "f(PX)=Pf(X)",
+      "misconception": "不是。输出只需按输入的置换对应重排，不要求原先各行相同；教学算例取零查询键是特殊情形。",
+      "question": "置换等变是否意味着所有位置输出完全相同？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "related": [
+        "tr-position",
+        "tr-attention"
+      ],
+      "importOrder": 53,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "把 token 按同一规则重新排列，如果输出也只按相同规则重新排列，就称为置换等变。它不同于输出完全不变的置换不变性。这是解释为什么需要位置输入的一种教学推论，不是论文单独列出的命名定理。",
+        "symbols": [
+          [
+            "\\(P\\)",
+            "位置置换矩阵。"
+          ],
+          [
+            "\\(A\\)",
+            "逐行 softmax 得到的注意力矩阵。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "查询键值一起重排",
+            "text": "对同一序列的三个投影一起左乘置换矩阵，分数的行列也相应改变。此推导要求没有固定在原索引上的额外位置信息或因果掩码，否则操作对象已经改变。",
+            "latex": "(PQ)(PK)^{\\mathsf T}=P(QK^{\\mathsf T})P^{\\mathsf T}"
+          },
+          {
+            "title": "输出跟随输入位置重排",
+            "text": "逐行 softmax 与一致的行列置换相容，再与重排后的值相乘，内部置换相互抵消，最后只保留输出行上的置换。因此不能靠这种结构本身知道原来的先后顺序。",
+            "latex": "\\operatorname{Attn}(PQ,PK,PV)=P\\operatorname{Attn}(Q,K,V)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：两位置的所有查询、键均为零，值分别是 2 和 4，则每个输出都是 3。交换两个位置后，输出依旧跟随交换规则；这说明相同权重的平均操作没有编码谁原本在前。",
+          "latex": "\\tfrac12(2+4)=3"
+        },
+        "connection": "该推论把位置编码的必要性与注意力公式连接起来；有因果掩码或外部位置向量时，不应直接套用这一等变结论。",
+        "check": {
+          "question": "置换等变是否意味着所有位置输出完全相同？",
+          "answer": "不是。输出只需按输入的置换对应重排，不要求原先各行相同；教学算例取零查询键是特殊情形。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-20_205526_054.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "tr-convolution",
+      "name": "连续卷积与空洞卷积的连接路径",
+      "english": "Contiguous and dilated convolution",
+      "group": "Transformer 基础",
+      "summary": "连续卷积读取相邻局部位置；空洞卷积在核采样点之间留出间隔以扩大感受野。",
+      "explanation": "卷积通过多层局部连接间接传递远距离信息。连续核每次覆盖紧邻的位置，空洞核可以跳着读取。论文用它们与自注意力比较连接路径与计算成本；能连接远端位置的最短路径和实际训练速度是两个问题。",
+      "formula": "连续卷积读取相邻局部位置；空洞卷积在核采样点之间留出间隔以扩大感受野。",
+      "latex": "R_{single}=1+a(k-1)",
+      "misconception": "不是。间隔改变采样位置；固定核宽下权重数量不因此增加，跨度内也可能有未直接采样的位置。",
+      "question": "空洞卷积是否把核之间的空位也作为额外输入参数？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 7
+        }
+      ],
+      "related": [
+        "tr-attention",
+        "tr-position"
+      ],
+      "importOrder": 54,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "卷积通过多层局部连接间接传递远距离信息。连续核每次覆盖紧邻的位置，空洞核可以跳着读取。论文用它们与自注意力比较连接路径与计算成本；能连接远端位置的最短路径和实际训练速度是两个问题。",
+        "symbols": [
+          [
+            "\\(k\\)",
+            "卷积核宽度。"
+          ],
+          [
+            "\\(L\\)",
+            "层数。"
+          ],
+          [
+            "\\(a\\)",
+            "空洞间隔因子。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "连续卷积逐层扩大覆盖范围",
+            "text": "步长为一、没有空洞时，每叠一层通常只增加核宽减一的感受野；因此要在很长序列中传递信息，需要较多连续局部连接。这里讨论结构路径，而非保证学到某种语义关系。",
+            "latex": "R_L=1+L(k-1)"
+          },
+          {
+            "title": "空洞扩大采样间距",
+            "text": "单层空洞卷积的有效覆盖跨度随间隔增大；若跨层间隔按指数变化，连接远距离所需层数可以减少。并非任意固定空洞率都自动得到论文讨论的对数路径性质。",
+            "latex": "R_{single}=1+a(k-1)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：核宽为 3 时，普通一层读取三个相邻位置，跨度为 3；间隔因子为 2 时读取相隔一个位置的三点，跨度为 5。覆盖跨度增大不代表实际读取了全部五个位置。",
+          "latex": "1+2(3-1)=5"
+        },
+        "connection": "比较注意力与卷积要同时看路径、序列长度和表示维度；论文表 1 的复杂度是特定模块的理论量，不是任意硬件的时间实测。",
+        "check": {
+          "question": "空洞卷积是否把核之间的空位也作为额外输入参数？",
+          "answer": "不是。间隔改变采样位置；固定核宽下权重数量不因此增加，跨度内也可能有未直接采样的位置。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-21_173422_904.png",
+        "专有名词/ScreenShot_2026-10-21_173430_712.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "tr-dropout",
+      "name": "Dropout 与训练正则化",
+      "english": "Dropout regularization",
+      "group": "Transformer 基础",
+      "summary": "训练时随机屏蔽部分分量，减轻模型对特定特征组合的过度依赖。",
+      "explanation": "Dropout 在训练过程中制造随机缺失，让模型不能完全依赖某几个固定分量。原论文在子层输出与嵌入加位置编码的结果上使用它。训练阶段的随机性和推理阶段的确定计算要区分，不能把它解释成永久剪掉同一批权重。",
+      "formula": "训练时随机屏蔽部分分量，减轻模型对特定特征组合的过度依赖。",
+      "latex": "\\Pr(m_i=1)=1-p",
+      "misconception": "不是。这里的 0.1 是丢弃概率，保留概率为 0.9；还要核对不同接口对参数的具体命名。",
+      "question": "Dropout 的 0.1 是否表示保留 10% 分量？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 8
+        }
+      ],
+      "related": [
+        "pruning",
+        "tr-postnorm"
+      ],
+      "importOrder": 55,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "Dropout 在训练过程中制造随机缺失，让模型不能完全依赖某几个固定分量。原论文在子层输出与嵌入加位置编码的结果上使用它。训练阶段的随机性和推理阶段的确定计算要区分，不能把它解释成永久剪掉同一批权重。",
+        "symbols": [
+          [
+            "\\(p\\)",
+            "丢弃概率。"
+          ],
+          [
+            "\\(m_i\\)",
+            "以概率 1−p 保留的随机掩码。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "理解常见的期望保持实现",
+            "text": "在常见 inverted dropout 写法中，保留的分量除以保留概率，使训练输出的逐分量期望保持原值。此写法是教学补充，原文重点在应用位置和丢弃率，不是给出这一推导。",
+            "latex": "\\widetilde x_i=m_i x_i/(1-p),\\quad \\mathbb E[\\widetilde x_i]=x_i"
+          },
+          {
+            "title": "检查训练与评估模式",
+            "text": "论文 base 设置使用 0.1 的 dropout。评估通常关闭随机丢弃；若校准量化时仍启用训练随机性，就可能混入不同来源的输出差异，需要明确记录模式并控制变量。",
+            "latex": ""
+          }
+        ],
+        "example": {
+          "text": "教学算例：令输入数值为 4，丢弃率为 0.5。训练时它以相同概率变成 0 或 8，平均仍为 4；单次结果并不等于 4，期望一致也不等于每次输出一致。",
+          "latex": "\\tfrac12\\cdot0+\\tfrac12\\cdot8=4"
+        },
+        "connection": "Dropout 是训练正则化，剪枝是结构或参数压缩。两者都可能出现零值，却不能据此认作同一种推理加速方法。",
+        "check": {
+          "question": "Dropout 的 0.1 是否表示保留 10% 分量？",
+          "answer": "不是。这里的 0.1 是丢弃概率，保留概率为 0.9；还要核对不同接口对参数的具体命名。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-21_220010_273.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "tr-bleu",
+      "name": "BLEU 与翻译评估边界",
+      "english": "BLEU score",
+      "group": "Transformer 基础",
+      "summary": "用裁剪 n-gram 匹配精度与长度惩罚评估候选翻译，通常越高越好。",
+      "explanation": "BLEU 衡量候选翻译与参考文本的局部片段匹配，但自然语言可以有多种合理表述，因此分数不是语义理解正确率。论文使用它比较机器翻译模型，不能把不同数据集、分词流程或报告口径下的数字直接排列高低。",
+      "formula": "用裁剪 n-gram 匹配精度与长度惩罚评估候选翻译，通常越高越好。",
+      "latex": "\\operatorname{BLEU}=BP\\prod_np_n^{w_n}",
+      "misconception": "不是。BLEU 不是逐项分类准确率，1 分的意义必须放在同一任务与评估协议中理解。",
+      "question": "BLEU 增加 1 分是否就是准确率增加一个百分点？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 8
+        }
+      ],
+      "related": [
+        "evaluation",
+        "tr-decoding"
+      ],
+      "importOrder": 56,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "BLEU 衡量候选翻译与参考文本的局部片段匹配，但自然语言可以有多种合理表述，因此分数不是语义理解正确率。论文使用它比较机器翻译模型，不能把不同数据集、分词流程或报告口径下的数字直接排列高低。",
+        "symbols": [
+          [
+            "\\(p_n\\)",
+            "n-gram 的裁剪匹配精度。"
+          ],
+          [
+            "\\(BP\\)",
+            "过短候选的长度惩罚。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "匹配精度与长度约束共同作用",
+            "text": "教学上可把标准 BLEU 看作多个 n-gram 匹配精度的加权几何平均，再乘长度惩罚。具体平滑、分词、参考集合及实现版本影响结果，复现时必须明确这些设置。",
+            "latex": "\\operatorname{BLEU}=BP\\exp\\left(\\sum_{n=1}^Nw_n\\log p_n\\right)"
+          },
+          {
+            "title": "回到论文的具体证据",
+            "text": "本地表 2 中 base 的英德 BLEU 为 27.3，big 为 28.4。表 3 却是开发集消融，不能直接与表 2 的测试集结果混读；原文英法数字还有表文不一致，需要注明。",
+            "latex": ""
+          }
+        ],
+        "example": {
+          "text": "教学算例：若所有考虑的 n-gram 精度均为 0.5，且长度惩罚为 1，则几何平均为 0.5，可按百分制记作 50。它并不表示一半句子的意思完全正确，更不是分类准确率。",
+          "latex": "1\\cdot\\exp\\left(\\sum_nw_n\\log0.5\\right)=0.5,\\quad\\sum_nw_n=1"
+        },
+        "connection": "与已读量化论文的 PPL 一样，指标都依赖任务和评估协议；PPL 低与 BLEU 高分别描述不同对象，不能直接相互换算。",
+        "check": {
+          "question": "BLEU 增加 1 分是否就是准确率增加一个百分点？",
+          "answer": "不是。BLEU 不是逐项分类准确率，1 分的意义必须放在同一任务与评估协议中理解。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-23_133936_403.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "tr-decoding",
+      "name": "束搜索与模型集成",
+      "english": "Beam search and ensemble",
+      "group": "Transformer 基础",
+      "summary": "束搜索保留多条候选输出前缀；模型集成结合多个模型的预测，二者不属于同一维度。",
+      "explanation": "自回归生成存在很多可能的后续路径。束搜索每步保留若干得分较高的候选前缀，减少只看眼前最高概率的局限；模型集成则组合不同模型的预测。论文还使用检查点参数平均，它也不等同于多模型同时推理。",
+      "formula": "束搜索保留多条候选输出前缀；模型集成结合多个模型的预测，二者不属于同一维度。",
+      "latex": "\\text{beam search}\\ne\\text{model ensemble}",
+      "misconception": "不是。四条候选通常来自同一个模型；独立模型的集成是另一项设置。",
+      "question": "使用束宽 4 是否表示同时运行四个独立训练的模型？",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 8
+        }
+      ],
+      "related": [
+        "tr-mask",
+        "tr-bleu"
+      ],
+      "importOrder": 57,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "自回归生成存在很多可能的后续路径。束搜索每步保留若干得分较高的候选前缀，减少只看眼前最高概率的局限；模型集成则组合不同模型的预测。论文还使用检查点参数平均，它也不等同于多模型同时推理。",
+        "symbols": [
+          [
+            "\\(B\\)",
+            "束宽，即每步保留的候选前缀数。"
+          ],
+          [
+            "\\(V\\)",
+            "词表大小。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "扩展候选并重新筛选",
+            "text": "每条保留的前缀都可向词表中的下一符号扩展，再按所用评分规则保留束宽条候选。长度惩罚会影响排名，束宽本身不构成枚举所有完整输出的全局最优保证。",
+            "latex": "\\text{candidates per step}\\ \\le BV"
+          },
+          {
+            "title": "区分三种组合方式",
+            "text": "论文解码使用束宽 4 和长度惩罚；base 平均最后 5 个检查点、big 平均最后 20 个检查点。参数平均最终形成一套参数，多模型概率集成则需多次前向计算，成本不能混为一谈。",
+            "latex": ""
+          }
+        ],
+        "example": {
+          "text": "教学算例：束宽为 2、词表只有三个候选符号时，一步最多形成六个前缀扩展，再选择两条。即使第一步得分最高的前缀不在最终最优序列上，束搜索也可能因剪枝而找不到真正最优解。",
+          "latex": "B V=2\\times3=6"
+        },
+        "connection": "比较推理速度需要对齐搜索策略、候选条数与集成方式，否则精度和成本的差异可能来自解码协议而不是模型或量化算法。",
+        "check": {
+          "question": "使用束宽 4 是否表示同时运行四个独立训练的模型？",
+          "answer": "不是。四条候选通常来自同一个模型；独立模型的集成是另一项设置。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-23_134156_788.png",
+        "专有名词/ScreenShot_2026-10-23_134200_028.png"
+      ],
+      "collected": true
     }
   ],
   "readingUpdates": [

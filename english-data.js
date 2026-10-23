@@ -1,6 +1,6 @@
-/* 原句已与本地 PDF 核对；example 均为教学例句。 */
+/* 原句节选已核对本地 PDF；example 为教学例句。 */
 window.STUDY_DATA.english = {
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-23",
   "terms": [
     {
       "id": "en-quantization",
@@ -491,9 +491,17 @@ window.STUDY_DATA.english = {
         {
           "paper": "tensor-network-part1",
           "page": 15
+        },
+        {
+          "paper": "tensor-review",
+          "page": 6
         }
       ],
-      "importOrder": 23
+      "importOrder": 23,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_221654_130.png"
+      ],
+      "collected": true
     },
     {
       "id": "en-tensor-tensorization",
@@ -1807,6 +1815,820 @@ window.STUDY_DATA.english = {
       ],
       "collected": true,
       "importOrder": 86
+    },
+    {
+      "id": "en-impedance",
+      "name": "impedance",
+      "meaning": "阻抗 / 阻碍",
+      "group": "Transformer / 阅读积累",
+      "usage": "在电学中通常译为阻抗；比喻用法可指阻碍。",
+      "example": "Impedance and resistance are not identical concepts.",
+      "translation": "阻抗与电阻不是同一概念。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 该词并非本篇注意力论文专属，按原有关联资料归类。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "battery-tensor",
+          "page": 1
+        }
+      ],
+      "importOrder": 87,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_201433_279.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-redundancy",
+      "name": "redundancy",
+      "meaning": "冗余",
+      "group": "Transformer / 阅读积累",
+      "usage": "redundant 是形容词；说明可替代或重复的信息。",
+      "example": "Redundancy can permit a compact representation.",
+      "translation": "冗余可能允许更紧凑的表示。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 该词并非本篇注意力论文专属，按原有关联资料归类。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "tensor-review",
+          "page": 3
+        }
+      ],
+      "importOrder": 88,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_201844_790.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-entry",
+      "name": "entry",
+      "meaning": "条目 / 元素",
+      "group": "Transformer / 阅读积累",
+      "usage": "矩阵、张量中通常指一个索引位置的元素。",
+      "example": "An observed entry constrains the tensor model.",
+      "translation": "一个已观测条目约束张量模型。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 该词并非本篇注意力论文专属，按原有关联资料归类。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "tensor-review",
+          "page": 3
+        }
+      ],
+      "importOrder": 89,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_215129_459.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-coefficient",
+      "name": "coefficient",
+      "meaning": "系数",
+      "group": "Transformer / 阅读积累",
+      "usage": "coefficient 不是置信度 confidence。",
+      "example": "Each coefficient weights a component.",
+      "translation": "每个系数为一个成分赋权。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 该词并非本篇注意力论文专属，按原有关联资料归类。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "tensor-review",
+          "page": 3
+        }
+      ],
+      "importOrder": 90,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_215146_123.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-mode-wise-multiplication",
+      "name": "mode-wise multiplication",
+      "meaning": "模态乘法",
+      "group": "Transformer / 阅读积累",
+      "usage": "沿指定模态进行矩阵乘法。",
+      "example": "Mode-wise multiplication changes one tensor dimension.",
+      "translation": "模态乘法改变张量的一个维度。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 该词并非本篇注意力论文专属，按原有关联资料归类。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "tensor-review",
+          "page": 6
+        }
+      ],
+      "importOrder": 91,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_221641_329.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-pipeline",
+      "name": "pipeline",
+      "meaning": "处理流程 / 流水线",
+      "group": "Transformer / 阅读积累",
+      "usage": "需区分一般工作流程与系统中的流水线并行。",
+      "example": "The pipeline separates training from evaluation.",
+      "translation": "该流程区分训练与评估。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 7
+        }
+      ],
+      "importOrder": 93,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-17_154855_521.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-transduction",
+      "name": "transduction",
+      "meaning": "序列转换",
+      "group": "Transformer / 阅读积累",
+      "usage": "sequence transduction 指把输入序列映射到输出序列。",
+      "example": "Translation is a sequence transduction task.",
+      "translation": "翻译是一种序列转换任务。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 94,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_170244_488.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-inherently",
+      "name": "inherently",
+      "meaning": "内在地 / 本质上",
+      "group": "Transformer / 阅读积累",
+      "usage": "副词修饰性质，注意其适用对象。",
+      "example": "The computation is inherently sequential.",
+      "translation": "该计算具有内在的串行性。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 95,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_170416_456.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-precludes",
+      "name": "precludes",
+      "meaning": "使不可能 / 排除",
+      "group": "Transformer / 阅读积累",
+      "usage": "preclude doing sth；比降低概率含义更强。",
+      "example": "This dependency precludes parallel updates.",
+      "translation": "这种依赖使并行更新无法进行。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 96,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_170424_131.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-eschewing",
+      "name": "eschewing",
+      "meaning": "避开 / 摒弃",
+      "group": "Transformer / 阅读积累",
+      "usage": "eschew 的现在分词，可作后置修饰。",
+      "example": "The architecture eschews recurrence.",
+      "translation": "该架构不采用循环结构。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 97,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_170549_537.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-logarithmically",
+      "name": "logarithmically",
+      "meaning": "以对数方式",
+      "group": "Transformer / 阅读积累",
+      "usage": "描述增长阶，不是实测延迟的直接断言。",
+      "example": "The path length grows logarithmically in this construction.",
+      "translation": "该构造中的路径长度按对数增长。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 98,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_195438_370.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-textual-entailment",
+      "name": "textual entailment",
+      "meaning": "文本蕴含",
+      "group": "Transformer / 阅读积累",
+      "usage": "判断一段文本是否支持另一段表述。",
+      "example": "Textual entailment concerns relations between statements.",
+      "translation": "文本蕴含关注陈述之间的支持关系。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 99,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_195628_113.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-concession",
+      "name": "concession",
+      "meaning": "让步",
+      "group": "Transformer / 阅读积累",
+      "usage": "语法中的让步关系，例如 although / albeit。",
+      "example": "The clause expresses a concession.",
+      "translation": "该从句表达让步。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 100,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_195755_306.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-facilitate",
+      "name": "facilitate",
+      "meaning": "使更容易 / 促进",
+      "group": "Transformer / 阅读积累",
+      "usage": "facilitate 后接名词或动名词，不等于保证成功。",
+      "example": "Matching dimensions facilitate residual connections.",
+      "translation": "匹配的维度便于残差连接。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 3
+        }
+      ],
+      "importOrder": 101,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_213554_729.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-subsequent",
+      "name": "subsequent",
+      "meaning": "后续的",
+      "group": "Transformer / 阅读积累",
+      "usage": "subsequent to 表示在……之后。",
+      "example": "The mask excludes subsequent positions.",
+      "translation": "该掩码排除后续位置。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 3
+        }
+      ],
+      "importOrder": 102,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_213623_552.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-incorporate",
+      "name": "incorporate",
+      "meaning": "纳入 / 融入",
+      "group": "Transformer / 阅读积累",
+      "usage": "incorporate A into B，将 A 纳入 B。",
+      "example": "The model incorporates position information.",
+      "translation": "模型纳入位置信息。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 103,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_214348_862.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-compatibility",
+      "name": "compatibility",
+      "meaning": "匹配程度 / 相容性",
+      "group": "Transformer / 阅读积累",
+      "usage": "注意力里表示查询与键的匹配分数。",
+      "example": "Compatibility scores determine the attention weights.",
+      "translation": "匹配分数决定注意力权重。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 104,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-20_094716_806.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-concatenation",
+      "name": "concatenation",
+      "meaning": "拼接",
+      "group": "Transformer / 阅读积累",
+      "usage": "Concat 是 concatenate 操作的常见简写，区别于逐元素相加。",
+      "example": "Concatenation preserves the features of each head.",
+      "translation": "拼接保留每个头的特征。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "importOrder": 105,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-20_095711_792.png",
+        "语法与单词/ScreenShot_2026-10-20_100713_600.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-memory-footprint",
+      "name": "memory footprint",
+      "meaning": "内存占用",
+      "group": "Transformer / 阅读积累",
+      "usage": "需说明包括参数、激活、缓存还是临时工作区。",
+      "example": "A smaller matrix can reduce the memory footprint.",
+      "translation": "更小的矩阵可以降低内存占用。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 106,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-20_122042_116.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-extrapolate",
+      "name": "extrapolate",
+      "meaning": "外推",
+      "group": "Transformer / 阅读积累",
+      "usage": "外推到训练范围之外，不等于保证有效。",
+      "example": "The encoding may help the model extrapolate to longer sequences.",
+      "translation": "该编码可能帮助模型向更长序列外推。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 107,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-21_164041_160.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-asymptotic",
+      "name": "asymptotic",
+      "meaning": "渐近的",
+      "group": "Transformer / 阅读积累",
+      "usage": "修饰 complexity；忽略常数不等于常数开销不重要。",
+      "example": "Asymptotic complexity does not determine latency alone.",
+      "translation": "渐近复杂度不能单独决定延迟。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 108,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-21_212443_242.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-pairwise",
+      "name": "pairwise",
+      "meaning": "两两的 / 成对的",
+      "group": "Transformer / 阅读积累",
+      "usage": "pairwise interactions 指成对相互作用。",
+      "example": "Attention computes pairwise matching scores.",
+      "translation": "注意力计算两两匹配分数。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 109,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-21_212621_768.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-desiderata",
+      "name": "desiderata",
+      "meaning": "期望满足的条件",
+      "group": "Transformer / 阅读积累",
+      "usage": "desideratum 的复数，描述设计目标。",
+      "example": "The desiderata include cost and path length.",
+      "translation": "期望条件包括成本与路径长度。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 110,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-21_212903_800.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-dilated-convolution",
+      "name": "dilated convolutions",
+      "meaning": "空洞卷积",
+      "group": "Transformer / 阅读积累",
+      "usage": "通过间隔采样扩大覆盖跨度，核宽不必变化。",
+      "example": "Dilated convolutions can enlarge the receptive field.",
+      "translation": "空洞卷积可以扩大感受野。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 7
+        }
+      ],
+      "importOrder": 111,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-21_212958_472.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-spanning",
+      "name": "spanning",
+      "meaning": "跨越 / 覆盖",
+      "group": "Transformer / 阅读积累",
+      "usage": "可描述跨越句子或位置范围，不能脱离上下文只译为生成。",
+      "example": "The relation spans several positions.",
+      "translation": "这种关系跨越多个位置。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 15
+        }
+      ],
+      "importOrder": 112,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-21_213402_146.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-ensemble",
+      "name": "ensemble",
+      "meaning": "模型集成",
+      "group": "Transformer / 阅读积累",
+      "usage": "多个模型的组合；区别于束搜索和检查点平均。",
+      "example": "An ensemble combines predictions from several models.",
+      "translation": "模型集成结合多个模型的预测。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 8
+        }
+      ],
+      "importOrder": 113,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_145009_759.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-constituency-parsing",
+      "name": "constituency parsing",
+      "meaning": "成分句法分析",
+      "group": "Transformer / 阅读积累",
+      "usage": "将句子分析成嵌套短语结构，区别于依存分析。",
+      "example": "Constituency parsing produces a phrase structure.",
+      "translation": "成分分析产生短语结构。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 9
+        }
+      ],
+      "importOrder": 114,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_145352_535.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-regime",
+      "name": "regime",
+      "meaning": "设置 / 训练机制",
+      "group": "Transformer / 阅读积累",
+      "usage": "training regime 指训练方案或条件。",
+      "example": "The training regime includes an optimizer and a schedule.",
+      "translation": "训练设置包括优化器与调度方案。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 7
+        }
+      ],
+      "importOrder": 115,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_145406_758.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-discriminative",
+      "name": "discriminative",
+      "meaning": "判别式的",
+      "group": "Transformer / 阅读积累",
+      "usage": "与 generative 生成式区分，但应看具体模型定义。",
+      "example": "A discriminative model predicts labels from inputs.",
+      "translation": "判别模型根据输入预测标签。",
+      "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 10
+        }
+      ],
+      "importOrder": 116,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_145418_278.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-scaled-dot-product-attention",
+      "name": "scaled dot-product attention",
+      "meaning": "缩放点积注意力",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes scaled dot-product attention in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍缩放点积注意力。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 117
+    },
+    {
+      "id": "en-multi-head-attention",
+      "name": "multi-head attention",
+      "meaning": "多头注意力",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes multi-head attention in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍多头注意力。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "importOrder": 118
+    },
+    {
+      "id": "en-self-attention",
+      "name": "self-attention",
+      "meaning": "自注意力",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes self-attention in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍自注意力。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "importOrder": 119
+    },
+    {
+      "id": "en-cross-attention",
+      "name": "encoder-decoder attention",
+      "meaning": "编码器—解码器注意力",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes encoder-decoder attention in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍编码器—解码器注意力。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "importOrder": 120
+    },
+    {
+      "id": "en-query",
+      "name": "query",
+      "meaning": "查询",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes query in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍查询。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 121
+    },
+    {
+      "id": "en-key",
+      "name": "key",
+      "meaning": "键",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes key in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍键。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 122
+    },
+    {
+      "id": "en-value",
+      "name": "value",
+      "meaning": "值",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes value in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍值。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 123
+    },
+    {
+      "id": "en-autoregressive",
+      "name": "auto-regressive",
+      "meaning": "自回归的",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes auto-regressive in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍自回归的。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 124
+    },
+    {
+      "id": "en-positional-encoding",
+      "name": "positional encoding",
+      "meaning": "位置编码",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes positional encoding in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍位置编码。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 125
+    },
+    {
+      "id": "en-feed-forward-network",
+      "name": "feed-forward network",
+      "meaning": "前馈网络",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes feed-forward network in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍前馈网络。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "importOrder": 126
+    },
+    {
+      "id": "en-dropout",
+      "name": "dropout",
+      "meaning": "随机丢弃正则化",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes dropout in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍随机丢弃正则化。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 8
+        }
+      ],
+      "importOrder": 127
+    },
+    {
+      "id": "en-beam-search",
+      "name": "beam search",
+      "meaning": "束搜索",
+      "group": "Transformer / 阅读积累",
+      "usage": "结合模型输入来源、维度与训练/推理阶段理解该术语。",
+      "example": "The paper describes beam search in the Transformer architecture.",
+      "translation": "论文在 Transformer 架构中介绍束搜索。",
+      "caution": "教学例句；术语的结构角色与现代模型的具体实现需要分别核对。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 8
+        }
+      ],
+      "importOrder": 128
     }
   ],
   "phrases": [
@@ -2327,6 +3149,195 @@ window.STUDY_DATA.english = {
       ],
       "collected": true,
       "importOrder": 25
+    },
+    {
+      "id": "en-be-modeled-as",
+      "name": "be modeled as",
+      "meaning": "被建模为",
+      "group": "Transformer / 阅读积累",
+      "usage": "be modeled as 后接数学或结构描述。",
+      "example": "The tensor can be modeled as a sum of components.",
+      "translation": "该张量可被建模为成分之和。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "tensor-review",
+          "page": 3
+        }
+      ],
+      "importOrder": 26,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-16_214843_851.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-in-conjunction-with",
+      "name": "in conjunction with",
+      "meaning": "与……结合使用",
+      "group": "Transformer / 阅读积累",
+      "usage": "介词短语表达联合使用，不保证协同收益。",
+      "example": "Attention is used in conjunction with another module.",
+      "translation": "注意力与另一个模块结合使用。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 27,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_170530_563.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-albeit",
+      "name": "albeit",
+      "meaning": "尽管 / 虽然",
+      "group": "Transformer / 阅读积累",
+      "usage": "让步连接词，常接形容词或短语，不能随意当成完整 however 句。",
+      "example": "The method is useful, albeit costly.",
+      "translation": "该方法虽有用，但成本较高。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 2
+        }
+      ],
+      "importOrder": 28,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_195505_225.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-offset-by",
+      "name": "offset by",
+      "meaning": "偏移……",
+      "group": "Transformer / 阅读积累",
+      "usage": "截图 offset b 截断；原文第 3 页可确认 offset by one position。",
+      "example": "The target inputs are offset by one position.",
+      "translation": "目标输入偏移一个位置。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 3
+        }
+      ],
+      "importOrder": 29,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-19_213637_295.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-counteract-an-effect",
+      "name": "counteract an effect",
+      "meaning": "抵消 / 缓解某种影响",
+      "group": "Transformer / 阅读积累",
+      "usage": "与 to 引导的目的状语配合；不一定完全消除。",
+      "example": "We scale the scores to counteract this effect.",
+      "translation": "我们缩放分数以缓解这一影响。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 30,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-20_094834_948.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-attend-over",
+      "name": "attend over",
+      "meaning": "对……范围施加注意力",
+      "group": "Transformer / 阅读积累",
+      "usage": "说明可被访问的键值范围，不是普通的参加。",
+      "example": "Each query can attend over the source positions.",
+      "translation": "每个查询可关注源序列位置。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 5
+        }
+      ],
+      "importOrder": 31,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-20_122322_068.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-keep-constant-vary",
+      "name": "keep A constant; vary B",
+      "meaning": "保持 A 不变，改变 B",
+      "group": "Transformer / 阅读积累",
+      "usage": "消融实验控制变量表达；只改变一个变量还需核对其余协议。",
+      "example": "We keep the total dimension constant and vary the number of heads.",
+      "translation": "我们保持总维度不变并改变头数。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 9
+        }
+      ],
+      "importOrder": 32,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_145214_096.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-in-light-of",
+      "name": "in light of",
+      "meaning": "鉴于 / 考虑到",
+      "group": "Transformer / 阅读积累",
+      "usage": "介词短语接已有事实或证据，避免当成因果证明。",
+      "example": "We revise the claim in light of the evidence.",
+      "translation": "我们根据证据修正该主张。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 9
+        }
+      ],
+      "importOrder": 33,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_151059_983.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-universally-optimal",
+      "name": "universally optimal",
+      "meaning": "普遍最优的",
+      "group": "Transformer / 阅读积累",
+      "usage": "很强的全称判断，必须明确目标与条件。",
+      "example": "No tested setting is shown to be universally optimal.",
+      "translation": "测试结果未证明某个设置普遍最优。",
+      "caution": "截图短语与教学例句分开；不把教学例句当作论文原文。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 9
+        }
+      ],
+      "importOrder": 34,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_151104_766.png"
+      ],
+      "collected": true
     }
   ],
   "sentences": [
@@ -2730,6 +3741,52 @@ window.STUDY_DATA.english = {
         }
       ],
       "importOrder": 16
+    },
+    {
+      "id": "en-sentence-attention-1",
+      "name": "目的状语：To counteract",
+      "group": "Transformer",
+      "paper": "attention-2017",
+      "page": 4,
+      "quote": "To counteract this effect",
+      "meaning": "为缓解这一影响",
+      "analysis": [
+        "原文目的状语节选，to + 动词原形说明后续缩放操作的目的。",
+        "counteract 的宾语 this effect 回指前文点积变大、softmax 梯度过小的影响，不是新的独立实验结论。"
+      ],
+      "focus": [
+        "目的与指代"
+      ],
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 4
+        }
+      ],
+      "importOrder": 17
+    },
+    {
+      "id": "en-sentence-attention-2",
+      "name": "原因从句：Since",
+      "group": "Transformer",
+      "paper": "attention-2017",
+      "page": 6,
+      "quote": "Since our model contains no recurrence and no convolution",
+      "meaning": "由于模型不包含循环与卷积",
+      "analysis": [
+        "原文原因从句节选；Since 在此表示原因，不表示自某时以来。",
+        "no recurrence and no convolution 为并列否定对象；主句继续说明需要注入位置信息。"
+      ],
+      "focus": [
+        "原因与并列否定"
+      ],
+      "refs": [
+        {
+          "paper": "attention-2017",
+          "page": 6
+        }
+      ],
+      "importOrder": 18
     }
   ]
 };
