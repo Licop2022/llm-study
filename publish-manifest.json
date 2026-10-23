@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T08:05:08.135Z",
+  "generatedAt": "2026-10-23T08:15:36.178Z",
   "counts": {
     "papers": 15,
     "concepts": 57,
     "terms": 127,
     "phrases": 34,
     "sentences": 18,
-    "experiments": 5
+    "experiments": 9
   },
   "files": [
     {
       "path": "index.html",
-      "bytes": 3405,
-      "sha256": "202ee359016cfafc025bfe68d37dd870780082f46104c5037603a70335dbf8c2"
+      "bytes": 3425,
+      "sha256": "1db74e126cd1b098e1d248121836dc677244cdf20fde6186e65cf0531c31181d"
     },
     {
       "path": "app.js",
-      "bytes": 86715,
-      "sha256": "335f119463e07726ee07e04a39dd7f4f4382156215fa0ae6149984d150f210cd"
+      "bytes": 86732,
+      "sha256": "f66da8d75e57bed44705b3981f1860193f66037e98376fa538fa987f422d0548"
     },
     {
       "path": "data.js",
-      "bytes": 316931,
-      "sha256": "f4fb16ac5f80485e50cf95f3346887a402005cf9425dc8ff4b724a2baab62224"
+      "bytes": 328313,
+      "sha256": "b02ce7b36d6a9dadb6ab94d5902d3ba107744161f716ff5ee393304807f94ee2"
     },
     {
       "path": "english-data.js",
@@ -1219,6 +1219,26 @@
       "path": "notes/experiments/code/d2_cell_rank_ablation.html",
       "bytes": 31625,
       "sha256": "4408b77f8d55143106352755dd319f3fd892790fda69d917f2d0ff8c7b4015de"
+    },
+    {
+      "path": "notes/experiments/rag/rag-scholarship-overview.md",
+      "bytes": 2503,
+      "sha256": "bc448dc29beb2269f231aa7898c340184460e1fbdffe98b4a7dd167a872c8bcb"
+    },
+    {
+      "path": "notes/experiments/rag/rag-fixed-test-lora.md",
+      "bytes": 2576,
+      "sha256": "08ab3ef3f3554d3e5124d8bb7ab15c64b003883db9c4fcd0a79e3cbd70e919da"
+    },
+    {
+      "path": "notes/experiments/rag/rag-rerank-e028.md",
+      "bytes": 2022,
+      "sha256": "a8846e75110338b61d21f2c88a97d58e504cf202ca1aed6927bec3714efb9627"
+    },
+    {
+      "path": "notes/experiments/rag/rag-chunk-comparison.md",
+      "bytes": 2028,
+      "sha256": "a601a97f583094a0ee0c8f97bb54876272919eb62c6ec666d16a76ae06fafc7d"
     },
     {
       "path": "notes/experiments/d2_cell_rank_ablation.py",

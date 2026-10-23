@@ -162,14 +162,14 @@
     const id=location.hash.slice(1).split('/')[1]||'';
     const selected=entries.find(e=>e.id===id)||entries.find(e=>e.status==='running')||entries[0];
     if(!selected)return heading('实验与代码','')+'<div class="empty">暂无实验记录。</div>';
-    const labels={recorded:'已有截图结果',running:'启动确认 · 待最终结果',teaching:'教学材料 · 待自评'};
+    const labels={recorded:'已有记录',running:'启动确认 · 待最终结果',teaching:'教学材料 · 待自评'};
     const list=entries.filter(e=>e.kind===selected.kind).sort((a,b)=>a.importOrder-b.importOrder);
     const experimental=entries.filter(e=>e.kind==='experiment');
     const code=entries.find(e=>e.kind==='code');
     return heading('实验与代码','',`<a class="button" href="#journal">学习日志 ${icon('pen')}</a>`)+
       `<nav class="experiment-tabs" aria-label="实验与代码分类"><a class="${selected.kind==='experiment'?'active':''}" href="#experiments/${experimental.at(-1)?.id||''}">实验记录 <small>${experimental.length}</small></a><a class="${selected.kind==='code'?'active':''}" href="#experiments/${code?.id||''}">代码语法 <small>${entries.filter(e=>e.kind==='code').length}</small></a></nav>
       <div class="experiment-layout"><aside class="experiment-list" aria-label="实验与代码条目">${list.map(e=>`<a href="#experiments/${attr(e.id)}" class="experiment-row ${selected.id===e.id?'selected':''}" ${selected.id===e.id?'aria-current="page"':''}><time>${esc(e.date)}</time><strong>${esc(e.title)}</strong><span>${esc(labels[e.status]||e.status)}</span></a>`).join('')}</aside>
-      <article class="experiment-detail" data-experiment-id="${attr(selected.id)}"><header class="experiment-header"><p>${esc(selected.date)} · ${esc(labels[selected.status]||selected.status)}</p><h2>${esc(selected.title)}</h2><p>${esc(selected.summary)}</p><div class="experiment-actions"><button class="button primary" data-action="experiment-review" data-id="${attr(selected.id)}">写复盘</button><a class="button" href="${attr(selected.markdown)}" download>下载 Markdown</a><a class="text-link" href="#papers/${attr(selected.paper)}">关联论文 ↗</a></div></header>
+      <article class="experiment-detail" data-experiment-id="${attr(selected.id)}"><header class="experiment-header"><p>${esc(selected.date)} · ${esc(labels[selected.status]||selected.status)}</p><h2>${esc(selected.title)}</h2><p>${esc(selected.summary)}</p><div class="experiment-actions"><button class="button primary" data-action="experiment-review" data-id="${attr(selected.id)}">写复盘</button><a class="button" href="${attr(selected.markdown)}" download>下载 Markdown</a>${selected.paper?`<a class="text-link" href="#papers/${attr(selected.paper)}">关联论文 ↗</a>`:""}</div></header>
       <div class="experiment-body">${selected.bodyHtml}</div>${selected.evidence?.length?`<details class="experiment-evidence"><summary>原始截图 · ${selected.evidence.length} 张</summary>${selected.evidence.map(e=>`<figure><a href="${attr(e.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${attr(e.url)}" alt="${attr(e.label)}"></a><figcaption>${esc(e.label)}</figcaption></figure>`).join('')}</details>`:''}
       <footer class="experiment-footer"><button class="button" data-action="experiment-review" data-id="${attr(selected.id)}">写复盘</button><a class="text-link" href="#journal">查看我的学习日志 ↗</a></footer></article></div>`;
   }
