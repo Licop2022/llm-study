@@ -1,53 +1,22 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#386b76">
-  <meta name="description" content="从论文到理解：个人 LLM 量化与张量学习记录、概念库与方法比较。">
-  <title>研究工作台 · 文献学习空间</title>
-  <link rel="icon" href="assets/gdut-logo-footer.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>科研学习工作台</title>
+  <link rel="icon" href="assets/gdut-logo-footer.png">
   <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
-  <link rel="stylesheet" href="english.css">
-  <link rel="stylesheet" href="reading-ui.css">
-  <link rel="stylesheet" href="workspace.css?v=20261023-attention-rag">
-  <link rel="stylesheet" href="experiments.css">
+  <link rel="stylesheet" href="workbench.css?v=20261024-workbench">
+  <link rel="stylesheet" href="learning.css?v=20261024-workbench"><link rel="stylesheet" href="knowledge-tree.css?v=20261024-workbench">
   <script defer src="assets/vendor/katex/katex.min.js"></script>
-  <script defer src="math-text.js?v=20261023-attention-rag"></script>
-  <script defer src="data.js?v=20261023-attention-rag"></script>
-  <script defer src="english-data.js?v=20261023-attention-rag"></script>
-  <script defer src="todo-core.js"></script>
-  <script defer src="app.js?v=20261023-attention-rag"></script>
+  <script defer src="math-text.js"></script><script defer src="data.js"></script><script defer src="english-data.js"></script>
+  <script defer src="todo-core.js"></script><script defer src="workbench-storage.js?v=20261024-workbench"></script><script defer src="learning-data.js?v=20261024-workbench"></script><script defer src="knowledge-tree.js?v=20261024-workbench"></script><script defer src="learning-ui.js?v=20261024-workbench"></script><script defer src="workbench.js?v=20261024-workbench"></script>
 </head>
 <body>
-  <aside class="sidebar" id="sidebar">
-    <a class="workspace-brand" href="#overview"><img src="assets/gdut-logo-header.png" alt="广东工业大学" width="1000" height="228"></a>
-    <div class="workspace-name">研究工作台</div>
-    <nav id="navigation" aria-label="主导航"></nav>
-    <section id="workspace-library" class="workspace-library" aria-label="侧栏文库"></section>
-  </aside>
-  <div class="app-shell">
-    <header class="topbar">
-      <button class="icon-button mobile-menu" id="menu-button" aria-label="展开学习导航" aria-expanded="false"></button>
-      <div class="breadcrumb">学习空间 <span>/</span> <strong id="page-label">学习总览</strong></div>
-      <div class="workspace-top-actions"><button id="search-button" class="search-trigger"><span id="search-icon"></span><span>检索学习资料</span><kbd>/</kbd></button><button class="button small" data-action="workspace-schedule" id="workspace-schedule-toggle" aria-expanded="false">学习日程</button></div>
-    </header>
-    <div id="todo-reminders" hidden></div>
-    <div class="learning-layout">
-      <main id="main" tabindex="-1"></main>
-      <aside id="study-schedule" class="study-schedule" aria-label="按日期查看学习记录"></aside>
-    </div>
-    <span id="updated-date" hidden></span>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="workspace">
+    <header class="topbar"><nav id="area-nav" aria-label="工作区"></nav><div class="toptools"><button data-tool="search">搜索资料 <kbd>Ctrl K</kbd></button><button id="context-tool" data-tool="continue">继续阅读</button><button id="notes-tool" data-tool="notes">阅读笔记</button></div><nav id="breadcrumbs" aria-label="当前位置"></nav></header>
+    <div id="workspace-reminders" class="workspace-reminders" hidden></div><main id="main"></main>
   </div>
-  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title"><div id="detail-content"></div></dialog>
-  <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
-    <div class="search-dialog-head"><label for="global-search" id="search-title">搜索学习库</label><button class="icon-button" data-action="close-search" aria-label="关闭搜索">×</button></div>
-    <input id="global-search" type="search" placeholder="试试：输出误差、AWQ、closed-form" autocomplete="off">
-    <div id="search-results" class="search-results"></div>
-  </dialog>
-  <input type="file" id="import-file" accept="application/json,.json" hidden>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <noscript>请启用 JavaScript，以使用概念卡片和学习记录功能。论文原件保存在 papers 文件夹。</noscript>
-</body>
-</html>
+  <dialog id="dialog" aria-labelledby="dialog-title"><header><h2 id="dialog-title"></h2><button data-close aria-label="关闭弹窗">×</button></header><div id="dialog-body"></div></dialog>
+  <input type="file" id="import-file" accept=".json,application/json" hidden><div id="message" role="status" aria-live="polite"></div>
+</body></html>

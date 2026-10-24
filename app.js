@@ -57,6 +57,7 @@
     out.todos=T.normalize(raw.todos);
     out.appliedUpdates = Array.isArray(raw.appliedUpdates) ? raw.appliedUpdates.filter(id=>typeof id==='string'&&/^[a-z0-9-]{1,80}$/.test(id)) : [];
     out.updatedAt = typeof raw.updatedAt === 'string' ? raw.updatedAt : now();
+    if(raw.workspace && typeof raw.workspace==='object' && !Array.isArray(raw.workspace))out.workspace=raw.workspace;
     return out;
   }
   let state = blankState(), storageOK = true, corruptState = false;
@@ -524,6 +525,7 @@
       if(!confirm('导入并合并备份？同一卡片和待办保留更新时间较新的记录；日志按 ID 合并。当前记录会先自动导出一份备份。')){event.target.value='';return;}
       exportBackup();
       for(const group of ['papers','concepts','english'])for(const [id,r] of Object.entries(incoming[group]))if(!state[group][id]||(r.updatedAt||'')>=(state[group][id].updatedAt||''))state[group][id]=r;
+      if(incoming.workspace&&(!state.workspace||(incoming.workspace.updatedAt||'')>(state.workspace.updatedAt||'')))state.workspace={...state.workspace,...incoming.workspace};
       state.todos=T.normalize([...state.todos,...incoming.todos]);
       state.appliedUpdates=[...new Set([...state.appliedUpdates,...incoming.appliedUpdates])];
       const logs=new Map(state.logs.map(l=>[l.id,l]));for(const l of incoming.logs)if(!logs.has(l.id))logs.set(l.id,l);state.logs=[...logs.values()];

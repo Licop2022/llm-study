@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T08:15:36.178Z",
+  "generatedAt": "2026-10-24T04:24:05.660Z",
   "counts": {
     "papers": 15,
     "concepts": 57,
@@ -12,13 +12,13 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 3425,
-      "sha256": "1db74e126cd1b098e1d248121836dc677244cdf20fde6186e65cf0531c31181d"
+      "bytes": 1995,
+      "sha256": "2084da5e5a4a67bd70c28bdfce37b3f6a0d748d82b9d5cb603d9919936a35f44"
     },
     {
       "path": "app.js",
-      "bytes": 86732,
-      "sha256": "f66da8d75e57bed44705b3981f1860193f66037e98376fa538fa987f422d0548"
+      "bytes": 87028,
+      "sha256": "2d04873adf892807fe46f2cb6ec7d4eff8af8dca9948a7113a2bbcfe4d66b670"
     },
     {
       "path": "data.js",
@@ -64,6 +64,51 @@
       "path": "experiments.css",
       "bytes": 3676,
       "sha256": "2589fb53e3871f28f06abc8aceae23bcc34d9b75266e6bbfb83f8ab9c8e85d98"
+    },
+    {
+      "path": "classic.html",
+      "bytes": 3496,
+      "sha256": "fc0d5ef781d577891d5bcb774f852df4cea5b84d596463e92ea7f1ddde3d7cf4"
+    },
+    {
+      "path": "workbench.js",
+      "bytes": 41798,
+      "sha256": "f354ecac43f9388ea590823a0e2f86c7ba1097e25b6755892eb67c88c3f3fbaf"
+    },
+    {
+      "path": "workbench-storage.js",
+      "bytes": 7672,
+      "sha256": "254490a049709e6a9487cc4a1ff438d31e0d5c69083e3de6dbc6dbdd39a832ea"
+    },
+    {
+      "path": "workbench.css",
+      "bytes": 16610,
+      "sha256": "39b0a31da2639c34aad3adc84b000aff5d39b365c7bf1255c1d32d50d32fe1ce"
+    },
+    {
+      "path": "learning-data.js",
+      "bytes": 21937,
+      "sha256": "8bb1688c3e43a7e18634061d48a4be278bf8b0c95f400dd424a57021ff23d086"
+    },
+    {
+      "path": "learning-ui.js",
+      "bytes": 14116,
+      "sha256": "be32d0fa93c5c0b76f17f023f14fe85cd840b7d46b85e623137c93841be3bad3"
+    },
+    {
+      "path": "learning.css",
+      "bytes": 7946,
+      "sha256": "17c248f60632664fb145ebb742c03d8ed9c50375c75d629d2ccbf2a8b32b728d"
+    },
+    {
+      "path": "knowledge-tree.js",
+      "bytes": 12579,
+      "sha256": "d825804ef627d14f975b2ebf0e0964ce547f35f0df44cd5c109e6d6b00562ad3"
+    },
+    {
+      "path": "knowledge-tree.css",
+      "bytes": 3506,
+      "sha256": "18b709f73c16541100cd8e6a95faf5bc6fb47697dba283a7cd047dad49cad16d"
     },
     {
       "path": "assets/gdut-logo-header.png",
@@ -1262,8 +1307,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 619,
-      "sha256": "b56da85acce8e9c994a89f7dd1fd7915fbdf6cff05e23531db4f408b2a17695e"
+      "bytes": 720,
+      "sha256": "54f6980e7199f583c780685f51b18182f72a1734c8d51dd5dcaa9b72ac48e8bb"
     },
     {
       "path": ".github/workflows/pages.yml",
