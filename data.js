@@ -1,7 +1,7 @@
 /* 稳定 ID 与 importOrder 保留个人记录和首次导入顺序。 */
 window.STUDY_DATA = {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-27",
   "title": "LLM 量化与张量学习",
   "notation": "统一采用行样本约定：X ∈ ℝᴺˣᵐ，W ∈ ℝᵐˣⁿ，Y = XW。Wq 表示量化并反量化后的浮点等效权重；原论文的矩阵朝向可能不同。引用页码均为 PDF 物理页码。",
   "papers": [
@@ -1091,6 +1091,120 @@ window.STUDY_DATA = {
         "limit": "任务、架构与协议限制；不是量化方法"
       },
       "source": "用户提供的本地 arXiv v7，15 页；原文 §3–6、表 1–3。用户已读，未额外填写完成日期、掌握度或实验结果。"
+    },
+    {
+      "id": "caldera",
+      "name": "CALDERA",
+      "title": "Compressing Large Language Models using Low Rank and Low Precision Decomposition",
+      "authors": "Rajarshi Saha, Naomi Sagan, Varun Srivastava, Andrea J. Goldsmith & Mert Pilanci",
+      "year": 2024,
+      "venue": "NeurIPS 2024",
+      "arxiv": "2405.18886",
+      "phase": "P3",
+      "category": "误差补偿进阶",
+      "pdf": "papers/P3_误差补偿进阶/CALDERA.pdf",
+      "pages": 38,
+      "version": "本地 NeurIPS 2024 稿 · 38页（含附录与清单）",
+      "initialStatus": "read",
+      "color": "teal",
+      "tags": [
+        "低精度低秩因子",
+        "联合优化",
+        "秩约束回归",
+        "LDLQ",
+        "E8 / RHT"
+      ],
+      "concepts": [
+        "output-error",
+        "low-rank",
+        "qera-exact",
+        "quantization-codebook",
+        "lattice-codebook",
+        "quip-role",
+        "rank-constrained-regression",
+        "forward-pass",
+        "quantizer-saturation",
+        "marchenko-pastur",
+        "rht",
+        "ldlq-feedback",
+        "caldera-joint",
+        "factor-bit-budget"
+      ],
+      "tagline": "在校准输出目标下联合优化量化主体与低精度低秩因子，研究质量、位数与推理开销的权衡。",
+      "question": "如何让量化主体与低秩因子在有限比特预算内共同拟合原线性层，而不把补偿分支始终留在高精度？",
+      "mechanism": "原文采用列输入约定 \\(W_o\\in\\mathbb R^{n\\times m}\\)，近似为 \\(Q_o+LR\\)。本站转成行样本：\\(W=W_o^\\top\\)、\\(Q=Q_o^\\top\\)、\\(A=R^\\top\\)、\\(B=L^\\top\\)，输出为 \\(XQ+(XA)B\\)。外循环用 LDLQ 更新减去当前低秩项后的主体，再用校准感知的秩约束回归初始化因子，内循环交替最小二乘与量化；所有矩阵都受低精度约束，并保存校准误差最好的候选。实验在 QuIP# 框架上采用 RHT 非相干预处理与 E8 格量化。",
+      "formula": "W≈Q+AB；最小化 ‖X(Q+AB−W)‖²；Q、A、B 都需满足低精度表示约束。",
+      "latex": "\\min_{Q,A,B}\\|X(Q+AB-W)\\|_F^2,\\quad Q\\in\\mathcal C_Q^{m\\times n},\\ A\\in\\mathcal C_A^{m\\times k},\\ B\\in\\mathcal C_B^{k\\times n}",
+      "evidence": "PDF第8页表1：LLaMA-2 7B、主体2比特、平均2.4比特时，rank256/4比特因子的 WikiText2 PPL为6.19，rank64/16比特因子为7.36；同表 QuIP# rank64且无微调为7.73。第10页表6：A10G、batch=1、序列长度=1，7B的rank256/4比特因子吞吐45.89 tok/s，未压缩31.75，QuIP#无低秩分支87.74；该CALDERA设置提升了相对未压缩的吞吐，但低于QuIP#。",
+      "caveat": "连续秩约束回归的解析最优性不等于离散联合优化或整模型任务全局最优。第23–24页 MP 谱估计有独立同分布、随机量化及渐近近似条件，不能直接当成 E8 实现的逐模型保证。表1–2、RHT微调表3–4、任务微调表5需分开；表5在10个检查点中报告最佳测试表现，且第27页说明LQ-LoRA对照的微调数据不同。第9页因子分块文字有索引表述不一致，宜以所选rank64分量转BF16的预算口径为准，复现时核对代码。平均位数不是完整设备峰值显存；表6速度仅限所列硬件与协议。",
+      "reading": [
+        {
+          "page": 2,
+          "label": "图2 · 主体、因子与奇异谱"
+        },
+        {
+          "page": 3,
+          "label": "式1 · 校准目标与码本约束"
+        },
+        {
+          "page": 4,
+          "label": "主体反馈、因子更新与伪逆"
+        },
+        {
+          "page": 5,
+          "label": "算法1 · 外循环与最佳候选"
+        },
+        {
+          "page": 6,
+          "label": "算法2 · 低精度因子子问题"
+        },
+        {
+          "page": 8,
+          "label": "表1–2 · 无RHT微调的质量比较"
+        },
+        {
+          "page": 9,
+          "label": "RHT与任务微调的区别"
+        },
+        {
+          "page": 10,
+          "label": "表5–6 · 微调预算与真实吞吐"
+        },
+        {
+          "page": 23,
+          "label": "附录C.4 · MP近似条件"
+        },
+        {
+          "page": 24,
+          "label": "附录C.5 · 正定二阶矩下的连续解"
+        },
+        {
+          "page": 27,
+          "label": "平均比特预算与数据口径"
+        },
+        {
+          "page": 30,
+          "label": "标量随机量化器与饱和"
+        }
+      ],
+      "checks": [
+        "CALDERA与QERA在哪些变量上优化，低秩因子是否受量化约束？",
+        "原文列输入矩阵如何转成本站行样本公式？",
+        "为何保留最佳候选不能证明每次量化更新都使误差下降？",
+        "为何相同平均位数下，因子秩与精度可以不同？",
+        "RHT微调、任务LoRA微调与原始PTQ结果为什么不能混读？",
+        "MP近似使用了哪些不应省略的条件？"
+      ],
+      "comparison": {
+        "target": "2比特主体＋低精度低秩因子；位数随秩与因子精度变化",
+        "objective": "校准层输出平方误差；主体和因子联合优化",
+        "statistic": "输入非中心二阶矩 / Hessian、LDL反馈结构",
+        "operation": "RHT、LDLQ外循环、秩约束回归初始化、因子交替量化",
+        "calibration": "层输入激活；小模型256条RedPajama样本，细节见第26页",
+        "extra": "因子也可4比特；可选RHT微调与rank64 BF16任务适配",
+        "limit": "离散非凸、校准覆盖、因子解码开销、理论简化和对照协议"
+      },
+      "source": "根据用户本地38页NeurIPS 2024原件整理，所有页码为PDF物理页。用户本次声明已读；未提供具体完成日期或个人理解，不填掌握程度与完成日期。"
     }
   ],
   "concepts": [
@@ -1122,6 +1236,14 @@ window.STUDY_DATA = {
         {
           "paper": "zeroquant-v2",
           "page": 5
+        },
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 30
         }
       ],
       "importOrder": 1,
@@ -1622,6 +1744,14 @@ window.STUDY_DATA = {
         {
           "paper": "eora",
           "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 26
         }
       ],
       "importOrder": 8,
@@ -1709,6 +1839,10 @@ window.STUDY_DATA = {
         {
           "paper": "attention-2017",
           "page": 5
+        },
+        {
+          "paper": "caldera",
+          "page": 3
         }
       ],
       "importOrder": 9,
@@ -1863,6 +1997,14 @@ window.STUDY_DATA = {
         {
           "paper": "zeroquant-v2",
           "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 3
         }
       ],
       "captures": [
@@ -1953,6 +2095,14 @@ window.STUDY_DATA = {
         {
           "paper": "zeroquant-v2",
           "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 30
         }
       ],
       "importOrder": 12,
@@ -2025,6 +2175,10 @@ window.STUDY_DATA = {
         {
           "paper": "qera",
           "page": 5
+        },
+        {
+          "paper": "caldera",
+          "page": 4
         }
       ],
       "importOrder": 13,
@@ -2100,6 +2254,10 @@ window.STUDY_DATA = {
         {
           "paper": "qera",
           "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 24
         }
       ],
       "importOrder": 14,
@@ -2271,6 +2429,14 @@ window.STUDY_DATA = {
         {
           "paper": "attention-2017",
           "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 10
         }
       ],
       "captures": [
@@ -3860,6 +4026,14 @@ window.STUDY_DATA = {
         {
           "paper": "zeroquant-v2",
           "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 27
         }
       ],
       "captures": [
@@ -4192,6 +4366,10 @@ window.STUDY_DATA = {
       "refs": [
         {
           "paper": "zeroquant-v2",
+          "page": 10
+        },
+        {
+          "paper": "caldera",
           "page": 10
         }
       ],
@@ -5047,6 +5225,840 @@ window.STUDY_DATA = {
         "专有名词/ScreenShot_2026-10-23_134200_028.png"
       ],
       "collected": true
+    },
+    {
+      "id": "quantization-codebook",
+      "name": "量化码本、离散点与基数",
+      "english": "Quantization codebook and cardinality",
+      "group": "量化基础",
+      "summary": "码本规定哪些数值可以被表示；基数是可选表示的数量，位宽限制可用索引数。",
+      "explanation": "量化不是给任意浮点数换一个较短的名字，而是先规定有限的可表示集合，再把输入映射到其中一个元素。理解码本、码字和基数，才能区分位宽、数值范围与量化粒度；它们描述的是不同限制。",
+      "formula": "码本规定哪些数值可以被表示；基数是可选表示的数量，位宽限制可用索引数。",
+      "latex": "Q(z)\\in\\mathcal C",
+      "misconception": "不是。2 比特限制最多四个索引；对应的数值、尺度和是否带符号由码本约定决定。",
+      "question": "2 比特码本是否必须是 {0,1,2,3}？",
+      "related": [
+        "quantization",
+        "bitwidth"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 30
+        }
+      ],
+      "importOrder": 58,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "量化不是给任意浮点数换一个较短的名字，而是先规定有限的可表示集合，再把输入映射到其中一个元素。理解码本、码字和基数，才能区分位宽、数值范围与量化粒度；它们描述的是不同限制。",
+        "symbols": [
+          [
+            "\\(\\mathcal C\\)",
+            "可表示值或向量码字的集合。"
+          ],
+          [
+            "\\(|\\mathcal C|\\)",
+            "集合基数，即不同码字的个数。"
+          ],
+          [
+            "\\(B\\)",
+            "编码一个索引所用的比特数。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "从有限索引得到容量限制",
+            "text": "若每个标量使用 B 个比特且没有额外编码约定，可区分的索引最多有二的 B 次方个。码本未必用满这些索引；数值的跨度与索引数量也没有一一对应关系。",
+            "latex": "|\\mathcal C|\\le 2^B,\\qquad \\log_2|\\mathcal C|\\le B"
+          },
+          {
+            "title": "标量码本与向量码本分开计费",
+            "text": "向量量化的一次索引可代表一个多维向量。此时必须先说明一次编码包含多少分量，再把总比特除以分量数；不能把每向量比特数直接当成每标量位宽。",
+            "latex": "b_{\\rm component}=B_{\\rm code}/p"
+          }
+        ],
+        "example": {
+          "text": "教学算例：码本为 {−1,0,1} 时有三个码字，固定长度索引至少需要 2 比特，其中一个索引可以闲置。若一个八维码字由 16 比特索引表示，忽略其他开销时平均是每分量 2 比特。",
+          "latex": "\\lceil\\log_2 3\\rceil=2,\\qquad 16/8=2"
+        },
+        "connection": "CALDERA 对主体及两个因子分别施加可表示集合约束。论文第3页的标量记法与实际第7页的格向量量化实现，需要按编码单位分别理解。",
+        "check": {
+          "question": "2 比特码本是否必须是 {0,1,2,3}？",
+          "answer": "不是。2 比特限制最多四个索引；对应的数值、尺度和是否带符号由码本约定决定。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-24_123249_971.png",
+        "专有名词/ScreenShot_2026-10-24_132241_308.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "lattice-codebook",
+      "name": "格与格码本",
+      "english": "Lattice and lattice codebook",
+      "group": "量化基础",
+      "summary": "格是基向量整数线性组合形成的点集；实际低比特码本需取有限部分并约定编码。",
+      "explanation": "可以把格想成由若干基向量反复平移铺成的规则点阵。二维整数网格只是最简单的例子；高维格让多个权重共同选取一个码字。无限格本身不能直接用固定的有限比特索引全部表示，实际码本还需要有限选择及编码规则。",
+      "formula": "格是基向量整数线性组合形成的点集；实际低比特码本需取有限部分并约定编码。",
+      "latex": "\\mathcal C\\subset\\Lambda",
+      "misconception": "不是。格通常是无限离散点集，有限码本需要额外选择及编码；实际 E8 量化规则应回到对应实现核对。",
+      "question": "格与有限码本是否完全相同？",
+      "related": [
+        "quantization-codebook"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 7
+        }
+      ],
+      "importOrder": 59,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "可以把格想成由若干基向量反复平移铺成的规则点阵。二维整数网格只是最简单的例子；高维格让多个权重共同选取一个码字。无限格本身不能直接用固定的有限比特索引全部表示，实际码本还需要有限选择及编码规则。",
+        "symbols": [
+          [
+            "\\(G\\)",
+            "满列秩基矩阵；列向量生成格。"
+          ],
+          [
+            "\\(z\\in\\mathbb Z^p\\)",
+            "整数系数，不是任意实数系数。"
+          ],
+          [
+            "\\(\\Lambda\\)",
+            "由基矩阵生成的离散点集。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "先定义无限点集",
+            "text": "每个整数系数向量对应一个格点。基矩阵改变点阵几何，但这里讲的是码本结构，不意味着学习模型中的每一个矩阵都必须是格。",
+            "latex": "\\Lambda=\\{Gz:z\\in\\mathbb Z^p\\}"
+          },
+          {
+            "title": "再定义有限编码与向量误差",
+            "text": "实际量化器从有限码字中选择代表向量，距离、缩放、截断和编码规则共同决定误差。CALDERA 数值实验使用 E8 格量化；这并不等于对每个元素独立做普通均匀舍入。",
+            "latex": "Q(v)=\\arg\\min_{c\\in\\mathcal C}\\|v-c\\|_2^2"
+          }
+        ],
+        "example": {
+          "text": "教学算例：单位基生成二维整数网格。若仅取 {−1,0,1}×{−1,0,1}，有限码本有九个点，固定长度索引需要 4 比特。该例只是几何入门，不是论文实际 E8 码本。",
+          "latex": "|\\mathcal C|=3^2=9,\\quad \\lceil\\log_2 9\\rceil=4"
+        },
+        "connection": "先理解码本再看 CALDERA 的 E8 实现，可以避免把向量量化的编码单位、理论中的标量随机量化器与实际内核混成同一对象。",
+        "check": {
+          "question": "格与有限码本是否完全相同？",
+          "answer": "不是。格通常是无限离散点集，有限码本需要额外选择及编码；实际 E8 量化规则应回到对应实现核对。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-24_132131_396.png",
+        "专有名词/ScreenShot_2026-10-24_132154_093.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "quip-role",
+      "name": "QuIP / QuIP# 在 CALDERA 中的角色",
+      "english": "QuIP and QuIP# as CALDERA components",
+      "group": "误差重构",
+      "summary": "CALDERA 借助既有的非相干预处理、LDLQ 及格量化，再联合优化低秩分支。",
+      "explanation": "阅读 CALDERA 时会看到多个既有方法名称。更清楚的方式是按模块定位：随机变换处理数值分布，LDLQ 处理量化反馈，格码本规定可表示向量，CALDERA 再组织主体与低秩因子的联合更新。这是一张方法角色表，不是已经精读 QuIP 原论文的记录。",
+      "formula": "CALDERA 借助既有的非相干预处理、LDLQ 及格量化，再联合优化低秩分支。",
+      "latex": "",
+      "misconception": "不是。此卡片仅依据 CALDERA 对相关模块与对照实验的描述，不新增 QuIP 已读论文记录。",
+      "question": "这里出现 QuIP，是否表示已经收录并读完它的原论文？",
+      "related": [
+        "lattice-codebook",
+        "rht",
+        "ldlq-feedback"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 7
+        },
+        {
+          "paper": "caldera",
+          "page": 28
+        }
+      ],
+      "importOrder": 60,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "阅读 CALDERA 时会看到多个既有方法名称。更清楚的方式是按模块定位：随机变换处理数值分布，LDLQ 处理量化反馈，格码本规定可表示向量，CALDERA 再组织主体与低秩因子的联合更新。这是一张方法角色表，不是已经精读 QuIP 原论文的记录。",
+        "symbols": [
+          [
+            "\\(Q\\)",
+            "量化主体矩阵。"
+          ],
+          [
+            "\\(LR\\)",
+            "额外低秩分支；是否量化、如何优化需按方法区分。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "区分前处理与量化器",
+            "text": "第2页回顾 QuIP 的随机变换与量化反馈，第7页说明实验使用 QuIP# 框架和 E8 格。预处理并不代替量化器，格码本也不自动提供 CALDERA 的联合优化。",
+            "latex": ""
+          },
+          {
+            "title": "比较时固定微调和位数口径",
+            "text": "第7–8页的比较省略 RHT 微调，第9页才单独引入；第28页消融又分别移除 RHT 或 LDLQ。比较名称之外还应确认低秩秩数、因子精度与是否微调一致。",
+            "latex": ""
+          }
+        ],
+        "example": {
+          "text": "教学阅读例：两行实验都写平均 2.4 比特，不代表配置相同。一个可用 rank64 的16比特因子，另一个可用 rank256 的4比特因子；前处理、微调和量化器也需要逐项核对。",
+          "latex": "64\\times16=256\\times4"
+        },
+        "connection": "与已有 LoRC、L²QER、QERA、EoRA 的卡片对照时，先比较优化对象与约束，再比较实验设置；本文只记录 CALDERA 引述的 QuIP 系列角色。",
+        "check": {
+          "question": "这里出现 QuIP，是否表示已经收录并读完它的原论文？",
+          "answer": "不是。此卡片仅依据 CALDERA 对相关模块与对照实验的描述，不新增 QuIP 已读论文记录。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_090947_857.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "rank-constrained-regression",
+      "name": "秩约束回归与欠定系统",
+      "english": "Rank-constrained regression and underdetermined systems",
+      "group": "线性代数",
+      "summary": "先在输入可见的空间拟合输出，再施加秩约束；欠定方向需要伪逆或额外选择。",
+      "explanation": "校准样本只看到了输入空间的一部分方向。即使多个权重矩阵在这些样本上给出相同输出，它们在未观测方向仍可能不同。因此低秩回归既要处理秩限制，也要处理输入矩阵的零空间；伪逆是选择解的工具，不是凭空补回未观测信息。",
+      "formula": "先在输入可见的空间拟合输出，再施加秩约束；欠定方向需要伪逆或额外选择。",
+      "latex": "\\operatorname{rank}(Z)\\le k",
+      "misconception": "不能。伪逆选择一个符合准则的解；校准未覆盖的方向仍需要数据、先验或正则化。",
+      "question": "欠定系统的伪逆解能保证未见输入上的输出也正确吗？",
+      "related": [
+        "svd",
+        "qera-exact",
+        "gram-psd"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 4
+        },
+        {
+          "paper": "caldera",
+          "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 15
+        },
+        {
+          "paper": "caldera",
+          "page": 17
+        },
+        {
+          "paper": "caldera",
+          "page": 18
+        },
+        {
+          "paper": "caldera",
+          "page": 24
+        }
+      ],
+      "importOrder": 61,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "校准样本只看到了输入空间的一部分方向。即使多个权重矩阵在这些样本上给出相同输出，它们在未观测方向仍可能不同。因此低秩回归既要处理秩限制，也要处理输入矩阵的零空间；伪逆是选择解的工具，不是凭空补回未观测信息。",
+        "symbols": [
+          [
+            "\\(X\\in\\mathbb R^{N\\times m}\\)",
+            "本站行样本输入矩阵。"
+          ],
+          [
+            "\\(Z\\in\\mathbb R^{m\\times n}\\)",
+            "待估计的低秩映射。"
+          ],
+          [
+            "\\(Y\\in\\mathbb R^{N\\times n}\\)",
+            "目标输出；此处通常为残差经过输入后的结果。"
+          ],
+          [
+            "\\(X^\\dagger\\)",
+            "Moore–Penrose 伪逆，允许矩阵非方阵或秩不足。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "把约束放到正确空间",
+            "text": "目标是拟合 XZ 而不是 Z 本身。当 X 满行秩且样本数不大于输入维度时，每个目标输出都在 X 的像空间中；先做输出的最佳低秩近似，再用伪逆映回，可得到一个最优解。",
+            "latex": "\\min_{\\operatorname{rank}(Z)\\le k}\\|XZ-Y\\|_F^2,\\qquad Z_*=X^\\dagger[Y]_k\\quad(\\operatorname{rank}X=N\\le m)"
+          },
+          {
+            "title": "识别零空间与条件边界",
+            "text": "若向一个解加入位于 X 零空间的映射，样本输出不变；还需检查添加后是否满足原秩约束。对一般秩不足输入，必须先投影到可达输出子空间，不能不加条件地套用上一式。",
+            "latex": "X(Z+K)=XZ\\quad\\text{if }XK=0"
+          }
+        ],
+        "example": {
+          "text": "教学算例：输入只有一行 [1,0]，目标是 3。映射 [3,t] 的第二项无论取什么都给出相同样本输出；最小范数解选择 t=0，但这不证明真实未观测方向的权重就是零。",
+          "latex": "[1,0]\\begin{bmatrix}3\\\\t\\end{bmatrix}=3"
+        },
+        "connection": "CALDERA 用秩约束回归初始化因子，再处理量化约束；这与 QERA 固定主体、允许连续补偿的解析问题有关联，但不等于离散联合问题也有闭式全局解。",
+        "check": {
+          "question": "欠定系统的伪逆解能保证未见输入上的输出也正确吗？",
+          "answer": "不能。伪逆选择一个符合准则的解；校准未覆盖的方向仍需要数据、先验或正则化。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_100901_257.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "forward-pass",
+      "name": "前向传播与校准激活采集",
+      "english": "Forward pass and calibration activations",
+      "group": "模型与评估",
+      "summary": "前向传播按计算图求输出；校准采集的是各层实际接收的激活。",
+      "explanation": "同一批文本进入模型后，逐层形成不同的中间激活。量化校准所说的输入矩阵通常是某个线性层看到的激活，而不总是最初的词嵌入。理解前向传播，可以把校准样本、层统计与训练反向传播明确区分。",
+      "formula": "前向传播按计算图求输出；校准采集的是各层实际接收的激活。",
+      "latex": "",
+      "misconception": "不会。前向只计算输出；参数更新还需要训练目标、梯度或其他优化步骤。",
+      "question": "前向传播是否一定会更新模型参数？",
+      "related": [
+        "calibration",
+        "autocorrelation"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 4
+        }
+      ],
+      "importOrder": 62,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "同一批文本进入模型后，逐层形成不同的中间激活。量化校准所说的输入矩阵通常是某个线性层看到的激活，而不总是最初的词嵌入。理解前向传播，可以把校准样本、层统计与训练反向传播明确区分。",
+        "symbols": [
+          [
+            "\\(h_\\ell\\)",
+            "第 ℓ 层或子模块的输入表示。"
+          ],
+          [
+            "\\(X_\\ell\\)",
+            "将该模块的校准输入按行收集得到的矩阵。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "沿计算图逐步计算",
+            "text": "给定参数和输入，前向过程计算每个模块输出。它可能包含注意力、非线性、归一化及残差，并非只把所有层权重直接连乘成一个矩阵。",
+            "latex": "h_{\\ell+1}=f_\\ell(h_\\ell;W_\\ell)"
+          },
+          {
+            "title": "由前向采集输入统计",
+            "text": "将中间输入收集后可计算每层非中心二阶矩。一次前向采集统计不等于训练，也不表示保存一次统计后对任意变化的模型、数据分布都永远适用。",
+            "latex": "H_\\ell=X_\\ell^\\top X_\\ell/N"
+          }
+        ],
+        "example": {
+          "text": "教学算例：两层网络先把标量 2 乘以 3，再经过 ReLU，第二层接收的输入是 6 而不是 2。若要重构第二层输出，应使用它实际接收的激活作为校准输入。",
+          "latex": "2\\xrightarrow{\\times3}6\\xrightarrow{\\operatorname{ReLU}}6"
+        },
+        "connection": "CALDERA 第4页讨论预先采集并复用 Hessian；理解该统计属于哪一层，有助于与 QERA 和 EoRA 的校准分布保持一致。",
+        "check": {
+          "question": "前向传播是否一定会更新模型参数？",
+          "answer": "不会。前向只计算输出；参数更新还需要训练目标、梯度或其他优化步骤。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_101036_977.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "quantizer-saturation",
+      "name": "量化器饱和与动态范围",
+      "english": "Quantizer saturation and dynamic range",
+      "group": "量化基础",
+      "summary": "超出可表示范围会发生饱和；范围太大又会在固定位宽下增大量化步长。",
+      "explanation": "量化器只有有限表示范围。输入超出范围时，即使增加计算精度也无法用当前码本正确表示。扩大范围可以减少越界，却会在相同位数下拉大相邻点距离，所以动态范围需要同时考虑越界风险和区间内误差。",
+      "formula": "超出可表示范围会发生饱和；范围太大又会在固定位宽下增大量化步长。",
+      "latex": "|x|>a\\ \\Rightarrow\\ \\text{saturation}",
+      "misconception": "不能。它减少越界却增加固定比特下的步长；无偏性和误差界也必须满足对应量化器的假设。",
+      "question": "把范围无限放大是否总能让误差更小？",
+      "related": [
+        "quantization-codebook",
+        "outliers"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 5
+        },
+        {
+          "paper": "caldera",
+          "page": 18
+        },
+        {
+          "paper": "caldera",
+          "page": 30
+        },
+        {
+          "paper": "caldera",
+          "page": 31
+        }
+      ],
+      "importOrder": 63,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "量化器只有有限表示范围。输入超出范围时，即使增加计算精度也无法用当前码本正确表示。扩大范围可以减少越界，却会在相同位数下拉大相邻点距离，所以动态范围需要同时考虑越界风险和区间内误差。",
+        "symbols": [
+          [
+            "\\(a>0\\)",
+            "对称标量范围半径，允许区间为 [−a,a]。"
+          ],
+          [
+            "\\(B\\)",
+            "标量量化位数。"
+          ],
+          [
+            "\\(\\Delta\\)",
+            "相邻均匀量化点的距离。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "范围与分辨率相互制约",
+            "text": "对包含两个端点的均匀标量码本，固定比特数时范围半径越大，步长越大。随机舍入的零均值与方差上界要求输入位于范围内；不能忽略该条件。",
+            "latex": "\\Delta=\\frac{2a}{2^B-1},\\qquad \\operatorname{Var}(Q(x)-x)\\le\\Delta^2/4\\quad(|x|\\le a)"
+          },
+          {
+            "title": "区分理论量化器与实际实现",
+            "text": "CALDERA 附录用无饱和或高概率无饱和条件分析标量随机量化，正文实验则使用 E8 格量化。截图中的因子动态范围来自特定理论条件，不能当成任意矩阵都可无条件套用的超参数。",
+            "latex": ""
+          }
+        ],
+        "example": {
+          "text": "教学算例：2 比特、范围 [−3,3] 时步长为 2，越界的 4 无法被该码本精确表示；若采用端点截断会得到 3。将范围扩大到 [−6,6] 后步长为 4，虽然不再越界，区间内分辨率却更粗。",
+          "latex": "\\Delta_{a=3}=2,\\qquad\\Delta_{a=6}=4"
+        },
+        "connection": "这里的饱和指量化器超出范围，与已有英语 saturation 表示性能收益趋于饱和的用法不同；同一个词需要按研究对象区分。",
+        "check": {
+          "question": "把范围无限放大是否总能让误差更小？",
+          "answer": "不能。它减少越界却增加固定比特下的步长；无偏性和误差界也必须满足对应量化器的假设。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_131536_970.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "marchenko-pastur",
+      "name": "Marchenko–Pastur 近似的适用边界",
+      "english": "Marchenko–Pastur approximation",
+      "group": "线性代数",
+      "summary": "用大维随机矩阵的谱分布估计尾部能量；不是任意真实误差矩阵的精确谱公式。",
+      "explanation": "低秩补偿去掉一部分大奇异方向后，剩余误差与尾部谱有关。直接计算随机误差谱的期望很难，论文于是借助大维随机矩阵的分布近似。这个工具解释趋势，但它依赖独立同分布等简化条件，不能把近似结论直接改写成所有模型上的数值保证。",
+      "formula": "用大维随机矩阵的谱分布估计尾部能量；不是任意真实误差矩阵的精确谱公式。",
+      "latex": "S=\\frac1m EE^\\top",
+      "misconception": "不能。还需核对随机性、独立性、方差、归一化与维度比例，真实模型误差可能违反这些条件。",
+      "question": "只知道一个矩阵很大，能否直接认定它满足 MP 律？",
+      "related": [
+        "svd",
+        "eigendecomposition"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        },
+        {
+          "paper": "caldera",
+          "page": 23
+        },
+        {
+          "paper": "caldera",
+          "page": 24
+        }
+      ],
+      "importOrder": 64,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "低秩补偿去掉一部分大奇异方向后，剩余误差与尾部谱有关。直接计算随机误差谱的期望很难，论文于是借助大维随机矩阵的分布近似。这个工具解释趋势，但它依赖独立同分布等简化条件，不能把近似结论直接改写成所有模型上的数值保证。",
+        "symbols": [
+          [
+            "\\(E\\in\\mathbb R^{n\\times m}\\)",
+            "教学模型中的随机误差矩阵，元素均值为零、方差为 σ²。"
+          ],
+          [
+            "\\(\\gamma=n/m\\)",
+            "维度比例；这里示意 0<γ≤1。"
+          ],
+          [
+            "\\(S=EE^\\top/m\\)",
+            "样本谱矩阵，注意归一化和矩阵朝向。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "先明确归一化与假设",
+            "text": "在独立同分布、适当矩条件和维度共同增长的设定下，经验特征值分布趋向 MP 律。谱支撑端点与方差、宽高比有关；有限维的每个特征值不必精确落在渐近端点。",
+            "latex": "\\lambda_\\pm=\\sigma^2(1\\pm\\sqrt{\\gamma})^2"
+          },
+          {
+            "title": "再看它在 CALDERA 证明中的位置",
+            "text": "附录第23页先把量化误差作独立同分布的简化，再使用渐近谱估计尾部特征值之和。实际 E8 量化、反馈关联及有限模型维度与简化模型不同，应保留“近似”和适用条件。",
+            "latex": "\\text{tail energy}=\\sum_{i>k}\\lambda_i(S)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：令方差为1、维度比为1/4，则渐近连续谱支撑为 [1/4,9/4]。这只描述该归一化随机矩阵模型的极限分布，不是从某张网络权重矩阵直接读出的范围。",
+          "latex": "\\lambda_-=0.25,\\qquad\\lambda_+=2.25"
+        },
+        "connection": "它把 CALDERA 的误差上界与谱尾部、目标秩联系起来；与截断 SVD 的确定性最优性质分属不同层次，不能混用。",
+        "check": {
+          "question": "只知道一个矩阵很大，能否直接认定它满足 MP 律？",
+          "answer": "不能。还需核对随机性、独立性、方差、归一化与维度比例，真实模型误差可能违反这些条件。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_131815_460.png",
+        "专有名词/ScreenShot_2026-10-26_142717_499.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "rht",
+      "name": "随机 Hadamard 变换与非相干预处理",
+      "english": "Randomized Hadamard transform",
+      "group": "量化基础",
+      "summary": "正交混合可重新分配数值幅度；权重变换时输入统计和逆变换也要一致处理。",
+      "explanation": "某些坐标中的权重特别大，会迫使低比特码本覆盖更宽范围。随机符号与 Hadamard 正交混合把信息分散到不同坐标，试图让量化更容易。旋转前后的线性映射可以保持等价，但量化后的误差取决于新坐标中的码本与尺度。",
+      "formula": "正交混合可重新分配数值幅度；权重变换时输入统计和逆变换也要一致处理。",
+      "latex": "T^\\top T=I",
+      "misconception": "一般不是。必须使输入变换、权重变换、输出逆变换及输入统计保持一致。",
+      "question": "只旋转权重而保持输入和输出接口不变，是否仍是原来的线性层？",
+      "related": [
+        "scaling",
+        "gram-psd"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        },
+        {
+          "paper": "caldera",
+          "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 26
+        },
+        {
+          "paper": "caldera",
+          "page": 28
+        }
+      ],
+      "importOrder": 65,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "某些坐标中的权重特别大，会迫使低比特码本覆盖更宽范围。随机符号与 Hadamard 正交混合把信息分散到不同坐标，试图让量化更容易。旋转前后的线性映射可以保持等价，但量化后的误差取决于新坐标中的码本与尺度。",
+        "symbols": [
+          [
+            "\\(T_{\\rm in},T_{\\rm out}\\)",
+            "归一化 Hadamard 与随机符号组成的正交矩阵。"
+          ],
+          [
+            "\\(W\\in\\mathbb R^{m\\times n}\\)",
+            "本站行样本权重。"
+          ],
+          [
+            "\\(H=X^\\top X/N\\)",
+            "原输入非中心二阶矩。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "按同一约定变换输入与权重",
+            "text": "以行样本约定教学：输入右乘输入变换，权重左乘其转置并右乘输出变换。最后再把输出变回原空间，正交矩阵相消，未量化映射保持一致。",
+            "latex": "X\\mapsto XT_{\\rm in},\\quad \\widetilde W=T_{\\rm in}^\\top WT_{\\rm out},\\quad(XT_{\\rm in})\\widetilde WT_{\\rm out}^\\top=XW"
+          },
+          {
+            "title": "校准统计也必须变换",
+            "text": "新输入的二阶矩应按对应的正交变换更新。论文还单独研究变换参数微调；那是额外的优化步骤，不能与最初无损坐标变换或无需训练的压缩阶段混为一谈。",
+            "latex": "\\widetilde H=T_{\\rm in}^\\top H T_{\\rm in}"
+          }
+        ],
+        "example": {
+          "text": "教学算例：二维向量 [2,0] 右乘归一化 Hadamard 后变成 [√2,√2]，二范数仍为2，但最大绝对分量从2变为√2。这展示幅度分散，不保证任意向量的最大分量都一定下降。",
+          "latex": "[2,0]\\frac1{\\sqrt2}\\begin{bmatrix}1&1\\\\1&-1\\end{bmatrix}=[\\sqrt2,\\sqrt2]"
+        },
+        "connection": "与 SmoothQuant 的通道缩放一样，它通过等价变换改变量化条件；这里是正交坐标混合，不能直接当作逐通道对角缩放。",
+        "check": {
+          "question": "只旋转权重而保持输入和输出接口不变，是否仍是原来的线性层？",
+          "answer": "一般不是。必须使输入变换、权重变换、输出逆变换及输入统计保持一致。"
+        }
+      },
+      "captures": [
+        "专有名词/ScreenShot_2026-10-27_170410_058.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "ldlq-feedback",
+      "name": "LDLQ 与量化误差反馈",
+      "english": "LDLQ and quantization error feedback",
+      "group": "误差重构",
+      "summary": "量化当前部分时利用先前误差反馈，反馈结构由校准二阶矩的 LDL 分解决定。",
+      "explanation": "独立舍入只管当前值离哪个码字最近，但已量化部分的误差也会影响输出。LDLQ 将先前误差反馈到后续量化输入，按校准度量分配影响。理解这一层后，才容易区分主体量化误差反馈与另加低秩分支的误差重构。",
+      "formula": "量化当前部分时利用先前误差反馈，反馈结构由校准二阶矩的 LDL 分解决定。",
+      "latex": "H\\propto X^\\top X",
+      "misconception": "不是。它包含按校准结构组织的先前误差反馈；移除反馈会改变算法。",
+      "question": "LDLQ 是否就是对每列独立做最近舍入？",
+      "related": [
+        "second-order",
+        "rtn"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 4
+        },
+        {
+          "paper": "caldera",
+          "page": 23
+        },
+        {
+          "paper": "caldera",
+          "page": 28
+        }
+      ],
+      "importOrder": 66,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "独立舍入只管当前值离哪个码字最近，但已量化部分的误差也会影响输出。LDLQ 将先前误差反馈到后续量化输入，按校准度量分配影响。理解这一层后，才容易区分主体量化误差反馈与另加低秩分支的误差重构。",
+        "symbols": [
+          [
+            "\\(H\\)",
+            "校准二阶矩，尺度按原文定义。"
+          ],
+          [
+            "\\(U\\)",
+            "用于展示分解结构的单位上三角矩阵。"
+          ],
+          [
+            "\\(D\\)",
+            "对角矩阵；论文将 U 写为 M+I。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "LDL 分解提供反馈结构",
+            "text": "论文利用校准二阶矩的三角分解构造反馈。这里的上三角形式是原文约定，不能与教材下三角形式直接对调而不修改索引和处理顺序。",
+            "latex": "NH=X^\\top X=UDU^\\top"
+          },
+          {
+            "title": "量化前加入历史残差",
+            "text": "第4页式2采用原文列处理约定：当前列在送进量化器之前，加上已量化列误差的线性组合。本站其他公式以行样本为主，实际实现需将矩阵朝向整体转换。",
+            "latex": "Q_{:j}=\\mathcal Q\\!\\left(W_{:j}+\\sum_{i<j}(W_{:i}-Q_{:i})a_{ij}\\right)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：若先前一个标量从1.2量化为1，反馈系数为0.5，当前量化输入会增加0.1。这个数值只是展示反馈方向，不能据此断言任何层最终误差都减少0.1。",
+          "latex": "(1.2-1)\\times0.5=0.1"
+        },
+        "connection": "CALDERA 外循环会对减去当前低秩项后的主体重新运行 LDLQ；QERA 则在固定量化权重之后求补偿，优化范围因此不同。",
+        "check": {
+          "question": "LDLQ 是否就是对每列独立做最近舍入？",
+          "answer": "不是。它包含按校准结构组织的先前误差反馈；移除反馈会改变算法。"
+        }
+      }
+    },
+    {
+      "id": "caldera-joint",
+      "name": "CALDERA：低精度主体与低秩因子联合优化",
+      "english": "Joint low-precision and low-rank optimization",
+      "group": "误差重构",
+      "summary": "主体与低秩因子都受量化约束，交替更新并保留观测目标最好的候选。",
+      "explanation": "固定一个量化主体后再补偿，只是在已选主体附近修复。CALDERA 允许主体和两个低秩因子相互调整，而且因子本身也必须能用低精度表示。这使问题更贴近存储约束，却失去一次连续截断 SVD 就能解决整个问题的条件。",
+      "formula": "主体与低秩因子都受量化约束，交替更新并保留观测目标最好的候选。",
+      "latex": "\\widehat Y=XQ+(XA)B",
+      "misconception": "不是。解析结论针对取消离散约束的子问题，量化与交替联合更新不享有同样的完整全局保证。",
+      "question": "CALDERA 因子初始化有解析解，是否意味着完整算法是闭式全局最优？",
+      "related": [
+        "qera-exact",
+        "rank-constrained-regression",
+        "ldlq-feedback",
+        "factor-bit-budget"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 4
+        },
+        {
+          "paper": "caldera",
+          "page": 5
+        },
+        {
+          "paper": "caldera",
+          "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 24
+        }
+      ],
+      "importOrder": 67,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "固定一个量化主体后再补偿，只是在已选主体附近修复。CALDERA 允许主体和两个低秩因子相互调整，而且因子本身也必须能用低精度表示。这使问题更贴近存储约束，却失去一次连续截断 SVD 就能解决整个问题的条件。",
+        "symbols": [
+          [
+            "\\(W,Q\\in\\mathbb R^{m\\times n}\\)",
+            "原权重与量化后浮点等效主体，采用本站行样本朝向。"
+          ],
+          [
+            "\\(A\\in\\mathbb R^{m\\times k},B\\in\\mathbb R^{k\\times n}\\)",
+            "本站因子；对应原文右、左因子的转置。"
+          ],
+          [
+            "\\(\\mathcal C_Q,\\mathcal C_A,\\mathcal C_B\\)",
+            "主体与两个因子的可表示集合。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "把输出目标与离散约束一起写出",
+            "text": "固定校准输入后，目标是压缩层与原层输出之间的平方误差。低秩乘积提供结构，码本限制提供低精度；不能把这两个约束中的任意一个默默去掉。",
+            "latex": "\\min_{Q,A,B}\\|X(Q+AB-W)\\|_F^2,\\quad Q\\in\\mathcal C_Q^{m\\times n},\\ A\\in\\mathcal C_A^{m\\times k},\\ B\\in\\mathcal C_B^{k\\times n}"
+          },
+          {
+            "title": "外循环联合更新，内循环修正因子量化损失",
+            "text": "外循环按当前低秩项更新主体，再拟合新残差；因子子问题先用连续秩约束回归初始化，再交替最小二乘和量化。算法保留最佳候选，因此“返回的最好误差不增”不表示每次量化候选都单调下降。",
+            "latex": ""
+          },
+          {
+            "title": "解析子问题不等于整体全局最优",
+            "text": "若固定 Q、取消因子量化且二阶矩正定，可在加权残差空间做最佳低秩近似。恢复离散量化和主体更新之后，仍是更复杂的非凸联合问题，不能把连续子问题的最优性直接推广。",
+            "latex": "E=W-Q,\\quad H\\succ0:\\quad C_*=H^{-1/2}[H^{1/2}E]_k"
+          }
+        ],
+        "example": {
+          "text": "教学算例：标量目标为0.9，主体固定在1时，需要残差−0.1；若因子乘积只能取0或0.25，连续最优补偿−0.1无法表示。允许重新选择主体与因子，才是联合搜索，但仍不自动保证找到全局最佳配置。",
+          "latex": "\\min_{c\\in\\{0,0.25\\}}(1+c-0.9)^2=0.01"
+        },
+        "connection": "把 LoRC 的普通残差 SVD、QERA 的固定主体加权解析补偿与 CALDERA 的主体/因子离散联合优化并列，能清楚看到“低秩补偿”内部不同的优化范围。",
+        "check": {
+          "question": "CALDERA 因子初始化有解析解，是否意味着完整算法是闭式全局最优？",
+          "answer": "不是。解析结论针对取消离散约束的子问题，量化与交替联合更新不享有同样的完整全局保证。"
+        }
+      }
+    },
+    {
+      "id": "factor-bit-budget",
+      "name": "低秩因子位宽与平均比特预算",
+      "english": "Low-rank factor precision and average bit budget",
+      "group": "误差重构",
+      "summary": "压缩率同时取决于主体位宽、因子位宽和秩；平均位数还需说明开销口径。",
+      "explanation": "低秩分支虽然参数少，若全部保持高精度也可能占据可观存储。降低因子位宽可以在相同参数预算内使用更高秩，但因子量化会增加误差，解码也可能增加计算成本。因此应同时看存储、质量与速度，而不是只看某一个“几比特”标签。",
+      "formula": "压缩率同时取决于主体位宽、因子位宽和秩；平均位数还需说明开销口径。",
+      "latex": "\\text{bits}=mn b_Q+mk b_A+kn b_B",
+      "misconception": "不一定。解码与内核开销可能抵消带宽收益；CALDERA表6在给定硬件上就出现16比特因子更快的情况。",
+      "question": "低秩因子用4比特后，真实推理一定比16比特更快吗？",
+      "related": [
+        "bit-packing",
+        "pareto-frontier",
+        "evaluation"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 10
+        },
+        {
+          "paper": "caldera",
+          "page": 27
+        }
+      ],
+      "importOrder": 68,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "低秩分支虽然参数少，若全部保持高精度也可能占据可观存储。降低因子位宽可以在相同参数预算内使用更高秩，但因子量化会增加误差，解码也可能增加计算成本。因此应同时看存储、质量与速度，而不是只看某一个“几比特”标签。",
+        "symbols": [
+          [
+            "\\(m,n,k\\)",
+            "输入宽度、输出宽度与分解秩。"
+          ],
+          [
+            "\\(b_Q,b_A,b_B\\)",
+            "主体、左因子、右因子的每元素比特数。"
+          ],
+          [
+            "\\(b_{\\rm avg}\\)",
+            "除以原权重元素数后的平均位数。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "先计算表示本身的比特数",
+            "text": "行样本权重有 mn 个元素，两个因子分别有 mk 和 kn 个元素。下式只统计矩阵表示，不含比例因子、码本、对齐、变换参数和未压缩模块等额外开销。",
+            "latex": "b_{\\rm avg}=b_Q+\\frac{mkb_A+knb_B}{mn}"
+          },
+          {
+            "title": "再区分低精度初始化与微调后存储",
+            "text": "论文第27页按每层七个投影矩阵汇总平均位数；第10页表5中的部分因子微调后变为 BF16，因此平均预算高于4比特初始化。表6还表明4比特因子解码可能比16比特因子更慢。",
+            "latex": ""
+          }
+        ],
+        "example": {
+          "text": "教学算例：对4096×4096矩阵，主体2比特、两个rank256因子各4比特，平均为2.5比特；rank64因子各16比特同样是2.5比特。它们不保证相同质量或速度，论文整层汇总口径也不同于这个单矩阵例。",
+          "latex": "2+\\frac{2\\times256\\times4}{4096}=2+\\frac{2\\times64\\times16}{4096}=2.5"
+        },
+        "connection": "与现有 Pareto 前沿、比特打包和评估卡片一起使用，避免把相同平均位数直接当成相同显存占用、同等准确率或相同吞吐。",
+        "check": {
+          "question": "低秩因子用4比特后，真实推理一定比16比特更快吗？",
+          "answer": "不一定。解码与内核开销可能抵消带宽收益；CALDERA表6在给定硬件上就出现16比特因子更快的情况。"
+        }
+      }
     }
   ],
   "readingUpdates": [

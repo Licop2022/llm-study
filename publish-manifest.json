@@ -1,34 +1,34 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T04:24:05.660Z",
+  "generatedAt": "2026-10-27T12:10:40.931Z",
   "counts": {
-    "papers": 15,
-    "concepts": 57,
-    "terms": 127,
-    "phrases": 34,
-    "sentences": 18,
+    "papers": 16,
+    "concepts": 68,
+    "terms": 153,
+    "phrases": 46,
+    "sentences": 21,
     "experiments": 9
   },
   "files": [
     {
       "path": "index.html",
-      "bytes": 1995,
-      "sha256": "2084da5e5a4a67bd70c28bdfce37b3f6a0d748d82b9d5cb603d9919936a35f44"
+      "bytes": 2017,
+      "sha256": "bfddce955b1a02e005faf0c1bfb8c360834bf08a69e9c410ebf992dac0f7efca"
     },
     {
       "path": "app.js",
-      "bytes": 87028,
-      "sha256": "2d04873adf892807fe46f2cb6ec7d4eff8af8dca9948a7113a2bbcfe4d66b670"
+      "bytes": 87084,
+      "sha256": "5233a303d41259261674f12e5fa024fdaffd9f5d0dafa9d7b08bdc52339bb127"
     },
     {
       "path": "data.js",
-      "bytes": 328313,
-      "sha256": "b02ce7b36d6a9dadb6ab94d5902d3ba107744161f716ff5ee393304807f94ee2"
+      "bytes": 378876,
+      "sha256": "b7fb33060b1c665c46af9ebe8b53d36648dafd031a6e0ade2711f7ec72f2353b"
     },
     {
       "path": "english-data.js",
-      "bytes": 135747,
-      "sha256": "0692539f93dfda98dc3a4f7f6ce748ccdfd4299196cd80bcc9e3b3eec63f43b3"
+      "bytes": 167729,
+      "sha256": "bf0dce09f9f67591f2b767dc8ff60635c776eb94340b4a24f0a09a7d81fe4476"
     },
     {
       "path": "todo-core.js",
@@ -67,13 +67,13 @@
     },
     {
       "path": "classic.html",
-      "bytes": 3496,
-      "sha256": "fc0d5ef781d577891d5bcb774f852df4cea5b84d596463e92ea7f1ddde3d7cf4"
+      "bytes": 3462,
+      "sha256": "80169a2361c5eb9700d78de7167c03fd24f7cb3ca0770c5b70c722ad33a08445"
     },
     {
       "path": "workbench.js",
-      "bytes": 41798,
-      "sha256": "f354ecac43f9388ea590823a0e2f86c7ba1097e25b6755892eb67c88c3f3fbaf"
+      "bytes": 42328,
+      "sha256": "8e9afa74143b4fb25cf3c1d2bbf86e74528e68840713ad22540e3ecfa8b6dd89"
     },
     {
       "path": "workbench-storage.js",
@@ -87,8 +87,8 @@
     },
     {
       "path": "learning-data.js",
-      "bytes": 21937,
-      "sha256": "8bb1688c3e43a7e18634061d48a4be278bf8b0c95f400dd424a57021ff23d086"
+      "bytes": 24398,
+      "sha256": "ba70d34bcae4f78a16bc3acdac1d0b4fd7b0c958d7de070264f187f16d5e1f64"
     },
     {
       "path": "learning-ui.js",
@@ -102,8 +102,8 @@
     },
     {
       "path": "knowledge-tree.js",
-      "bytes": 12579,
-      "sha256": "d825804ef627d14f975b2ebf0e0964ce547f35f0df44cd5c109e6d6b00562ad3"
+      "bytes": 13342,
+      "sha256": "737baea32016fb1571beb239abc5935c614dcdde0534dc630ea93390b72f37ab"
     },
     {
       "path": "knowledge-tree.css",
@@ -526,6 +526,11 @@
       "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697"
     },
     {
+      "path": "papers/P3_误差补偿进阶/CALDERA.pdf",
+      "bytes": 1173315,
+      "sha256": "3ac2c359e0bbb63fd0112f77426061cc3124fa7b79e8fd04348f95a960ad3fbb"
+    },
+    {
       "path": "专有名词/ScreenShot_2026-10-16_143051_920.png",
       "bytes": 1235,
       "sha256": "2d7a32881701bb10853e6d3f2447f592261dc071592371a55bc55947102aaa4b"
@@ -646,6 +651,61 @@
       "sha256": "5279901e02ee2d0d58dac3c54c09e1e67b0ba6b18bc6d8e709f0dc448119873d"
     },
     {
+      "path": "专有名词/ScreenShot_2026-10-24_123249_971.png",
+      "bytes": 5110,
+      "sha256": "593c8cd1d347169a106fbf991e9f38bfedab754b4e13bc722bee44f195bb49fe"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-24_132241_308.png",
+      "bytes": 1130,
+      "sha256": "452adf06e94cd7b0db1d5f672cc810d4f1243c77ee0879ba2744ad03caf7c35e"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-24_132131_396.png",
+      "bytes": 686,
+      "sha256": "0c4022c7b25594c31b206c24070fc5fced3b228de38dc2e58bf39d119ed340d5"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-24_132154_093.png",
+      "bytes": 2262,
+      "sha256": "f3472972d9168bf75921eb9143262906ca3d9347f35beb40065d58960cbd35e1"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-26_090947_857.png",
+      "bytes": 1604,
+      "sha256": "3a317dabef6078e4d8654d0a9e4e015e8f3122504745e053844e4272a02fc8e3"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-26_100901_257.png",
+      "bytes": 3128,
+      "sha256": "52ad980455020d86ffa999244e9b54cc49d2881e40f4bbdf259b6daa9fb92719"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-26_101036_977.png",
+      "bytes": 2003,
+      "sha256": "42a1c61a43ec997083817f337265406cff315f558495361c1f39009afbad4215"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-26_131536_970.png",
+      "bytes": 41111,
+      "sha256": "19e59341396c21462fbe25b8078587940e7374abf56f1db3c2007e4c1f99f88a"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-26_131815_460.png",
+      "bytes": 2904,
+      "sha256": "53a77f8936a1b7a88be559a91849b78c524186248a34534ed7c3db433eddb246"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-26_142717_499.png",
+      "bytes": 2419,
+      "sha256": "130e5392e472bd5ae04e82ef7232a49667f74d95c733e18c8d774e8c1a346650"
+    },
+    {
+      "path": "专有名词/ScreenShot_2026-10-27_170410_058.png",
+      "bytes": 4829,
+      "sha256": "66643bbf373a7d32d8041f349616dbd43a6b51cd55e1baefbd74710e07096a53"
+    },
+    {
       "path": "语法与单词/ScreenShot_2026-10-13_225228_144.png",
       "bytes": 4125,
       "sha256": "12b73b1f6d6ed1356d85eb6b49538d1934c2e5bda9a63e3c3b8d94c6c7f4a4d2"
@@ -694,6 +754,11 @@
       "path": "语法与单词/ScreenShot_2026-10-12_210937_816.png",
       "bytes": 1026,
       "sha256": "12dc542cf641c271fa1350dca8d13aef9765882bde92632bd226e5a4b9bf9c44"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-24_122508_643.png",
+      "bytes": 860,
+      "sha256": "f125e141deae0e4359f25ebf276de61d93676e2aa1371d7167d1c58361a77f2a"
     },
     {
       "path": "语法与单词/ScreenShot_2026-10-12_211750_720.png",
@@ -749,6 +814,11 @@
       "path": "语法与单词/ScreenShot_2026-10-13_225454_787.png",
       "bytes": 906,
       "sha256": "db19f1f14e733a41353cfbbd97d4946345c200537955a989ea0e4f646b48d770"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134553_547.png",
+      "bytes": 3380,
+      "sha256": "5e649bf789557b33cee4a974cdfdf33c6242c941ee90d01c964eb7a394156393"
     },
     {
       "path": "语法与单词/ScreenShot_2026-10-14_103721_094.png",
@@ -966,6 +1036,11 @@
       "sha256": "5bb0f5d7230eb633eea30bcb6d14f6cc8f0fe0aa311d27c5f309f01b449f0232"
     },
     {
+      "path": "语法与单词/ScreenShot_2026-10-26_100545_122.png",
+      "bytes": 1033,
+      "sha256": "fd9ed2708d1c4948e4c09861e3d17614871c7b6f08890b8644b32bb527e7dc58"
+    },
+    {
       "path": "语法与单词/ScreenShot_2026-10-20_094716_806.png",
       "bytes": 1104,
       "sha256": "f474c3ddae106940574315bed2272f9cab6cbbaea72e1933c269f49b226640eb"
@@ -1034,6 +1109,91 @@
       "path": "语法与单词/ScreenShot_2026-10-23_145418_278.png",
       "bytes": 1273,
       "sha256": "3a7c1375a3e9b98b5f070f7ad503a1654ec5bf49c662d9ec2a5389ad493a42a2"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-23_215126_548.png",
+      "bytes": 2162,
+      "sha256": "afe29d9f2813094b47f2966b64d9b3edcd6def6f27c3f0a504ef28fbf067de68"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-23_215516_899.png",
+      "bytes": 1518,
+      "sha256": "a1f740551a4808e80d5aca94594a6b1c9bb29ec36ccb26348833ac259433fa21"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-23_215534_146.png",
+      "bytes": 1200,
+      "sha256": "4cdf6525711885a4b2b7bc6648efd46220dde558e77dab88a5f5160b40b532bb"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-23_221158_414.png",
+      "bytes": 1555,
+      "sha256": "9ef528d7b285c07937e15408cacdcabc7993bd92c8b8da3a5125d39ed0536a53"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-24_121923_785.png",
+      "bytes": 948,
+      "sha256": "15774e00e1d7e661b1e35d6876f130f74476ec7b7c0eb13c7419d5b5188a4c5d"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-24_122245_323.png",
+      "bytes": 713,
+      "sha256": "518dbc179d93f11faea8878c9fc87a4f5439c63831f139881e502dba5411a10d"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-24_122734_203.png",
+      "bytes": 855,
+      "sha256": "4cebea4608e65cb421f3ac6424c2ecd0fe83a645b50e6b924b7638e9c558ca1b"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-24_132448_893.png",
+      "bytes": 668,
+      "sha256": "f7fe91fd6c1bc228bb4bf0d7ed06a9ee76636ed67a8d78b5a72c980fa270064a"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-24_132554_051.png",
+      "bytes": 1239,
+      "sha256": "97f0690f716871218deb1d7e87b34bb4ff24b775a5605544bc8b485b10df5483"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134128_603.png",
+      "bytes": 3563,
+      "sha256": "dca9ba7f855dde657ad4e71a70017e2da3353cf82086b821de7ea0841fb6cffb"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134402_139.png",
+      "bytes": 1000,
+      "sha256": "0041aab04a95a8247aa7766dfa56ee06c4bc1cf0087ed2007ba442027f546ff8"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134439_196.png",
+      "bytes": 3280,
+      "sha256": "05756d2a9d9006ed9f950c37d96fb7176f14f3180e737c34e9cb173b1a9b4e16"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134644_611.png",
+      "bytes": 1043,
+      "sha256": "4c4c52d3b36a7a598718f5bd6a1313a9168bc20a76f7aad906f517c0c0f3f3c6"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134909_540.png",
+      "bytes": 2596,
+      "sha256": "698d315d92cf4efbb48e83b412f199e4a19391794cc8115ac57fe5e41ae6ec01"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_135423_235.png",
+      "bytes": 3933,
+      "sha256": "d53e64d2e5184c11cd26a9e9bb20e7e03fd23a4bd201e386ecca7dc3e5e2fd01"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_193309_012.png",
+      "bytes": 3597,
+      "sha256": "89a17d4ba4ad235293ea947cc4c092197bd9e9cdc50ff5fbdbd34e42aad6e0d7"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_193343_989.png",
+      "bytes": 1654,
+      "sha256": "3b9562ddfe502b9b1f79a2fae4ad977b2e8a091e2c3de765570f15ccdba251cc"
     },
     {
       "path": "语法与单词/ScreenShot_2026-10-12_202436_153.png",
@@ -1121,6 +1281,11 @@
       "sha256": "10ed26828b44c13dda28e5b2fc01e2003b969d06aee1b6c81980808635017e41"
     },
     {
+      "path": "语法与单词/ScreenShot_2026-10-27_193355_628.png",
+      "bytes": 797,
+      "sha256": "a17534a0bcf9d8ff3a24081e094a6449369bf68e6e1174baa0a8cb0473c1e541"
+    },
+    {
       "path": "语法与单词/ScreenShot_2026-10-19_213637_295.png",
       "bytes": 1859,
       "sha256": "105dcb4f1c0e2802fb1f29c724fcce146c2d5485155a4b4b371735a0802256c0"
@@ -1149,6 +1314,56 @@
       "path": "语法与单词/ScreenShot_2026-10-23_151104_766.png",
       "bytes": 5236,
       "sha256": "1fc067db634a0abda1c6576e2d5a3283b747c914fe94e9545aff3b6091396ff4"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-23_215504_404.png",
+      "bytes": 2267,
+      "sha256": "8e987cf65dabc75a9c6475d0e440abda3b9dcc8a035d6e48d1cb5b8a5ba06eb2"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-23_215901_867.png",
+      "bytes": 1199,
+      "sha256": "983ad168b211edfff6e25975890484116e296e621825d7b6a6ff8b45f53f5260"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_100156_432.png",
+      "bytes": 1810,
+      "sha256": "160a5e9d02a6bddc98768ad62cc8a401a46aba7e49b6e74fbad5b63340692f40"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134444_661.png",
+      "bytes": 9142,
+      "sha256": "5c093e673e013744ffa88ff5f71e8f2111541650eeb6257739a4f5d65652f344"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134457_483.png",
+      "bytes": 4362,
+      "sha256": "62d0e098431da9955ac794c9caf58b281a99a61df214a57efadef7c02a30518e"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_134810_339.png",
+      "bytes": 4854,
+      "sha256": "8832c212c3c2f083e278434e803ece01041522521cb542ceb91489b358721d0b"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-26_135414_370.png",
+      "bytes": 1468,
+      "sha256": "edca94dbc1aab3ae7c45961ad44350b86216a1ca479c3a9ad77dabcdba55afd9"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_192943_981.png",
+      "bytes": 4210,
+      "sha256": "5e08f326eb5c4fa5ed72de41d4faf1b3778112adc7c7cd706678fd6f3d50a9f7"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_193219_590.png",
+      "bytes": 4476,
+      "sha256": "b08f115ef17c65c5f00367a749804cb36ab0ba3c952d326bfe9421048dd3797e"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_193254_236.png",
+      "bytes": 1078,
+      "sha256": "3c7cc24ff8ad501ddc7b6b4b1be6b57d0a7459d407fd7065d7ada22e117403b3"
     },
     {
       "path": "notes/experiments/实验日志/D2/预测基线/D2-GPU-261017-001.md",

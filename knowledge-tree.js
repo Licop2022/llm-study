@@ -17,7 +17,13 @@ window.createKnowledgeExplorer = function(api) {
     'bit-packing':['concept:bitwidth'],pruning:['f-matrix'],
     'tr-attention':['f-matrix','f-softmax'],'tr-heads':['concept:tr-attention'],'tr-roles':['concept:tr-attention'],'tr-mask':['concept:tr-roles'],
     'tr-position':['concept:tr-permutation'],'tr-ffn':['f-matrix'],'tr-postnorm':['concept:tr-heads','concept:tr-ffn'],'tr-permutation':['concept:tr-attention'],
-    'tr-convolution':['concept:tr-attention'],'tr-dropout':['concept:tr-ffn','f-stat'],'tr-bleu':['f-protocol'],'tr-decoding':['concept:tr-mask','f-softmax']
+    'tr-convolution':['concept:tr-attention'],'tr-dropout':['concept:tr-ffn','f-stat'],'tr-bleu':['f-protocol'],'tr-decoding':['concept:tr-mask','f-softmax'],
+    'quantization-codebook':['concept:quantization','concept:bitwidth'],'lattice-codebook':['concept:quantization-codebook','f-matrix'],
+    'quip-role':['concept:lattice-codebook','concept:rht','concept:ldlq-feedback'],'rank-constrained-regression':['f-ls','concept:svd','concept:gram-psd'],
+    'forward-pass':['f-matrix','concept:calibration'],'quantizer-saturation':['concept:quantization-codebook'],
+    'marchenko-pastur':['concept:eigendecomposition','concept:svd','f-stat'],'rht':['f-matrix','concept:gram-psd'],
+    'ldlq-feedback':['concept:second-order','concept:rtn'],'caldera-joint':['concept:rank-constrained-regression','concept:ldlq-feedback','concept:factor-bit-budget'],
+    'factor-bit-budget':['concept:bit-packing','concept:low-rank']
   };
   const foundations=Object.entries(learning.foundations).map(([key,f])=>({key,id:key,kind:'foundation',title:f.title,summary:f.summary,raw:f}));
   const nodes=[...foundations,...items.filter(x=>x.kind!=='english')], lookup=key=>nodes.find(x=>x.key===key);

@@ -1,6 +1,6 @@
 /* 原句节选已核对本地 PDF；example 为教学例句。 */
 window.STUDY_DATA.english = {
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-27",
   "terms": [
     {
       "id": "en-quantization",
@@ -19,6 +19,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "awq",
           "page": 1
+        },
+        {
+          "paper": "caldera",
+          "page": 3
         }
       ],
       "importOrder": 1
@@ -132,6 +136,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "eora",
           "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 3
         }
       ],
       "importOrder": 6
@@ -266,6 +274,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "zeroquant-v2",
           "page": 8
+        },
+        {
+          "paper": "caldera",
+          "page": 2
         }
       ],
       "importOrder": 12,
@@ -318,6 +330,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "eora",
           "page": 3
+        },
+        {
+          "paper": "caldera",
+          "page": 4
         }
       ],
       "importOrder": 14
@@ -335,6 +351,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "qera",
           "page": 4
+        },
+        {
+          "paper": "caldera",
+          "page": 3
         }
       ],
       "importOrder": 15
@@ -571,6 +591,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "lqer",
           "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 2
         }
       ],
       "importOrder": 27
@@ -813,7 +837,7 @@ window.STUDY_DATA.english = {
       "name": "pruning",
       "meaning": "剪枝",
       "group": "实验与表达",
-      "usage": "通过删除或置零部分权重等方式压缩模型。",
+      "usage": "通过删除或置零部分权重等方式压缩模型。 本次截图只显示prune及后续残字，按CALDERA第3页原文确认后归并，未补造整句。",
       "example": "Pruning changes the weight structure before compensation.",
       "translation": "剪枝在补偿前改变权重结构。",
       "caution": "剪枝与量化不同；两者都可能产生压缩误差。",
@@ -825,11 +849,16 @@ window.STUDY_DATA.english = {
         {
           "paper": "zeroquant-v2",
           "page": 10
+        },
+        {
+          "paper": "caldera",
+          "page": 3
         }
       ],
       "captures": [
         "语法与单词/ScreenShot_2026-10-12_210937_816.png",
-        "专有名词/ScreenShot_2026-10-16_171144_951.png"
+        "专有名词/ScreenShot_2026-10-16_171144_951.png",
+        "语法与单词/ScreenShot_2026-10-24_122508_643.png"
       ],
       "collected": true,
       "importOrder": 39
@@ -1095,6 +1124,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "eora",
           "page": 9
+        },
+        {
+          "paper": "caldera",
+          "page": 10
         }
       ],
       "captures": [],
@@ -1217,10 +1250,15 @@ window.STUDY_DATA.english = {
         {
           "paper": "zeroquant-v2",
           "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 6
         }
       ],
       "captures": [
-        "语法与单词/ScreenShot_2026-10-13_225454_787.png"
+        "语法与单词/ScreenShot_2026-10-13_225454_787.png",
+        "语法与单词/ScreenShot_2026-10-26_134553_547.png"
       ],
       "collected": true,
       "importOrder": 58
@@ -1808,6 +1846,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "zeroquant-v2",
           "page": 10
+        },
+        {
+          "paper": "caldera",
+          "page": 10
         }
       ],
       "captures": [
@@ -2136,7 +2178,7 @@ window.STUDY_DATA.english = {
       "name": "incorporate",
       "meaning": "纳入 / 融入",
       "group": "Transformer / 阅读积累",
-      "usage": "incorporate A into B，将 A 纳入 B。",
+      "usage": "incorporate A into B，将 A 纳入 B。 本次截图为第三人称单数incorporates，沿用本词条。",
       "example": "The model incorporates position information.",
       "translation": "模型纳入位置信息。",
       "caution": "截图为术语片段；例句为教学编写，不补造原文整句。 截图是积累来源；关联 PDF 页提供技术语境，不表示该片段逐字出现在该页。",
@@ -2144,11 +2186,16 @@ window.STUDY_DATA.english = {
         {
           "paper": "attention-2017",
           "page": 6
+        },
+        {
+          "paper": "caldera",
+          "page": 4
         }
       ],
       "importOrder": 103,
       "captures": [
-        "语法与单词/ScreenShot_2026-10-19_214348_862.png"
+        "语法与单词/ScreenShot_2026-10-19_214348_862.png",
+        "语法与单词/ScreenShot_2026-10-26_100545_122.png"
       ],
       "collected": true
     },
@@ -2629,6 +2676,545 @@ window.STUDY_DATA.english = {
         }
       ],
       "importOrder": 128
+    },
+    {
+      "id": "en-semantics",
+      "name": "semantics",
+      "meaning": "语义",
+      "group": "CALDERA · 低精度分解",
+      "usage": "通常为不可数名词，讨论意义与语义关系。",
+      "example": "Syntax and semantics describe different aspects of language.",
+      "translation": "句法与语义描述语言的不同方面。",
+      "caution": "教学例句，非论文原句。不能把语义相似直接等同于事实正确。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 1
+        }
+      ],
+      "importOrder": 129,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_215126_548.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-coarsely",
+      "name": "coarsely",
+      "meaning": "粗略地 / 以较粗粒度",
+      "group": "CALDERA · 低精度分解",
+      "usage": "副词，常修饰capture、quantize；反义细致可用finely。",
+      "example": "The backbone coarsely represents the residual structure.",
+      "translation": "主体粗略表示剩余结构。",
+      "caution": "教学例句，非论文原句。截图只显示coarsely及后续残字，词形由第2页原文确认，不补造截图整句。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        }
+      ],
+      "importOrder": 130,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_215516_899.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-essence",
+      "name": "essence",
+      "meaning": "本质 / 核心特征",
+      "group": "CALDERA · 低精度分解",
+      "usage": "capture the essence of表示抓住核心。",
+      "example": "A summary captures the essence of an argument.",
+      "translation": "摘要抓住一个论证的核心。",
+      "caution": "教学例句，非论文原句。这是比喻性描述，不是某个已定义的数值指标。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        }
+      ],
+      "importOrder": 131,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_215534_146.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-codebook",
+      "name": "codebook",
+      "meaning": "码本",
+      "group": "CALDERA · 低精度分解",
+      "usage": "有限可表示码字集合；注意scalar/vector编码单位。",
+      "example": "A codebook assigns indices to representable vectors.",
+      "translation": "码本为可表示向量分配索引。",
+      "caution": "教学例句，非论文原句。码本条目、向量维度与每分量比特数应分开。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 132,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_221158_414.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-succinctly",
+      "name": "succinctly",
+      "meaning": "简洁地",
+      "group": "CALDERA · 低精度分解",
+      "usage": "副词，常与describe、state、summarize搭配。",
+      "example": "The objective can be stated succinctly.",
+      "translation": "该目标可以简洁表述。",
+      "caution": "教学例句，非论文原句。简洁表述仍需保留假设与约束；截图后半截不补成原句。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 133,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-24_121923_785.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-profile",
+      "name": "profile",
+      "meaning": "分布形态 / 轮廓",
+      "group": "CALDERA · 低精度分解",
+      "usage": "本文singular value profile指奇异值随序号变化的形态。",
+      "example": "The singular value profile decays gradually.",
+      "translation": "奇异值谱形态逐渐衰减。",
+      "caution": "教学例句，非论文原句。此处不是个人资料，也不是profile程序性能分析动词。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        }
+      ],
+      "importOrder": 134,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-24_122245_323.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-fidelity",
+      "name": "fidelity",
+      "meaning": "保真度",
+      "group": "CALDERA · 低精度分解",
+      "usage": "high fidelity强调与原对象接近。",
+      "example": "Fidelity depends on the chosen error measure.",
+      "translation": "保真度取决于所选误差度量。",
+      "caution": "教学例句，非论文原句。不是分类accuracy的无条件同义词。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 135,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-24_122734_203.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-proxy",
+      "name": "proxy objective",
+      "meaning": "代理目标",
+      "group": "CALDERA · 低精度分解",
+      "usage": "proxy作修饰语，表示用较易优化的量代替最终目标。",
+      "example": "Layer output error is a proxy objective for compression.",
+      "translation": "层输出误差是压缩的一个代理目标。",
+      "caution": "教学例句，非论文原句。降低代理目标不必然提升所有下游任务。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 136,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-24_132448_893.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-sophisticated",
+      "name": "sophisticated",
+      "meaning": "复杂精细的",
+      "group": "CALDERA · 低精度分解",
+      "usage": "形容词，可修饰method或compression procedure。",
+      "example": "A sophisticated method may require more computation.",
+      "translation": "复杂精细的方法可能需要更多计算。",
+      "caution": "教学例句，非论文原句。不天然表示效果更好，仍需对照证据。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 137,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-24_132554_051.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-stochasticity",
+      "name": "stochasticity",
+      "meaning": "随机性",
+      "group": "CALDERA · 低精度分解",
+      "usage": "名词；stochastic为形容词，期望需说明对何种随机性取值。",
+      "example": "The expectation is over quantizer stochasticity.",
+      "translation": "该期望针对量化器随机性。",
+      "caution": "教学例句，非论文原句。不同于确定性误差，也不自动等于高斯噪声。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 5
+        }
+      ],
+      "importOrder": 138,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134128_603.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-derivation",
+      "name": "derivation",
+      "meaning": "推导",
+      "group": "CALDERA · 低精度分解",
+      "usage": "derive为动词，derivation为推导过程。",
+      "example": "The appendix gives the full derivation.",
+      "translation": "附录给出完整推导。",
+      "caution": "教学例句，非论文原句。不与derivative导数混淆。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 5
+        }
+      ],
+      "importOrder": 139,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134402_139.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-backbone",
+      "name": "backbone",
+      "meaning": "主体 / 主干",
+      "group": "CALDERA · 低精度分解",
+      "usage": "本文指全尺寸的量化矩阵Q。",
+      "example": "The backbone and the low-rank factors use different precisions.",
+      "translation": "主体与低秩因子使用不同精度。",
+      "caution": "教学例句，非论文原句。在其他论文中也可指基础网络；这里具体到Q。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        }
+      ],
+      "importOrder": 140,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134439_196.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-upper-bound",
+      "name": "upper bound",
+      "meaning": "上界",
+      "group": "CALDERA · 低精度分解",
+      "usage": "名词；动词bound A from above或upper-bound A。",
+      "example": "An upper bound need not be tight.",
+      "translation": "上界未必紧致。",
+      "caution": "教学例句，非论文原句。上界变小不等于每次实测值都按相同比例变小。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 5
+        }
+      ],
+      "importOrder": 141,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134644_611.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-non-convex",
+      "name": "non-convex",
+      "meaning": "非凸的",
+      "group": "CALDERA · 低精度分解",
+      "usage": "形容词，常修饰problem或objective。",
+      "example": "The factorized optimization problem is non-convex.",
+      "translation": "因子化优化问题是非凸的。",
+      "caution": "教学例句，非论文原句。非凸不意味着所有子问题都无解析解；第6页连续秩约束问题有特殊结构。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 142,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134909_540.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-trailing-singular-values",
+      "name": "trailing singular values",
+      "meaning": "尾部奇异值",
+      "group": "CALDERA · 低精度分解",
+      "usage": "按降序排列后位于后段的奇异值。",
+      "example": "The trailing singular values determine the truncation residual.",
+      "translation": "尾部奇异值决定截断残差。",
+      "caution": "教学例句，非论文原句。不是矩阵尾部若干行，也不是最小特征值的随意别称。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        }
+      ],
+      "importOrder": 143,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_135423_235.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-heuristic",
+      "name": "heuristic",
+      "meaning": "启发式策略 / 启发式的",
+      "group": "CALDERA · 低精度分解",
+      "usage": "可作名词或形容词，常用于缺少完整最优保证但实用的策略。",
+      "example": "The heuristic changes the update schedule.",
+      "translation": "该启发式策略改变更新安排。",
+      "caution": "教学例句，非论文原句。经验有效性与定理保证分别报告。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 8
+        }
+      ],
+      "importOrder": 144,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_193309_012.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-throughput-degradation",
+      "name": "throughput degradation",
+      "meaning": "吞吐下降",
+      "group": "CALDERA · 低精度分解",
+      "usage": "throughput通常按每秒token数等速率报告。",
+      "example": "Dequantization can cause throughput degradation.",
+      "translation": "反量化可能导致吞吐下降。",
+      "caution": "教学例句，非论文原句。需要固定设备、batch和序列长度；不等于单请求延迟的所有方面。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 9
+        }
+      ],
+      "importOrder": 145,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_193343_989.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-lattice",
+      "name": "lattice",
+      "meaning": "格",
+      "group": "CALDERA · 低精度分解",
+      "usage": "由基向量整数线性组合形成的离散集合。",
+      "example": "The discussion explains lattice and its assumptions.",
+      "translation": "这部分讨论解释格及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        }
+      ],
+      "importOrder": 146,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-24_132131_396.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-cardinality",
+      "name": "cardinality",
+      "meaning": "集合基数",
+      "group": "CALDERA · 低精度分解",
+      "usage": "集合中不同元素的数目。",
+      "example": "The discussion explains cardinality and its assumptions.",
+      "translation": "这部分讨论解释集合基数及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 147,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-24_132241_308.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-underdetermined",
+      "name": "under-determined linear system",
+      "meaning": "欠定线性系统",
+      "group": "CALDERA · 低精度分解",
+      "usage": "约束不足以唯一确定全部未知量；本文可用伪逆选择解。",
+      "example": "The discussion explains under-determined linear system and its assumptions.",
+      "translation": "这部分讨论解释欠定线性系统及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 4
+        }
+      ],
+      "importOrder": 148,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_100901_257.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-forward-pass",
+      "name": "forward pass",
+      "meaning": "前向传播",
+      "group": "CALDERA · 低精度分解",
+      "usage": "按计算图由输入计算输出；与反向传播区分。",
+      "example": "The discussion explains forward pass and its assumptions.",
+      "translation": "这部分讨论解释前向传播及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 4
+        }
+      ],
+      "importOrder": 149,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_101036_977.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-quantizer-saturation",
+      "name": "quantizer saturation",
+      "meaning": "量化器饱和",
+      "group": "CALDERA · 低精度分解",
+      "usage": "输入超出量化器可表示范围；与性能收益饱和区分。",
+      "example": "The discussion explains quantizer saturation and its assumptions.",
+      "translation": "这部分讨论解释量化器饱和及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 31
+        }
+      ],
+      "importOrder": 150,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_131536_970.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-marchenko-pastur",
+      "name": "Marchenko–Pastur approximation",
+      "meaning": "Marchenko–Pastur近似",
+      "group": "CALDERA · 低精度分解",
+      "usage": "依赖随机矩阵假设及大维渐近条件。",
+      "example": "The discussion explains Marchenko–Pastur approximation and its assumptions.",
+      "translation": "这部分讨论解释Marchenko–Pastur近似及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 23
+        }
+      ],
+      "importOrder": 151,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-26_131815_460.png",
+        "专有名词/ScreenShot_2026-10-26_142717_499.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-rht",
+      "name": "randomized Hadamard transform",
+      "meaning": "随机Hadamard变换",
+      "group": "CALDERA · 低精度分解",
+      "usage": "常缩写RHT，使用正交混合与随机符号进行预处理。",
+      "example": "The discussion explains randomized Hadamard transform and its assumptions.",
+      "translation": "这部分讨论解释随机Hadamard变换及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        }
+      ],
+      "importOrder": 152,
+      "captures": [
+        "专有名词/ScreenShot_2026-10-27_170410_058.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-rank-constrained-regression",
+      "name": "rank-constrained regression",
+      "meaning": "秩约束回归",
+      "group": "CALDERA · 低精度分解",
+      "usage": "在输出拟合目标中约束映射矩阵的秩。",
+      "example": "The discussion explains rank-constrained regression and its assumptions.",
+      "translation": "这部分讨论解释秩约束回归及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 153
+    },
+    {
+      "id": "en-ldlq",
+      "name": "LDLQ",
+      "meaning": "基于LDL分解的量化反馈",
+      "group": "CALDERA · 低精度分解",
+      "usage": "本文主体量化使用的反馈过程，原文约定需核对朝向。",
+      "example": "The discussion explains LDLQ and its assumptions.",
+      "translation": "这部分讨论解释基于LDL分解的量化反馈及其假设。",
+      "caution": "教学例句，非论文原句。与网站概念卡对照，不能仅凭术语名称推断最优性。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 4
+        }
+      ],
+      "importOrder": 154
     }
   ],
   "phrases": [
@@ -3205,11 +3791,16 @@ window.STUDY_DATA.english = {
         {
           "paper": "attention-2017",
           "page": 2
+        },
+        {
+          "paper": "caldera",
+          "page": 9
         }
       ],
       "importOrder": 28,
       "captures": [
-        "语法与单词/ScreenShot_2026-10-19_195505_225.png"
+        "语法与单词/ScreenShot_2026-10-19_195505_225.png",
+        "语法与单词/ScreenShot_2026-10-27_193355_628.png"
       ],
       "collected": true
     },
@@ -3338,6 +3929,250 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-23_151104_766.png"
       ],
       "collected": true
+    },
+    {
+      "id": "en-with-high-fidelity",
+      "name": "with high fidelity",
+      "meaning": "以较高保真度",
+      "group": "CALDERA · 低精度分解",
+      "usage": "with引出方式或性质，fidelity强调相对于原对象的保真。",
+      "example": "The factors preserve the dominant directions with high fidelity.",
+      "translation": "这些因子较好保留了主要方向。",
+      "caution": "教学例句，非论文原句。须说明保真的度量和对象，不能直接译成完全无损。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        }
+      ],
+      "importOrder": 35,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_215504_404.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-build-on-top-of",
+      "name": "build on top of …",
+      "meaning": "在……基础上构建",
+      "group": "CALDERA · 低精度分解",
+      "usage": "说明复用已有工作或框架；builds与主语单数一致。",
+      "example": "The method builds on top of an existing quantization framework.",
+      "translation": "该方法基于现有量化框架构建。",
+      "caution": "教学例句，非论文原句。截图末尾截断，原文第2页确认是builds on top of QuIP#；不视为新增已读QuIP原论文。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 2
+        }
+      ],
+      "importOrder": 36,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-23_215901_867.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-refined-version",
+      "name": "a refined version of …",
+      "meaning": "……的改进版本",
+      "group": "CALDERA · 低精度分解",
+      "usage": "refined是过去分词作定语，通常说明细化已有算法。",
+      "example": "This submodule is a refined version of the earlier algorithm.",
+      "translation": "该子模块是早先算法的改进版本。",
+      "caution": "教学例句，非论文原句。改进涉及哪些目标、步骤和约束，需要具体核对。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 4
+        }
+      ],
+      "importOrder": 37,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_100156_432.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-tunable-knob",
+      "name": "a tunable knob",
+      "meaning": "可调控制量",
+      "group": "CALDERA · 低精度分解",
+      "usage": "knob为旋钮的比喻，常指rank、位宽等超参数。",
+      "example": "The target rank is a tunable knob for the storage budget.",
+      "translation": "目标秩是调节存储预算的控制量。",
+      "caution": "教学例句，非论文原句。不是算法自动找到最佳配置的承诺。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 38,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134444_661.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-alternatively-stated",
+      "name": "alternatively stated",
+      "meaning": "换一种说法",
+      "group": "CALDERA · 低精度分解",
+      "usage": "句首插入语，对前一句做等价或近似改述。",
+      "example": "Alternatively stated, the two settings use the same nominal budget.",
+      "translation": "换一种说法，这两个设置使用相同名义预算。",
+      "caution": "教学例句，非论文原句。改述时仍要保留原条件，不能把充分条件改写为必要条件。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 39,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134457_483.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-proof-sketch",
+      "name": "proof sketch",
+      "meaning": "证明概要 / 证明思路",
+      "group": "CALDERA · 低精度分解",
+      "usage": "给出主要结构，通常省略技术细节。",
+      "example": "The proof sketch identifies the main assumptions.",
+      "translation": "证明概要指出主要假设。",
+      "caution": "教学例句，非论文原句。不能用概要取代完整条件与证明。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 40,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_134810_339.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-upper-bounded-by",
+      "name": "be upper bounded by …",
+      "meaning": "以……为上界",
+      "group": "CALDERA · 低精度分解",
+      "usage": "被动结构；A is upper bounded by B即A≤B。",
+      "example": "The expected error is upper bounded by a spectral tail term.",
+      "translation": "期望误差以一个谱尾部项为上界。",
+      "caution": "教学例句，非论文原句。方向不能反读为A≥B，且须保留概率与条件。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 41,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-26_135414_370.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-be-assessed-by",
+      "name": "be assessed by …",
+      "meaning": "通过……评估 / 由……评估",
+      "group": "CALDERA · 低精度分解",
+      "usage": "be assessed by后可接评估方法或施事者。",
+      "example": "The method is assessed by measuring perplexity and throughput.",
+      "translation": "该方法通过测量困惑度和吞吐来评估。",
+      "caution": "教学例句，非论文原句。by并不总表示方法，也可能表示由谁评估，需看宾语。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        }
+      ],
+      "importOrder": 42,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_192943_981.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-be-omitted",
+      "name": "be omitted",
+      "meaning": "被省略 / 未执行",
+      "group": "CALDERA · 低精度分解",
+      "usage": "被动语态；omitted可说明某实验步骤没有运行。",
+      "example": "Transform fine-tuning is omitted in this comparison.",
+      "translation": "本次比较省略变换微调。",
+      "caution": "教学例句，非论文原句。未执行不等于已经证明无效；要核对比较协议。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 7
+        }
+      ],
+      "importOrder": 43,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_193219_590.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-indicative-of",
+      "name": "be indicative of …",
+      "meaning": "可表明…… / 是……的迹象",
+      "group": "CALDERA · 低精度分解",
+      "usage": "indicative为形容词，of后接对象。",
+      "example": "A smaller calibration error is not directly indicative of better task accuracy.",
+      "translation": "更小校准误差并不直接表明任务准确率更好。",
+      "caution": "教学例句，非论文原句。不要把迹象写成严格因果证明。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 8
+        }
+      ],
+      "importOrder": 44,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_193254_236.png"
+      ],
+      "collected": true
+    },
+    {
+      "id": "en-subject-to",
+      "name": "subject to …",
+      "meaning": "满足……约束",
+      "group": "CALDERA · 低精度分解",
+      "usage": "优化表达中引出可行域或等式/不等式约束。",
+      "example": "We minimize output error subject to a rank constraint.",
+      "translation": "我们在秩约束下最小化输出误差。",
+      "caution": "教学例句，非论文原句。subject to 后的内容是可行域约束，不是额外相加的损失项。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 3
+        }
+      ],
+      "importOrder": 45
+    },
+    {
+      "id": "en-amenable-to",
+      "name": "be amenable to …",
+      "meaning": "适于进行……",
+      "group": "CALDERA · 低精度分解",
+      "usage": "to为介词，后接名词或动名词。",
+      "example": "The factors are amenable to further adaptation.",
+      "translation": "这些因子适于进一步适配。",
+      "caution": "教学例句，非论文原句。这是结构上的可行性，不是无条件效果保证。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 1
+        }
+      ],
+      "importOrder": 46
     }
   ],
   "sentences": [
@@ -3787,6 +4622,75 @@ window.STUDY_DATA.english = {
         }
       ],
       "importOrder": 18
+    },
+    {
+      "id": "en-sentence-caldera-constraints",
+      "name": "约束表达：be constrained to",
+      "group": "CALDERA",
+      "paper": "caldera",
+      "page": 1,
+      "quote": "Q, L, R are constrained to be representable using low-precision formats",
+      "meaning": "Q、L、R均被约束为可用低精度格式表示",
+      "analysis": [
+        "原文摘要节选，来源为第1页。",
+        "be constrained to be …说明可行域，不能只理解成最终另做一次不影响优化的格式转换。"
+      ],
+      "focus": [
+        "句法与论证边界"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 1
+        }
+      ],
+      "importOrder": 19
+    },
+    {
+      "id": "en-sentence-caldera-alternatively",
+      "name": "改述与用途：Alternatively stated",
+      "group": "CALDERA",
+      "paper": "caldera",
+      "page": 6,
+      "quote": "Alternatively stated, this provides a tunable knob for controlling the error",
+      "meaning": "换言之，这提供了控制误差的可调手段",
+      "analysis": [
+        "句首过去分词短语用于改述上文。",
+        "for controlling说明用途，后文继续说明主体与因子之间的预算权衡；节选不表示完全控制任意真实任务误差。"
+      ],
+      "focus": [
+        "句法与论证边界"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 6
+        }
+      ],
+      "importOrder": 20
+    },
+    {
+      "id": "en-sentence-caldera-throughput",
+      "name": "让步表达与作者评价：albeit",
+      "group": "CALDERA",
+      "paper": "caldera",
+      "page": 9,
+      "quote": "a slight (albeit, acceptable) throughput degradation compared to QuIP#",
+      "meaning": "相对于QuIP#有轻微但作者认为可接受的吞吐下降",
+      "analysis": [
+        "albeit引出让步，acceptable是作者评价。",
+        "量化影响需回到第10页表6看具体数值，不能把slight当成所有配置下的客观统一幅度。"
+      ],
+      "focus": [
+        "句法与论证边界"
+      ],
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 9
+        }
+      ],
+      "importOrder": 21
     }
   ]
 };

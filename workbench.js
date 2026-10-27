@@ -111,13 +111,16 @@
     $('#result-count').textContent = `${found.length} 项${knowledge ? ' · 按导入顺序' : ''}`;
     $('#list-results').innerHTML = `<div class="data-list ${knowledge ? 'knowledge-list' : ''}">${found.map(x => `<a class="data-row" href="${url(x)}"><div><h2>${esc(x.title)}</h2><p>${esc(x.subtitle)}</p>${x.kind !== 'english' ? `<p class="summary">${esc(x.summary)}</p>` : ''}</div>${!knowledge ? `<span>${x.kind === 'paper' ? `${x.raw.phase} · ${x.raw.year}` : esc(x.raw.date || '')}</span><span class="open">${x.kind === 'paper' ? '阅读' : '查看'} →</span>` : `<span class="tag">${esc(x.kind === 'concept' ? x.raw.group : {terms:'词汇',phrases:'学术表达',sentences:'原文短句'}[x.group])}</span>`}</a>`).join('') || `<div class="empty">${state.q ? '没有匹配的内容。' : '当前' + (route.realm === 'papers' ? '方向' : '项目') + '暂无这类资料。'}</div>`}</div>`;
   }
+  function collectionSources(x) {
+    return x.captures?.length ? `<details><summary>我的积累截图（${x.captures.length}）</summary><div class="source">${x.captures.map((file,i)=>`<a href="${esc(assetBase+encodeURI(file))}" target="_blank" rel="noopener">截图 ${i+1} ↗</a>`).join('')}</div></details>` : '';
+  }
   function lesson(c) {
     const l = c.lesson;
-    if (!l) return `<p>${prose(c.explanation)}</p>`;
-    return `<p>${prose(l.intuition)}</p><dl class="symbols">${(l.symbols || []).map(([s,t]) => `<dt>${prose(s)}</dt><dd>${prose(t)}</dd>`).join('')}</dl>${l.steps.map(s => `<h3>${esc(s.title)}</h3><p>${prose(s.text)}</p>${formula(s.latex)}`).join('')}<div class="example"><h3>教学算例</h3><p>${prose(l.example.text)}</p>${formula(l.example.latex)}</div><h3>方法联系</h3><p>${prose(l.connection)}</p><details><summary>自测：${prose(l.check.question)}</summary><p>${prose(l.check.answer)}</p></details><div class="source"><span>讲解与算例为教学整理</span>${(c.refs || []).map(source).join('')}</div>`;
+    if (!l) return `<p>${prose(c.explanation)}</p>${collectionSources(c)}`;
+    return `<p>${prose(l.intuition)}</p><dl class="symbols">${(l.symbols || []).map(([s,t]) => `<dt>${prose(s)}</dt><dd>${prose(t)}</dd>`).join('')}</dl>${l.steps.map(s => `<h3>${esc(s.title)}</h3><p>${prose(s.text)}</p>${formula(s.latex)}`).join('')}<div class="example"><h3>教学算例</h3><p>${prose(l.example.text)}</p>${formula(l.example.latex)}</div><h3>方法联系</h3><p>${prose(l.connection)}</p><details><summary>自测：${prose(l.check.question)}</summary><p>${prose(l.check.answer)}</p></details><div class="source"><span>讲解与算例为教学整理</span>${(c.refs || []).map(source).join('')}</div>${collectionSources(c)}`;
   }
   function englishBody(x) {
-    return `<p class="lead">${prose(x.meaning)}</p>${x.usage ? `<h2>用法</h2><p>${prose(x.usage)}</p>` : ''}${x.example ? `<h2>教学例句</h2><p lang="en">${esc(x.example)}</p><p>${esc(x.translation)}</p>` : ''}${x.analysis ? `<h2>句子分析</h2><p>${prose(typeof x.analysis === 'string' ? x.analysis : JSON.stringify(x.analysis))}</p>` : ''}${x.caution ? `<h2>易混之处</h2><p>${prose(x.caution)}</p>` : ''}<div class="source">${(x.refs || []).map(source).join('')}</div>`;
+    return `<p class="lead">${prose(x.meaning)}</p>${x.quote ? `<h2>原文节选</h2><blockquote lang="en">${esc(x.quote)}</blockquote>` : ''}${x.usage ? `<h2>用法</h2><p>${prose(x.usage)}</p>` : ''}${x.example ? `<h2>教学例句</h2><p lang="en">${esc(x.example)}</p><p>${esc(x.translation)}</p>` : ''}${x.analysis ? `<h2>句子分析</h2>${Array.isArray(x.analysis) ? `<ul>${x.analysis.map(text=>`<li>${prose(text)}</li>`).join('')}</ul>` : `<p>${prose(x.analysis)}</p>`}` : ''}${x.caution ? `<h2>易混之处</h2><p>${prose(x.caution)}</p>` : ''}<div class="source">${(x.refs || []).map(source).join('')}</div>${collectionSources(x)}`;
   }
   function assessControls(key) {
     return `<div class="self-actions"><span>掌握程度</span>${[['weak','待巩固'],['clear','能独立解释']].map(([level,text]) => `<button data-level="${level}" data-key="${key}" aria-pressed="${levels.get(key) === level}">${text}</button>`).join('')}<span class="muted">${levels.has(key) ? '' : '未自评'}</span></div>`;
