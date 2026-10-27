@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T12:10:40.931Z",
+  "generatedAt": "2026-10-27T12:26:52.611Z",
   "counts": {
     "papers": 16,
     "concepts": 68,
@@ -12,13 +12,13 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 2017,
-      "sha256": "bfddce955b1a02e005faf0c1bfb8c360834bf08a69e9c410ebf992dac0f7efca"
+      "bytes": 2097,
+      "sha256": "4a33f2221c5220c4fdb89d024905d3384abc29a0ae8a840ea460ae4de9694794"
     },
     {
       "path": "app.js",
-      "bytes": 87084,
-      "sha256": "5233a303d41259261674f12e5fa024fdaffd9f5d0dafa9d7b08bdc52339bb127"
+      "bytes": 87536,
+      "sha256": "0c455a540f41624f190f841806decb0a65533f4e20f789432be3ecc19b1928b5"
     },
     {
       "path": "data.js",
@@ -27,8 +27,8 @@
     },
     {
       "path": "english-data.js",
-      "bytes": 167729,
-      "sha256": "bf0dce09f9f67591f2b767dc8ff60635c776eb94340b4a24f0a09a7d81fe4476"
+      "bytes": 176401,
+      "sha256": "58b8ad9bf86ea8635c62ce95f4c22cf484c56977ab95726d663dd441c0e62473"
     },
     {
       "path": "todo-core.js",
@@ -67,13 +67,13 @@
     },
     {
       "path": "classic.html",
-      "bytes": 3462,
-      "sha256": "80169a2361c5eb9700d78de7167c03fd24f7cb3ca0770c5b70c722ad33a08445"
+      "bytes": 3502,
+      "sha256": "49b3b5983bc64e33a6ca2ac677c9cd5c4b46c87176e8329a2a7e112598de5503"
     },
     {
       "path": "workbench.js",
-      "bytes": 42328,
-      "sha256": "8e9afa74143b4fb25cf3c1d2bbf86e74528e68840713ad22540e3ecfa8b6dd89"
+      "bytes": 43308,
+      "sha256": "f7d7fa19072c63c1a4553100896630c3e7f670437d9455a58236bd038f9d03ae"
     },
     {
       "path": "workbench-storage.js",
@@ -82,8 +82,8 @@
     },
     {
       "path": "workbench.css",
-      "bytes": 16610,
-      "sha256": "39b0a31da2639c34aad3adc84b000aff5d39b365c7bf1255c1d32d50d32fe1ce"
+      "bytes": 16952,
+      "sha256": "5247d4ab0446e48565f052a1e761d77ee0e8293e222f25259dc55d27bca10adb"
     },
     {
       "path": "learning-data.js",
@@ -92,8 +92,8 @@
     },
     {
       "path": "learning-ui.js",
-      "bytes": 14116,
-      "sha256": "be32d0fa93c5c0b76f17f023f14fe85cd840b7d46b85e623137c93841be3bad3"
+      "bytes": 14566,
+      "sha256": "2652dcd422305f3b126808ce35ab084976fb4cc5517a371db2b405095284ae37"
     },
     {
       "path": "learning.css",

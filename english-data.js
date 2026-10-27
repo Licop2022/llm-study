@@ -1,4 +1,4 @@
-/* 原句节选已核对本地 PDF；example 为教学例句。 */
+/* 原句节选已核对本地 PDF；example 为教学例句。按当前词义与学习用途区分英语范畴。 */
 window.STUDY_DATA.english = {
   "updatedAt": "2026-10-27",
   "terms": [
@@ -25,7 +25,8 @@ window.STUDY_DATA.english = {
           "page": 3
         }
       ],
-      "importOrder": 1
+      "importOrder": 1,
+      "learningDomain": "academic"
     },
     {
       "id": "en-inference",
@@ -46,7 +47,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 2
+      "importOrder": 2,
+      "learningDomain": "academic"
     },
     {
       "id": "en-activation",
@@ -71,7 +73,8 @@ window.STUDY_DATA.english = {
           "page": 3
         }
       ],
-      "importOrder": 3
+      "importOrder": 3,
+      "learningDomain": "academic"
     },
     {
       "id": "en-weight",
@@ -88,7 +91,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 4
+      "importOrder": 4,
+      "learningDomain": "academic"
     },
     {
       "id": "en-outlier",
@@ -109,7 +113,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 5
+      "importOrder": 5,
+      "learningDomain": "academic"
     },
     {
       "id": "en-calibration",
@@ -142,7 +147,8 @@ window.STUDY_DATA.english = {
           "page": 3
         }
       ],
-      "importOrder": 6
+      "importOrder": 6,
+      "learningDomain": "academic"
     },
     {
       "id": "en-mixed-precision",
@@ -159,7 +165,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 7
+      "importOrder": 7,
+      "learningDomain": "academic"
     },
     {
       "id": "en-equivalent",
@@ -180,7 +187,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 8
+      "importOrder": 8,
+      "learningDomain": "academic"
     },
     {
       "id": "en-salient",
@@ -205,7 +213,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-13_225228_144.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-second-order",
@@ -226,7 +235,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 10
+      "importOrder": 10,
+      "learningDomain": "academic"
     },
     {
       "id": "en-approximation",
@@ -247,7 +257,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 11
+      "importOrder": 11,
+      "learningDomain": "academic"
     },
     {
       "id": "en-low-rank",
@@ -282,7 +293,8 @@ window.STUDY_DATA.english = {
       ],
       "importOrder": 12,
       "captures": [],
-      "collected": false
+      "collected": false,
+      "learningDomain": "academic"
     },
     {
       "id": "en-svd",
@@ -303,7 +315,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 13
+      "importOrder": 13,
+      "learningDomain": "academic"
     },
     {
       "id": "en-reconstruction",
@@ -336,7 +349,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 14
+      "importOrder": 14,
+      "learningDomain": "academic"
     },
     {
       "id": "en-frobenius",
@@ -357,7 +371,8 @@ window.STUDY_DATA.english = {
           "page": 3
         }
       ],
-      "importOrder": 15
+      "importOrder": 15,
+      "learningDomain": "academic"
     },
     {
       "id": "en-autocorrelation",
@@ -374,7 +389,8 @@ window.STUDY_DATA.english = {
           "page": 5
         }
       ],
-      "importOrder": 16
+      "importOrder": 16,
+      "learningDomain": "academic"
     },
     {
       "id": "en-closed-form",
@@ -403,7 +419,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-14_222941_107.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-negligible",
@@ -424,7 +441,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 18
+      "importOrder": 18,
+      "learningDomain": "general"
     },
     {
       "id": "en-baseline",
@@ -441,7 +459,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 19
+      "importOrder": 19,
+      "learningDomain": "academic"
     },
     {
       "id": "en-deployment",
@@ -462,7 +481,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 20
+      "importOrder": 20,
+      "learningDomain": "academic"
     },
     {
       "id": "en-tensor-tensor",
@@ -479,7 +499,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 21
+      "importOrder": 21,
+      "learningDomain": "academic"
     },
     {
       "id": "en-tensor-mode",
@@ -496,7 +517,8 @@ window.STUDY_DATA.english = {
           "page": 12
         }
       ],
-      "importOrder": 22
+      "importOrder": 22,
+      "learningDomain": "academic"
     },
     {
       "id": "en-tensor-contraction",
@@ -521,7 +543,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_221654_130.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-tensor-tensorization",
@@ -538,7 +561,8 @@ window.STUDY_DATA.english = {
           "page": 10
         }
       ],
-      "importOrder": 24
+      "importOrder": 24,
+      "learningDomain": "academic"
     },
     {
       "id": "en-tensor-incomplete",
@@ -555,7 +579,8 @@ window.STUDY_DATA.english = {
           "page": 12
         }
       ],
-      "importOrder": 25
+      "importOrder": 25,
+      "learningDomain": "academic"
     },
     {
       "id": "en-tensor-cyclic",
@@ -572,7 +597,8 @@ window.STUDY_DATA.english = {
           "page": 3
         }
       ],
-      "importOrder": 26
+      "importOrder": 26,
+      "learningDomain": "academic"
     },
     {
       "id": "en-singular-value",
@@ -597,7 +623,8 @@ window.STUDY_DATA.english = {
           "page": 2
         }
       ],
-      "importOrder": 27
+      "importOrder": 27,
+      "learningDomain": "academic"
     },
     {
       "id": "en-eigenvalue",
@@ -619,7 +646,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202532_033.png"
       ],
       "collected": true,
-      "importOrder": 28
+      "importOrder": 28,
+      "learningDomain": "academic"
     },
     {
       "id": "en-eigenvector",
@@ -640,7 +668,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202532_033.png"
       ],
       "collected": true,
-      "importOrder": 29
+      "importOrder": 29,
+      "learningDomain": "academic"
     },
     {
       "id": "en-eigenspace",
@@ -661,7 +690,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202532_033.png"
       ],
       "collected": true,
-      "importOrder": 30
+      "importOrder": 30,
+      "learningDomain": "academic"
     },
     {
       "id": "en-eigenprojection",
@@ -682,7 +712,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202532_033.png"
       ],
       "collected": true,
-      "importOrder": 31
+      "importOrder": 31,
+      "learningDomain": "academic"
     },
     {
       "id": "en-principal-component",
@@ -703,7 +734,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202532_033.png"
       ],
       "collected": true,
-      "importOrder": 32
+      "importOrder": 32,
+      "learningDomain": "academic"
     },
     {
       "id": "en-transpose",
@@ -724,7 +756,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202953_039.png"
       ],
       "collected": true,
-      "importOrder": 33
+      "importOrder": 33,
+      "learningDomain": "academic"
     },
     {
       "id": "en-diagonal-matrix",
@@ -745,7 +778,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_203006_928.png"
       ],
       "collected": true,
-      "importOrder": 34
+      "importOrder": 34,
+      "learningDomain": "academic"
     },
     {
       "id": "en-orthogonal-matrix",
@@ -766,7 +800,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_203006_928.png"
       ],
       "collected": true,
-      "importOrder": 35
+      "importOrder": 35,
+      "learningDomain": "academic"
     },
     {
       "id": "en-backpropagation",
@@ -787,7 +822,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_203046_001.png"
       ],
       "collected": true,
-      "importOrder": 36
+      "importOrder": 36,
+      "learningDomain": "academic"
     },
     {
       "id": "en-allocate",
@@ -809,7 +845,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_205019_424.png"
       ],
       "collected": true,
-      "importOrder": 37
+      "importOrder": 37,
+      "learningDomain": "general"
     },
     {
       "id": "en-representation-capacity",
@@ -830,7 +867,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_205037_864.png"
       ],
       "collected": true,
-      "importOrder": 38
+      "importOrder": 38,
+      "learningDomain": "academic"
     },
     {
       "id": "en-pruning",
@@ -861,7 +899,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-24_122508_643.png"
       ],
       "collected": true,
-      "importOrder": 39
+      "importOrder": 39,
+      "learningDomain": "academic"
     },
     {
       "id": "en-commonsense-reasoning",
@@ -882,7 +921,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_211750_720.png"
       ],
       "collected": true,
-      "importOrder": 40
+      "importOrder": 40,
+      "learningDomain": "academic"
     },
     {
       "id": "en-concatenated",
@@ -903,7 +943,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_211801_887.png"
       ],
       "collected": true,
-      "importOrder": 41
+      "importOrder": 41,
+      "learningDomain": "academic"
     },
     {
       "id": "en-metric",
@@ -924,7 +965,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_211934_175.png"
       ],
       "collected": true,
-      "importOrder": 42
+      "importOrder": 42,
+      "learningDomain": "academic"
     },
     {
       "id": "en-variant",
@@ -945,7 +987,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_212825_200.png"
       ],
       "collected": true,
-      "importOrder": 43
+      "importOrder": 43,
+      "learningDomain": "general"
     },
     {
       "id": "en-variable",
@@ -966,7 +1009,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_212825_200.png"
       ],
       "collected": true,
-      "importOrder": 44
+      "importOrder": 44,
+      "learningDomain": "academic"
     },
     {
       "id": "en-variance",
@@ -987,7 +1031,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_212825_200.png"
       ],
       "collected": true,
-      "importOrder": 45
+      "importOrder": 45,
+      "learningDomain": "academic"
     },
     {
       "id": "en-variation",
@@ -1008,7 +1053,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_212825_200.png"
       ],
       "collected": true,
-      "importOrder": 46
+      "importOrder": 46,
+      "learningDomain": "general"
     },
     {
       "id": "en-respectively",
@@ -1029,7 +1075,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_215823_215.png"
       ],
       "collected": true,
-      "importOrder": 47
+      "importOrder": 47,
+      "learningDomain": "general"
     },
     {
       "id": "en-symmetric",
@@ -1050,7 +1097,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_145841_032.png"
       ],
       "collected": true,
-      "importOrder": 48
+      "importOrder": 48,
+      "learningDomain": "academic"
     },
     {
       "id": "en-residual-path",
@@ -1071,7 +1119,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_145115_646.png"
       ],
       "collected": true,
-      "importOrder": 49
+      "importOrder": 49,
+      "learningDomain": "academic"
     },
     {
       "id": "en-eigendecomposition",
@@ -1090,7 +1139,8 @@ window.STUDY_DATA.english = {
       ],
       "captures": [],
       "collected": false,
-      "importOrder": 50
+      "importOrder": 50,
+      "learningDomain": "academic"
     },
     {
       "id": "en-compression-ratio",
@@ -1109,7 +1159,8 @@ window.STUDY_DATA.english = {
       ],
       "captures": [],
       "collected": false,
-      "importOrder": 51
+      "importOrder": 51,
+      "learningDomain": "academic"
     },
     {
       "id": "en-computational-overhead",
@@ -1132,7 +1183,8 @@ window.STUDY_DATA.english = {
       ],
       "captures": [],
       "collected": false,
-      "importOrder": 52
+      "importOrder": 52,
+      "learningDomain": "academic"
     },
     {
       "id": "en-fine-tuning-free",
@@ -1151,7 +1203,8 @@ window.STUDY_DATA.english = {
       ],
       "captures": [],
       "collected": false,
-      "importOrder": 53
+      "importOrder": 53,
+      "learningDomain": "academic"
     },
     {
       "id": "en-factorization",
@@ -1172,7 +1225,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225345_535.png"
       ],
       "collected": true,
-      "importOrder": 54
+      "importOrder": 54,
+      "learningDomain": "academic"
     },
     {
       "id": "en-low-rank-factorization",
@@ -1193,7 +1247,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225419_304.png"
       ],
       "collected": true,
-      "importOrder": 55
+      "importOrder": 55,
+      "learningDomain": "academic"
     },
     {
       "id": "en-quantization-error-matrix",
@@ -1214,7 +1269,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225430_361.png"
       ],
       "collected": true,
-      "importOrder": 56
+      "importOrder": 56,
+      "learningDomain": "academic"
     },
     {
       "id": "en-mitigate",
@@ -1235,7 +1291,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225438_770.png"
       ],
       "collected": true,
-      "importOrder": 57
+      "importOrder": 57,
+      "learningDomain": "general"
     },
     {
       "id": "en-trade-off",
@@ -1261,7 +1318,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-26_134553_547.png"
       ],
       "collected": true,
-      "importOrder": 58
+      "importOrder": 58,
+      "learningDomain": "general"
     },
     {
       "id": "en-distillation",
@@ -1282,7 +1340,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_103721_094.png"
       ],
       "collected": true,
-      "importOrder": 59
+      "importOrder": 59,
+      "learningDomain": "academic"
     },
     {
       "id": "en-scaling-laws",
@@ -1303,7 +1362,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_104024_281.png"
       ],
       "collected": true,
-      "importOrder": 60
+      "importOrder": 60,
+      "learningDomain": "academic"
     },
     {
       "id": "en-quantization-schemes",
@@ -1325,7 +1385,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_214148_230.png"
       ],
       "collected": true,
-      "importOrder": 61
+      "importOrder": 61,
+      "learningDomain": "academic"
     },
     {
       "id": "en-quantization-coverage",
@@ -1346,7 +1407,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_104349_489.png"
       ],
       "collected": true,
-      "importOrder": 62
+      "importOrder": 62,
+      "learningDomain": "academic"
     },
     {
       "id": "en-quantization-granularity",
@@ -1368,7 +1430,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_095204_452.png"
       ],
       "collected": true,
-      "importOrder": 63
+      "importOrder": 63,
+      "learningDomain": "academic"
     },
     {
       "id": "en-implementing",
@@ -1389,7 +1452,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_105604_846.png"
       ],
       "collected": true,
-      "importOrder": 64
+      "importOrder": 64,
+      "learningDomain": "general"
     },
     {
       "id": "en-divergence",
@@ -1410,7 +1474,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_214710_915.png"
       ],
       "collected": true,
-      "importOrder": 65
+      "importOrder": 65,
+      "learningDomain": "academic"
     },
     {
       "id": "en-susceptibility",
@@ -1431,7 +1496,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_214737_210.png"
       ],
       "collected": true,
-      "importOrder": 66
+      "importOrder": 66,
+      "learningDomain": "general"
     },
     {
       "id": "en-eliminate",
@@ -1452,7 +1518,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_214928_507.png"
       ],
       "collected": true,
-      "importOrder": 67
+      "importOrder": 67,
+      "learningDomain": "general"
     },
     {
       "id": "en-complementary",
@@ -1473,7 +1540,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_223338_950.png"
       ],
       "collected": true,
-      "importOrder": 68
+      "importOrder": 68,
+      "learningDomain": "general"
     },
     {
       "id": "en-anticipated",
@@ -1494,7 +1562,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-14_223633_410.png"
       ],
       "collected": true,
-      "importOrder": 69
+      "importOrder": 69,
+      "learningDomain": "general"
     },
     {
       "id": "en-fine-grained-quantization",
@@ -1516,7 +1585,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-15_221004_773.png"
       ],
       "collected": true,
-      "importOrder": 70
+      "importOrder": 70,
+      "learningDomain": "academic"
     },
     {
       "id": "en-scaling-factor",
@@ -1537,7 +1607,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_093848_844.png"
       ],
       "collected": true,
-      "importOrder": 71
+      "importOrder": 71,
+      "learningDomain": "academic"
     },
     {
       "id": "en-diminishing-returns",
@@ -1558,7 +1629,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_094033_044.png"
       ],
       "collected": true,
-      "importOrder": 72
+      "importOrder": 72,
+      "learningDomain": "general"
     },
     {
       "id": "en-plateau",
@@ -1579,7 +1651,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_094146_692.png"
       ],
       "collected": true,
-      "importOrder": 73
+      "importOrder": 73,
+      "learningDomain": "general"
     },
     {
       "id": "en-saturation",
@@ -1600,7 +1673,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_094146_692.png"
       ],
       "collected": true,
-      "importOrder": 74
+      "importOrder": 74,
+      "learningDomain": "general"
     },
     {
       "id": "en-marginal-improvement",
@@ -1621,7 +1695,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_094146_692.png"
       ],
       "collected": true,
-      "importOrder": 75
+      "importOrder": 75,
+      "learningDomain": "general"
     },
     {
       "id": "en-uniform-quantization",
@@ -1642,7 +1717,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_094249_708.png"
       ],
       "collected": true,
-      "importOrder": 76
+      "importOrder": 76,
+      "learningDomain": "academic"
     },
     {
       "id": "en-methodology",
@@ -1663,7 +1739,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_161336_688.png"
       ],
       "collected": true,
-      "importOrder": 77
+      "importOrder": 77,
+      "learningDomain": "academic"
     },
     {
       "id": "en-seamlessly",
@@ -1684,7 +1761,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_161840_224.png"
       ],
       "collected": true,
-      "importOrder": 78
+      "importOrder": 78,
+      "learningDomain": "general"
     },
     {
       "id": "en-notably",
@@ -1705,7 +1783,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_162022_847.png"
       ],
       "collected": true,
-      "importOrder": 79
+      "importOrder": 79,
+      "learningDomain": "general"
     },
     {
       "id": "en-discrepancy",
@@ -1726,7 +1805,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_162040_376.png"
       ],
       "collected": true,
-      "importOrder": 80
+      "importOrder": 80,
+      "learningDomain": "general"
     },
     {
       "id": "en-counterintuitive",
@@ -1747,7 +1827,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_162129_535.png"
       ],
       "collected": true,
-      "importOrder": 81
+      "importOrder": 81,
+      "learningDomain": "general"
     },
     {
       "id": "en-ablation-study",
@@ -1768,7 +1849,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_162146_823.png"
       ],
       "collected": true,
-      "importOrder": 82
+      "importOrder": 82,
+      "learningDomain": "academic"
     },
     {
       "id": "en-synergistically",
@@ -1789,7 +1871,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_174510_350.png"
       ],
       "collected": true,
-      "importOrder": 83
+      "importOrder": 83,
+      "learningDomain": "general"
     },
     {
       "id": "en-diversify",
@@ -1810,7 +1893,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_174556_518.png"
       ],
       "collected": true,
-      "importOrder": 84
+      "importOrder": 84,
+      "learningDomain": "general"
     },
     {
       "id": "en-sub-optimal",
@@ -1831,7 +1915,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_174942_342.png"
       ],
       "collected": true,
-      "importOrder": 85
+      "importOrder": 85,
+      "learningDomain": "academic"
     },
     {
       "id": "en-dequantization",
@@ -1856,7 +1941,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_175000_221.png"
       ],
       "collected": true,
-      "importOrder": 86
+      "importOrder": 86,
+      "learningDomain": "academic"
     },
     {
       "id": "en-impedance",
@@ -1877,7 +1963,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_201433_279.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-redundancy",
@@ -1898,7 +1985,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_201844_790.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-entry",
@@ -1919,7 +2007,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_215129_459.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-coefficient",
@@ -1940,7 +2029,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_215146_123.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-mode-wise-multiplication",
@@ -1961,7 +2051,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_221641_329.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-pipeline",
@@ -1982,7 +2073,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-17_154855_521.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-transduction",
@@ -2003,7 +2095,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_170244_488.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-inherently",
@@ -2024,7 +2117,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_170416_456.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-precludes",
@@ -2045,7 +2139,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_170424_131.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-eschewing",
@@ -2066,7 +2161,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_170549_537.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-logarithmically",
@@ -2087,7 +2183,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_195438_370.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-textual-entailment",
@@ -2108,7 +2205,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_195628_113.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-concession",
@@ -2129,7 +2227,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_195755_306.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-facilitate",
@@ -2150,7 +2249,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_213554_729.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-subsequent",
@@ -2171,7 +2271,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_213623_552.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-incorporate",
@@ -2197,7 +2298,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-19_214348_862.png",
         "语法与单词/ScreenShot_2026-10-26_100545_122.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-compatibility",
@@ -2218,7 +2320,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-20_094716_806.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-concatenation",
@@ -2240,7 +2343,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-20_095711_792.png",
         "语法与单词/ScreenShot_2026-10-20_100713_600.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-memory-footprint",
@@ -2261,7 +2365,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-20_122042_116.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-extrapolate",
@@ -2282,7 +2387,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-21_164041_160.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-asymptotic",
@@ -2303,7 +2409,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-21_212443_242.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-pairwise",
@@ -2324,7 +2431,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-21_212621_768.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-desiderata",
@@ -2345,7 +2453,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-21_212903_800.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-dilated-convolution",
@@ -2366,7 +2475,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-21_212958_472.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-spanning",
@@ -2387,7 +2497,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-21_213402_146.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-ensemble",
@@ -2408,7 +2519,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_145009_759.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-constituency-parsing",
@@ -2429,7 +2541,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_145352_535.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-regime",
@@ -2450,7 +2563,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_145406_758.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-discriminative",
@@ -2471,7 +2585,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_145418_278.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-scaled-dot-product-attention",
@@ -2488,7 +2603,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 117
+      "importOrder": 117,
+      "learningDomain": "academic"
     },
     {
       "id": "en-multi-head-attention",
@@ -2505,7 +2621,8 @@ window.STUDY_DATA.english = {
           "page": 5
         }
       ],
-      "importOrder": 118
+      "importOrder": 118,
+      "learningDomain": "academic"
     },
     {
       "id": "en-self-attention",
@@ -2522,7 +2639,8 @@ window.STUDY_DATA.english = {
           "page": 5
         }
       ],
-      "importOrder": 119
+      "importOrder": 119,
+      "learningDomain": "academic"
     },
     {
       "id": "en-cross-attention",
@@ -2539,7 +2657,8 @@ window.STUDY_DATA.english = {
           "page": 5
         }
       ],
-      "importOrder": 120
+      "importOrder": 120,
+      "learningDomain": "academic"
     },
     {
       "id": "en-query",
@@ -2556,7 +2675,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 121
+      "importOrder": 121,
+      "learningDomain": "academic"
     },
     {
       "id": "en-key",
@@ -2573,7 +2693,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 122
+      "importOrder": 122,
+      "learningDomain": "academic"
     },
     {
       "id": "en-value",
@@ -2590,7 +2711,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 123
+      "importOrder": 123,
+      "learningDomain": "academic"
     },
     {
       "id": "en-autoregressive",
@@ -2607,7 +2729,8 @@ window.STUDY_DATA.english = {
           "page": 2
         }
       ],
-      "importOrder": 124
+      "importOrder": 124,
+      "learningDomain": "academic"
     },
     {
       "id": "en-positional-encoding",
@@ -2624,7 +2747,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 125
+      "importOrder": 125,
+      "learningDomain": "academic"
     },
     {
       "id": "en-feed-forward-network",
@@ -2641,7 +2765,8 @@ window.STUDY_DATA.english = {
           "page": 5
         }
       ],
-      "importOrder": 126
+      "importOrder": 126,
+      "learningDomain": "academic"
     },
     {
       "id": "en-dropout",
@@ -2658,7 +2783,8 @@ window.STUDY_DATA.english = {
           "page": 8
         }
       ],
-      "importOrder": 127
+      "importOrder": 127,
+      "learningDomain": "academic"
     },
     {
       "id": "en-beam-search",
@@ -2675,7 +2801,8 @@ window.STUDY_DATA.english = {
           "page": 8
         }
       ],
-      "importOrder": 128
+      "importOrder": 128,
+      "learningDomain": "academic"
     },
     {
       "id": "en-semantics",
@@ -2696,7 +2823,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_215126_548.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-coarsely",
@@ -2717,7 +2845,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_215516_899.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-essence",
@@ -2738,7 +2867,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_215534_146.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-codebook",
@@ -2759,7 +2889,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_221158_414.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-succinctly",
@@ -2780,7 +2911,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-24_121923_785.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-profile",
@@ -2801,7 +2933,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-24_122245_323.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-fidelity",
@@ -2822,7 +2955,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-24_122734_203.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-proxy",
@@ -2843,7 +2977,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-24_132448_893.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sophisticated",
@@ -2864,7 +2999,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-24_132554_051.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-stochasticity",
@@ -2885,7 +3021,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134128_603.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-derivation",
@@ -2906,7 +3043,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134402_139.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-backbone",
@@ -2927,7 +3065,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134439_196.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-upper-bound",
@@ -2948,7 +3087,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134644_611.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-non-convex",
@@ -2969,7 +3109,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134909_540.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-trailing-singular-values",
@@ -2990,7 +3131,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_135423_235.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-heuristic",
@@ -3011,7 +3153,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-27_193309_012.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-throughput-degradation",
@@ -3032,7 +3175,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-27_193343_989.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-lattice",
@@ -3053,7 +3197,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "专有名词/ScreenShot_2026-10-24_132131_396.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-cardinality",
@@ -3074,7 +3219,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "专有名词/ScreenShot_2026-10-24_132241_308.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-underdetermined",
@@ -3095,7 +3241,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "专有名词/ScreenShot_2026-10-26_100901_257.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-forward-pass",
@@ -3116,7 +3263,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "专有名词/ScreenShot_2026-10-26_101036_977.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-quantizer-saturation",
@@ -3137,7 +3285,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "专有名词/ScreenShot_2026-10-26_131536_970.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-marchenko-pastur",
@@ -3159,7 +3308,8 @@ window.STUDY_DATA.english = {
         "专有名词/ScreenShot_2026-10-26_131815_460.png",
         "专有名词/ScreenShot_2026-10-26_142717_499.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-rht",
@@ -3180,7 +3330,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "专有名词/ScreenShot_2026-10-27_170410_058.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-rank-constrained-regression",
@@ -3197,7 +3348,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 153
+      "importOrder": 153,
+      "learningDomain": "academic"
     },
     {
       "id": "en-ldlq",
@@ -3214,7 +3366,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 154
+      "importOrder": 154,
+      "learningDomain": "academic"
     }
   ],
   "phrases": [
@@ -3245,7 +3398,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 1
+      "importOrder": 1,
+      "learningDomain": "general"
     },
     {
       "id": "en-rather-than",
@@ -3262,7 +3416,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 2
+      "importOrder": 2,
+      "learningDomain": "general"
     },
     {
       "id": "en-compared-with",
@@ -3279,7 +3434,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 3
+      "importOrder": 3,
+      "learningDomain": "general"
     },
     {
       "id": "en-in-terms-of",
@@ -3312,7 +3468,8 @@ window.STUDY_DATA.english = {
           "page": 8
         }
       ],
-      "importOrder": 4
+      "importOrder": 4,
+      "learningDomain": "general"
     },
     {
       "id": "en-at-cost",
@@ -3329,7 +3486,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 5
+      "importOrder": 5,
+      "learningDomain": "general"
     },
     {
       "id": "en-without-requiring",
@@ -3346,7 +3504,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 6
+      "importOrder": 6,
+      "learningDomain": "general"
     },
     {
       "id": "en-assumption",
@@ -3363,7 +3522,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 7
+      "importOrder": 7,
+      "learningDomain": "academic"
     },
     {
       "id": "en-we-propose",
@@ -3384,7 +3544,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 8
+      "importOrder": 8,
+      "learningDomain": "academic"
     },
     {
       "id": "en-refers-to",
@@ -3401,7 +3562,8 @@ window.STUDY_DATA.english = {
           "page": 10
         }
       ],
-      "importOrder": 9
+      "importOrder": 9,
+      "learningDomain": "general"
     },
     {
       "id": "en-counteracted-by",
@@ -3418,7 +3580,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 10
+      "importOrder": 10,
+      "learningDomain": "general"
     },
     {
       "id": "en-leverage-as",
@@ -3439,7 +3602,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202436_153.png"
       ],
       "collected": true,
-      "importOrder": 11
+      "importOrder": 11,
+      "learningDomain": "academic"
     },
     {
       "id": "en-allocate-to",
@@ -3461,7 +3625,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_205019_424.png"
       ],
       "collected": true,
-      "importOrder": 12
+      "importOrder": 12,
+      "learningDomain": "general"
     },
     {
       "id": "en-equivalent-to",
@@ -3482,7 +3647,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202821_367.png"
       ],
       "collected": true,
-      "importOrder": 13
+      "importOrder": 13,
+      "learningDomain": "academic"
     },
     {
       "id": "en-by-theorem",
@@ -3503,7 +3669,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_202929_240.png"
       ],
       "collected": true,
-      "importOrder": 14
+      "importOrder": 14,
+      "learningDomain": "academic"
     },
     {
       "id": "en-same-length",
@@ -3524,7 +3691,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_211849_151.png"
       ],
       "collected": true,
-      "importOrder": 15
+      "importOrder": 15,
+      "learningDomain": "general"
     },
     {
       "id": "en-achieve-gains",
@@ -3545,7 +3713,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_215715_167.png"
       ],
       "collected": true,
-      "importOrder": 16
+      "importOrder": 16,
+      "learningDomain": "academic"
     },
     {
       "id": "en-surpass-by",
@@ -3566,7 +3735,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_215926_583.png"
       ],
       "collected": true,
-      "importOrder": 17
+      "importOrder": 17,
+      "learningDomain": "academic"
     },
     {
       "id": "en-mitigate-degradation",
@@ -3587,7 +3757,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_220715_727.png"
       ],
       "collected": true,
-      "importOrder": 18
+      "importOrder": 18,
+      "learningDomain": "academic"
     },
     {
       "id": "en-explore-feasibility",
@@ -3608,7 +3779,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_220948_206.png"
       ],
       "collected": true,
-      "importOrder": 19
+      "importOrder": 19,
+      "learningDomain": "academic"
     },
     {
       "id": "en-with-participle",
@@ -3629,7 +3801,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-12_221908_326.png"
       ],
       "collected": true,
-      "importOrder": 20
+      "importOrder": 20,
+      "learningDomain": "general"
     },
     {
       "id": "en-while-contrast",
@@ -3650,7 +3823,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_224622_376.png"
       ],
       "collected": true,
-      "importOrder": 21
+      "importOrder": 21,
+      "learningDomain": "general"
     },
     {
       "id": "en-has-been-underscored",
@@ -3671,7 +3845,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225019_442.png"
       ],
       "collected": true,
-      "importOrder": 22
+      "importOrder": 22,
+      "learningDomain": "general"
     },
     {
       "id": "en-set-forth-to",
@@ -3692,7 +3867,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225120_740.png"
       ],
       "collected": true,
-      "importOrder": 23
+      "importOrder": 23,
+      "learningDomain": "general"
     },
     {
       "id": "en-be-subjected-to",
@@ -3713,7 +3889,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-13_225301_363.png"
       ],
       "collected": true,
-      "importOrder": 24
+      "importOrder": 24,
+      "learningDomain": "general"
     },
     {
       "id": "en-compatible-with",
@@ -3734,7 +3911,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-16_162009_087.png"
       ],
       "collected": true,
-      "importOrder": 25
+      "importOrder": 25,
+      "learningDomain": "general"
     },
     {
       "id": "en-be-modeled-as",
@@ -3755,7 +3933,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-16_214843_851.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-in-conjunction-with",
@@ -3776,7 +3955,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_170530_563.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-albeit",
@@ -3802,7 +3982,8 @@ window.STUDY_DATA.english = {
         "语法与单词/ScreenShot_2026-10-19_195505_225.png",
         "语法与单词/ScreenShot_2026-10-27_193355_628.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-offset-by",
@@ -3823,7 +4004,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-19_213637_295.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-counteract-an-effect",
@@ -3844,7 +4026,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-20_094834_948.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-attend-over",
@@ -3865,7 +4048,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-20_122322_068.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-keep-constant-vary",
@@ -3886,7 +4070,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_145214_096.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-in-light-of",
@@ -3907,7 +4092,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_151059_983.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-universally-optimal",
@@ -3928,7 +4114,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_151104_766.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-with-high-fidelity",
@@ -3949,7 +4136,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_215504_404.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-build-on-top-of",
@@ -3970,7 +4158,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-23_215901_867.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-refined-version",
@@ -3991,7 +4180,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_100156_432.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-tunable-knob",
@@ -4012,7 +4202,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134444_661.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-alternatively-stated",
@@ -4033,7 +4224,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134457_483.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-proof-sketch",
@@ -4054,7 +4246,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_134810_339.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-upper-bounded-by",
@@ -4075,7 +4268,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-26_135414_370.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "academic"
     },
     {
       "id": "en-be-assessed-by",
@@ -4096,7 +4290,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-27_192943_981.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-be-omitted",
@@ -4117,7 +4312,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-27_193219_590.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-indicative-of",
@@ -4138,7 +4334,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-27_193254_236.png"
       ],
-      "collected": true
+      "collected": true,
+      "learningDomain": "general"
     },
     {
       "id": "en-subject-to",
@@ -4155,7 +4352,8 @@ window.STUDY_DATA.english = {
           "page": 3
         }
       ],
-      "importOrder": 45
+      "importOrder": 45,
+      "learningDomain": "academic"
     },
     {
       "id": "en-amenable-to",
@@ -4172,7 +4370,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 46
+      "importOrder": 46,
+      "learningDomain": "general"
     }
   ],
   "sentences": [
@@ -4200,7 +4399,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 1
+      "importOrder": 1,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-smoothquant",
@@ -4225,7 +4425,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 2
+      "importOrder": 2,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-gptq",
@@ -4252,7 +4453,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 3
+      "importOrder": 3,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-awq",
@@ -4278,7 +4480,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 4
+      "importOrder": 4,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-qera",
@@ -4305,7 +4508,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 5
+      "importOrder": 5,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-tensor-review",
@@ -4329,7 +4533,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 6
+      "importOrder": 6,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-tensor-network-part1",
@@ -4353,7 +4558,8 @@ window.STUDY_DATA.english = {
           "page": 8
         }
       ],
-      "importOrder": 7
+      "importOrder": 7,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-tensor-network-part2",
@@ -4377,7 +4583,8 @@ window.STUDY_DATA.english = {
           "page": 10
         }
       ],
-      "importOrder": 8
+      "importOrder": 8,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-tensor-ring",
@@ -4401,7 +4608,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 9
+      "importOrder": 9,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-tensor-neural-survey",
@@ -4425,7 +4633,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 10
+      "importOrder": 10,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-battery-tensor",
@@ -4449,7 +4658,8 @@ window.STUDY_DATA.english = {
           "page": 12
         }
       ],
-      "importOrder": 11
+      "importOrder": 11,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-lqer",
@@ -4475,7 +4685,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 12
+      "importOrder": 12,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-eora-weight-fixed",
@@ -4500,7 +4711,8 @@ window.STUDY_DATA.english = {
         }
       ],
       "captures": [],
-      "importOrder": 13
+      "importOrder": 13,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-eora-rank-control",
@@ -4527,7 +4739,8 @@ window.STUDY_DATA.english = {
       "captures": [
         "语法与单词/ScreenShot_2026-10-12_221908_326.png"
       ],
-      "importOrder": 14
+      "importOrder": 14,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-zq-lorc-approx",
@@ -4551,7 +4764,8 @@ window.STUDY_DATA.english = {
           "page": 8
         }
       ],
-      "importOrder": 15
+      "importOrder": 15,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-zq-findings-limit",
@@ -4575,7 +4789,8 @@ window.STUDY_DATA.english = {
           "page": 10
         }
       ],
-      "importOrder": 16
+      "importOrder": 16,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-attention-1",
@@ -4598,7 +4813,8 @@ window.STUDY_DATA.english = {
           "page": 4
         }
       ],
-      "importOrder": 17
+      "importOrder": 17,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-attention-2",
@@ -4621,7 +4837,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 18
+      "importOrder": 18,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-caldera-constraints",
@@ -4644,7 +4861,8 @@ window.STUDY_DATA.english = {
           "page": 1
         }
       ],
-      "importOrder": 19
+      "importOrder": 19,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-caldera-alternatively",
@@ -4667,7 +4885,8 @@ window.STUDY_DATA.english = {
           "page": 6
         }
       ],
-      "importOrder": 20
+      "importOrder": 20,
+      "learningDomain": "academic"
     },
     {
       "id": "en-sentence-caldera-throughput",
@@ -4690,8 +4909,28 @@ window.STUDY_DATA.english = {
           "page": 9
         }
       ],
-      "importOrder": 21
+      "importOrder": 21,
+      "learningDomain": "academic"
     }
-  ]
+  ],
+  "domains": {
+    "general": {
+      "name": "通用英语",
+      "types": {
+        "terms": "常用词汇",
+        "phrases": "搭配与语法"
+      },
+      "description": "按一般词义、常见搭配和语法结构学习。"
+    },
+    "academic": {
+      "name": "论文英语",
+      "types": {
+        "terms": "专业术语",
+        "phrases": "学术表达",
+        "sentences": "原文精读"
+      },
+      "description": "按本项目中的专业词义、研究表达和原文语境学习。"
+    }
+  }
 };
 for(const [key,type] of [['terms','term'],['phrases','phrase'],['sentences','sentence']]){for(const entry of window.STUDY_DATA.english[key]){entry.englishType=type;entry.english=entry.meaning;}}

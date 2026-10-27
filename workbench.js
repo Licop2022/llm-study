@@ -18,6 +18,9 @@
   const sections = {overview:'总览',tasks:'任务看板',reading:'论文阅读',concepts:'概念库',english:'英语积累',experiments:'实验记录',code:'代码学习',review:'复习计划',notes:'笔记',roadmap:'学习路线',graph:'知识图谱',drill:'专项复习'};
   const sectionName = () => navigation[route.realm][route.section] || sections[route.section];
   const types = {paper:'论文',concept:'概念',english:'英语',case:'实验与代码'};
+  const englishDomains = data.english.domains;
+  const englishDomain = x => x.raw.learningDomain;
+  const englishType = x => englishDomains[englishDomain(x)].types[x.group];
   const recordStatus = value => ({recorded:'已归档',running:'已启动 · 结果待补',teaching:'教学整理'}[value] || value || '');
   const paper = id => data.papers.find(p => p.id === id);
   const items = [
@@ -101,15 +104,17 @@
   }
   function listPage() {
     const state = listState(), english = route.section === 'english';
-    $('#main').innerHTML = `${heading(sectionName())}<div class="list-toolbar"><input type="search" id="list-search" aria-label="搜索当前栏目" value="${esc(state.q)}" placeholder="在${sectionName()}中搜索…">${english ? `<select id="english-group" aria-label="英语类别"><option value="">全部英语</option>${[['terms','词汇'],['phrases','学术表达'],['sentences','原文短句']].map(([k,t]) => `<option value="${k}" ${state.group === k ? 'selected' : ''}>${t}</option>`).join('')}</select>` : ''}<span id="result-count" class="result-count"></span></div><div id="list-results"></div>`;
+    if(english && !state.domain)state.domain='general';
+    const domain=englishDomains[state.domain], own=items.filter(x=>x.kind==='english'&&belongs(x,route.project));
+    $('#main').innerHTML = `${heading(sectionName())}${english?`<div class="english-domains" role="group" aria-label="英语学习范畴">${Object.entries(englishDomains).map(([id,d])=>`<button data-english-domain="${id}" aria-pressed="${state.domain===id}">${esc(d.name)}<span>${own.filter(x=>englishDomain(x)===id).length}</span></button>`).join('')}</div>`:''}<div class="list-toolbar"><input type="search" id="list-search" aria-label="搜索当前栏目" value="${esc(state.q)}" placeholder="在${english?domain.name:sectionName()}中搜索…">${english ? `<select id="english-group" aria-label="英语类别"><option value="">全部${esc(domain.name)}</option>${Object.entries(domain.types).map(([k,t]) => `<option value="${k}" ${state.group === k ? 'selected' : ''}>${t}</option>`).join('')}</select>` : ''}<span id="result-count" class="result-count"></span></div><div id="list-results"></div>`;
     listResults();
   }
   function listResults() {
     const state = listState(), knowledge = ['concepts','english'].includes(route.section);
     const tokens = state.q.trim().normalize('NFKC').toLocaleLowerCase().split(/\s+/).filter(Boolean);
-    const found = items.filter(x => belongs(x,route.project) && sectionOf(x) === route.section && tokens.every(t => x.search.includes(t)) && (x.kind !== 'english' || !state.group || state.group === x.group));
+    const found = items.filter(x => belongs(x,route.project) && sectionOf(x) === route.section && tokens.every(t => x.search.includes(t)) && (x.kind !== 'english' || englishDomain(x)===(state.domain||'general') && (!state.group || state.group === x.group)));
     $('#result-count').textContent = `${found.length} 项${knowledge ? ' · 按导入顺序' : ''}`;
-    $('#list-results').innerHTML = `<div class="data-list ${knowledge ? 'knowledge-list' : ''}">${found.map(x => `<a class="data-row" href="${url(x)}"><div><h2>${esc(x.title)}</h2><p>${esc(x.subtitle)}</p>${x.kind !== 'english' ? `<p class="summary">${esc(x.summary)}</p>` : ''}</div>${!knowledge ? `<span>${x.kind === 'paper' ? `${x.raw.phase} · ${x.raw.year}` : esc(x.raw.date || '')}</span><span class="open">${x.kind === 'paper' ? '阅读' : '查看'} →</span>` : `<span class="tag">${esc(x.kind === 'concept' ? x.raw.group : {terms:'词汇',phrases:'学术表达',sentences:'原文短句'}[x.group])}</span>`}</a>`).join('') || `<div class="empty">${state.q ? '没有匹配的内容。' : '当前' + (route.realm === 'papers' ? '方向' : '项目') + '暂无这类资料。'}</div>`}</div>`;
+    $('#list-results').innerHTML = `<div class="data-list ${knowledge ? 'knowledge-list' : ''}">${found.map(x => `<a class="data-row" href="${url(x)}"><div><h2>${esc(x.title)}</h2><p>${esc(x.subtitle)}</p>${x.kind !== 'english' ? `<p class="summary">${esc(x.summary)}</p>` : ''}</div>${!knowledge ? `<span>${x.kind === 'paper' ? `${x.raw.phase} · ${x.raw.year}` : esc(x.raw.date || '')}</span><span class="open">${x.kind === 'paper' ? '阅读' : '查看'} →</span>` : `<span class="tag">${esc(x.kind === 'concept' ? x.raw.group : englishType(x))}</span>`}</a>`).join('') || `<div class="empty">${state.q ? '没有匹配的内容。' : '当前' + (route.realm === 'papers' ? '方向' : '项目') + '暂无这类资料。'}</div>`}</div>`;
   }
   function collectionSources(x) {
     return x.captures?.length ? `<details><summary>我的积累截图（${x.captures.length}）</summary><div class="source">${x.captures.map((file,i)=>`<a href="${esc(assetBase+encodeURI(file))}" target="_blank" rel="noopener">截图 ${i+1} ↗</a>`).join('')}</div></details>` : '';
@@ -137,7 +142,8 @@
     } else if (x.kind === 'concept') {
       body = `<h1>${esc(x.title)}</h1><p class="paper-title" lang="en">${esc(x.subtitle)}</p><p class="lead">${prose(raw.summary)}</p>${formula(raw.latex)}${lesson(raw)}<h2>相关文献</h2><div class="related-buttons">${data.papers.filter(p => p.concepts.includes(x.id)).map(p => `<a class="secondary" href="${url(byKey(`paper:${p.id}`))}">${esc(p.name)} →</a>`).join('')}</div>`;
     } else if (x.kind === 'english') {
-      body = `<h1 lang="en">${esc(x.title)}</h1>${englishBody(raw)}`;
+      if(listState().domain!==englishDomain(x)){listState().domain=englishDomain(x);listState().group='';listState().q='';}
+      body = `<span class="tag">${esc(englishDomains[englishDomain(x)].name)} · ${esc(englishType(x))}</span><h1 lang="en">${esc(x.title)}</h1>${englishBody(raw)}`;
     } else {
       body = `<h1>${esc(x.title)}</h1><p class="paper-title">${esc(raw.date)} · ${esc(recordStatus(raw.status))}</p><p class="lead">${esc(raw.summary)}</p>${raw.bodyHtml.replaceAll('notes/',assetBase+'notes/')}<p><a href="${assetBase}${encodeURI(raw.markdown)}" target="_blank" rel="noopener">打开 Markdown ↗</a></p>`;
     }
@@ -251,6 +257,7 @@
     if (target.dataset.action === 'task') taskDialog(target.dataset.key);
     if (target.dataset.action === 'plan') planDialog(target.dataset.key);
     if (target.dataset.peek) peek(target.dataset.peek);
+    if (target.dataset.englishDomain) { listState().domain=target.dataset.englishDomain;listState().group='';listPage(); }
     if (target.dataset.taskTab) { listState().tab = target.dataset.taskTab; tasksPage(); }
     if (target.dataset.reviewTab) { listState().tab = target.dataset.reviewTab; reviewPage(); }
     if (target.dataset.jump) { e.preventDefault(); document.getElementById(target.dataset.jump)?.scrollIntoView({behavior:'smooth'}); }
