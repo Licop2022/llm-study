@@ -12,8 +12,8 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 2157,
-      "sha256": "71a765e380df7b9aa580a956ddbac19c61a5462dea7c8f12efd2a61dc4c1ea2a"
+      "bytes": 2159,
+      "sha256": "75e0e3f7533d75e9b1ac112c85ab326508db1b693bd0949d54598c0993490827"
     },
     {
       "path": "app.js",
@@ -67,8 +67,8 @@
     },
     {
       "path": "classic.html",
-      "bytes": 3531,
-      "sha256": "27efd39e475894f1c0049799288b4fe7a395cde78e8a8e79f9ae58e426884b31"
+      "bytes": 3533,
+      "sha256": "25b72abd480a904817cff8a060cb32d3779591ed9a82cb55ddbfdcbf5c801148"
     },
     {
       "path": "workbench.js",
@@ -1532,8 +1532,8 @@
     },
     {
       "path": "site-links.js",
-      "bytes": 4905,
-      "sha256": "66a7e155c555e1ca8ba27e236ed747515aa7bc56fb257578709409b7846c84d9"
+      "bytes": 4738,
+      "sha256": "3a3ba4fd53de9c4fcdfe85f35b0bf20e3d4e2ce650a5cfbc6c9d2d669c30d06a"
     },
     {
       "path": "scripts/inject-site-links.cjs",
