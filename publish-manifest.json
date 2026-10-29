@@ -12,8 +12,8 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 2097,
-      "sha256": "4a33f2221c5220c4fdb89d024905d3384abc29a0ae8a840ea460ae4de9694794"
+      "bytes": 2157,
+      "sha256": "71a765e380df7b9aa580a956ddbac19c61a5462dea7c8f12efd2a61dc4c1ea2a"
     },
     {
       "path": "app.js",
@@ -67,8 +67,8 @@
     },
     {
       "path": "classic.html",
-      "bytes": 3502,
-      "sha256": "49b3b5983bc64e33a6ca2ac677c9cd5c4b46c87176e8329a2a7e112598de5503"
+      "bytes": 3531,
+      "sha256": "27efd39e475894f1c0049799288b4fe7a395cde78e8a8e79f9ae58e426884b31"
     },
     {
       "path": "workbench.js",
@@ -1527,8 +1527,18 @@
     },
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 905,
-      "sha256": "cd3c647d2a1e715002422b920e81911a3781aca1f4ad8f348fd07325a7218275"
+      "bytes": 1047,
+      "sha256": "71d2e69e7cb3112534d008b4ff6378ca4092c026c2ea009f9223ddaf5877b780"
+    },
+    {
+      "path": "site-links.js",
+      "bytes": 4905,
+      "sha256": "66a7e155c555e1ca8ba27e236ed747515aa7bc56fb257578709409b7846c84d9"
+    },
+    {
+      "path": "scripts/inject-site-links.cjs",
+      "bytes": 2274,
+      "sha256": "e00778a081f7d1b2e1361e753b1a373999e90bb846a9146e3ca7bdf975a726e7"
     }
   ]
 }

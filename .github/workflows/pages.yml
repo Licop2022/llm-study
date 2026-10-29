@@ -25,9 +25,12 @@ jobs:
         run: |
           mkdir -p /tmp/learning-site
           tar --exclude='./.git' --exclude='./.github' --exclude='./.gitignore' --exclude='./README.md' -cf - . | tar -xf - -C /tmp/learning-site
+      - name: Add website switcher to every published HTML page
+        run: node scripts/inject-site-links.cjs /tmp/learning-site llm-study
       - uses: actions/upload-pages-artifact@v4
         with:
           path: /tmp/learning-site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
