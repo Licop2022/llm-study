@@ -53,7 +53,7 @@
   function notify(message) { $('#message').textContent = message; $('#message').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#message').classList.remove('visible'),2600); }
   function listState() { const key = `${route.project}/${route.section}`; if (!listStates.has(key)) listStates.set(key,{q:'',tab:'concept'}); return listStates.get(key); }
   function readRoute() {
-    let [realm,project,section,id] = location.hash.slice(1).split('/');
+    let [realm,project,section,id,courseView] = location.hash.slice(1).split('/');
     if(['journal','todos','compare'].includes(realm)){location.replace('classic.html'+location.hash);return {realm:'papers',project:'quant',section:'overview'};}
     if(realm==='papers'&&(!project||!['quant','tensor'].includes(project))){const x=byKey('paper:'+project);id=x?.id;project=x?homeProject(x):'quant';section='reading';}
     if(['concepts','english','experiments'].includes(realm)){const kind={concepts:'concept',english:'english',experiments:'case'}[realm],x=byKey(kind+':'+project);section=realm;id=x?.id;project=x?homeProject(x):realm==='experiments'?'rag':'quant';realm=projects.find(p=>p.id===project).realm;if(x)section=sectionOf(x);} 
@@ -70,7 +70,7 @@
     const kind = {reading:'paper',concepts:'concept',english:'english',experiments:'case',code:'case',lessons:'lesson'}[section];
     const item = byKey(`${kind}:${id}`);
     const topic = section === 'roadmap' ? window.STUDY_LEARNING.topics.find(t => t.id === id && t.projects.includes(project)) : null;
-    return {realm,project,section,topic,item:item && belongs(item,project) && sectionOf(item) === section ? item : null};
+    return {realm,project,section,topic,courseView:item?.kind==='lesson' && item.raw.codeSections?.length && courseView==='code'?'code':'knowledge',item:item && belongs(item,project) && sectionOf(item) === section ? item : null};
   }
   function shell() {
     const currentProject = projects.find(p => p.id === route.project), projectItems = items.filter(x => belongs(x,route.project));
@@ -181,7 +181,7 @@
   function render() {
     if (previousHash) scrolls.set(previousHash,window.scrollY);
     observer?.disconnect(); route = readRoute();
-    const canonical = route.item ? url(route.item) : path(route.section,route.topic?.id || '');
+    const canonical = route.item ? url(route.item)+(route.item.kind==='lesson' && route.courseView==='code'?'/code':'') : path(route.section,route.topic?.id || '');
     if (location.hash !== canonical) history.replaceState(null,'',canonical);
     areaPaths[route.realm] = canonical; previousHash = canonical; document.body.classList.remove('focus');
     shell();
