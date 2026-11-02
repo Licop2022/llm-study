@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02T07:06:06.583Z",
+  "generatedAt": "2026-11-02T12:17:08.481Z",
   "counts": {
     "papers": 17,
     "concepts": 73,
@@ -12,8 +12,8 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 1997,
-      "sha256": "59d6a92152fcdd562d1ab9a8e6c25bcf75a68fc1658ac1c22bf9b2094eb66a01"
+      "bytes": 2169,
+      "sha256": "3d0257fa827faacd353737db0b50f7bfbfa16a3307e60238ca14ba8759e87bfa"
     },
     {
       "path": "app.js",
@@ -72,8 +72,8 @@
     },
     {
       "path": "workbench.js",
-      "bytes": 43456,
-      "sha256": "8db5e58b1a54da6f6b811038a99b0b96d42b45a7c97c885ff9e224da77e1b1fd"
+      "bytes": 45685,
+      "sha256": "30595d93eced52e1f7551d3a50380a91aac4fe1bfd0767fbad9aa274f2024090"
     },
     {
       "path": "workbench-storage.js",
@@ -102,13 +102,28 @@
     },
     {
       "path": "knowledge-tree.js",
-      "bytes": 13831,
-      "sha256": "2b90d21e4dab4d523a03e6474301903db4298e965df18d715311189fe136ca62"
+      "bytes": 13856,
+      "sha256": "9cf4b0cb944a95589754795ea938bf3441a6bfccd4091ce6e5506b00cef03894"
     },
     {
       "path": "knowledge-tree.css",
       "bytes": 3506,
       "sha256": "18b709f73c16541100cd8e6a95faf5bc6fb47697dba283a7cd047dad49cad16d"
+    },
+    {
+      "path": "course-data.js",
+      "bytes": 18246,
+      "sha256": "2bd18bc8f6f3413cc2c19dd16809cef792cce9cf2c647de03be64ea6941b1b22"
+    },
+    {
+      "path": "course-ui.js",
+      "bytes": 5810,
+      "sha256": "a14f9be31545b6c95c3465521f74840aa959f014c9124b85119392fa0704bab4"
+    },
+    {
+      "path": "course.css",
+      "bytes": 1461,
+      "sha256": "0bbc1e0dc8b775ccf9d35d0ee51ec996dfe2f714f5a19e8b0498c59e7eae38eb"
     },
     {
       "path": "assets/gdut-logo-header.png",
@@ -122,8 +137,8 @@
     },
     {
       "path": "assets/SOURCES.md",
-      "bytes": 1472,
-      "sha256": "d147030e2e23d557dc45772b6ece7570fbb500133e1281fe27a288ba7119ab7f"
+      "bytes": 2079,
+      "sha256": "0c900162a09e7637b27ba1baa933b97a0dc8cda349de5b667116264d2f48817b"
     },
     {
       "path": "notes/P1_打地基_四篇论文学习笔记.pdf",

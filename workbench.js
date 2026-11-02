@@ -8,16 +8,17 @@
   const prose = value => window.STUDY_MATH_TEXT.render(value || '', window.katex);
   const formula = value => value ? `<div class="formula">${window.katex.renderToString(value, {displayMode:true,throwOnError:true,trust:false})}</div>` : '';
   const ordered = items => [...items].sort((a,b) => (a.importOrder ?? 0) - (b.importOrder ?? 0));
-  const projects = [{id:'quant',realm:'papers',name:'量化与模型基础'},{id:'tensor',realm:'papers',name:'张量方法与应用'},{id:'battery',realm:'practice',name:'电池健康预测 · D2'},{id:'rag',realm:'practice',name:'RAG 实战'}];
-  const areas = {papers:'论文学习',practice:'项目实践'};
+  const projects = [{id:'quant',realm:'papers',name:'量化与模型基础'},{id:'tensor',realm:'papers',name:'张量方法与应用'},{id:'battery',realm:'practice',name:'电池健康预测 · D2'},{id:'rag',realm:'practice',name:'RAG 实战'},{id:'d2l',realm:'courses',name:'动手学深度学习'}];
+  const areas = {papers:'论文学习',practice:'项目实践',courses:'课程学习'};
   const navigation = {
     papers:{overview:'学习总览',reading:'论文阅读',roadmap:'学习路线',concepts:'概念库',english:'英语积累',drill:'专项复习',review:'复习计划',notes:'阅读笔记'},
-    practice:{overview:'项目总览',roadmap:'学习路线',tasks:'任务看板',experiments:'实验记录',code:'代码学习',notes:'项目复盘'}
+    practice:{overview:'项目总览',roadmap:'学习路线',tasks:'任务看板',experiments:'实验记录',code:'代码学习',notes:'项目复盘'},
+    courses:{overview:'课程总览',lessons:'章节笔记',review:'复习计划',notes:'我的笔记'}
   };
-  const areaPaths = {papers:'#papers/quant/overview',practice:'#practice/rag/overview'};
-  const sections = {overview:'总览',tasks:'任务看板',reading:'论文阅读',concepts:'概念库',english:'英语积累',experiments:'实验记录',code:'代码学习',review:'复习计划',notes:'笔记',roadmap:'学习路线',graph:'知识图谱',drill:'专项复习'};
+  const areaPaths = {papers:'#papers/quant/overview',practice:'#practice/rag/overview',courses:'#courses/d2l/overview'};
+  const sections = {overview:'总览',tasks:'任务看板',reading:'论文阅读',concepts:'概念库',english:'英语积累',experiments:'实验记录',code:'代码学习',review:'复习计划',notes:'笔记',roadmap:'学习路线',graph:'知识图谱',drill:'专项复习',lessons:'章节笔记'};
   const sectionName = () => navigation[route.realm][route.section] || sections[route.section];
-  const types = {paper:'论文',concept:'概念',english:'英语',case:'实验与代码'};
+  const types = {paper:'论文',concept:'概念',english:'英语',case:'实验与代码',lesson:'课程章节'};
   const englishDomains = data.english.domains;
   const englishDomain = x => x.raw.learningDomain;
   const englishType = x => englishDomains[englishDomain(x)].types[x.group];
@@ -27,18 +28,20 @@
     ...data.papers.map(p => ({kind:'paper',id:p.id,title:p.name,subtitle:p.title,summary:p.tagline,raw:p})),
     ...ordered(data.concepts).map(c => ({kind:'concept',id:c.id,title:c.name,subtitle:c.english,summary:c.summary,raw:c})),
     ...['terms','phrases','sentences'].flatMap(group => ordered(data.english[group]).map(e => ({kind:'english',id:e.id,title:e.name || e.quote,subtitle:e.meaning,summary:e.usage || e.meaning,group,raw:e}))),
-    ...ordered(data.experimentLearning.entries).map(e => ({kind:'case',id:e.id,title:e.title,subtitle:recordStatus(e.status),summary:e.summary,raw:e}))
-  ].map(x => ({...x,key:`${x.kind}:${x.id}`,search:[x.title,x.subtitle,x.summary,x.raw.usage,...(x.raw.tags || [])].join(' ').normalize('NFKC').toLocaleLowerCase()}));
+    ...ordered(data.experimentLearning.entries).map(e => ({kind:'case',id:e.id,title:e.title,subtitle:recordStatus(e.status),summary:e.summary,raw:e})),
+    ...window.STUDY_COURSES.units.map(u=>({kind:'lesson',id:u.id,title:u.title,subtitle:u.number+' · 动手学深度学习',summary:u.summary,raw:u}))
+  ].map(x => ({...x,key:`${x.kind}:${x.id}`,search:[x.title,x.subtitle,x.summary,x.raw.usage,x.raw.searchText,...(x.raw.tags || [])].join(' ').normalize('NFKC').toLocaleLowerCase()}));
   const byKey = key => items.find(x => x.key === key);
   const refs = x => x.kind === 'paper' ? [{paper:x.id,page:1}] : x.raw.refs || (x.raw.paper ? [{paper:x.raw.paper,page:x.raw.page || 1}] : []);
   function belongs(x,project) {
     if (!x) return false;
+    if (x.kind === 'lesson') return project === 'd2l';
     if (x.kind === 'case') return project === (x.id.startsWith('rag-') ? 'rag' : 'battery');
     if (x.kind === 'english' && x.raw.sourceKind === 'capture' && x.raw.learningDomain === 'general') return ['quant','tensor'].includes(project);
     return ['quant','tensor'].includes(project) && refs(x).some(r => paper(r.paper)?.phase.startsWith(project === 'quant' ? 'P' : 'T'));
   }
   const homeProject = x => projects.find(p => belongs(x,p.id))?.id || 'quant';
-  const sectionOf = x => x.kind === 'case' ? (x.raw.kind === 'code' ? 'code' : 'experiments') : ({paper:'reading',concept:'concepts',english:'english'}[x.kind]);
+  const sectionOf = x => x.kind === 'lesson' ? 'lessons' : x.kind === 'case' ? (x.raw.kind === 'code' ? 'code' : 'experiments') : ({paper:'reading',concept:'concepts',english:'english'}[x.kind]);
   const path = (section,id = '',project = route.project) => `#${projects.find(p => p.id === project).realm}/${project}/${section}${id ? `/${id}` : ''}`;
   const url = (x,project = route.project) => path(sectionOf(x),x.id,belongs(x,project) ? project : homeProject(x));
   const source = r => paper(r.paper) ? `<a href="${assetBase}${encodeURI(paper(r.paper).pdf)}#page=${r.page}" target="_blank" rel="noopener">${esc(paper(r.paper).name)} · p.${esc(r.page)} ↗</a>` : '';
@@ -62,9 +65,9 @@
       id = oldSection === 'knowledge' ? id : part;
       if (section === 'experiments' && byKey(`case:${id}`)?.raw.kind === 'code') section = 'code';
     }
-    if (!projects.some(p => p.id === project && p.realm === realm)) project = realm === 'practice' ? 'rag' : 'quant';
-    if (!navigation[realm][section] && section !== 'graph') section = 'overview';
-    const kind = {reading:'paper',concepts:'concept',english:'english',experiments:'case',code:'case'}[section];
+    if (!projects.some(p => p.id === project && p.realm === realm)) project = realm === 'courses' ? 'd2l' : realm === 'practice' ? 'rag' : 'quant';
+    if (!navigation[realm][section] && (section !== 'graph' || realm === 'courses')) section = 'overview';
+    const kind = {reading:'paper',concepts:'concept',english:'english',experiments:'case',code:'case',lessons:'lesson'}[section];
     const item = byKey(`${kind}:${id}`);
     const topic = section === 'roadmap' ? window.STUDY_LEARNING.topics.find(t => t.id === id && t.projects.includes(project)) : null;
     return {realm,project,section,topic,item:item && belongs(item,project) && sectionOf(item) === section ? item : null};
@@ -75,9 +78,10 @@
     $('#sidebar').innerHTML = `<div class="brand"><img src="${assetBase}assets/gdut-logo-footer.png" alt="广东工业大学校徽"><strong>科研工作台</strong></div><div class="project-picker"><label for="project">${route.realm === 'papers' ? '研究方向' : '实践项目'}</label><select id="project">${projects.filter(p => p.realm === route.realm).map(p => `<option value="${p.id}" ${p.id === route.project ? 'selected' : ''}>${p.name}</option>`).join('')}</select></div><nav class="section-nav" aria-label="${areas[route.realm]}导航">${Object.entries(navigation[route.realm]).map(([key,label]) => `<a href="${path(key)}" ${(key === route.section || key === 'roadmap' && route.section === 'graph') ? 'aria-current="page"' : ''}><span>${label}</span>${key in counts ? `<span class="nav-count">${counts[key]}</span>` : ''}</a>`).join('')}</nav><div class="side-context" id="side-context"></div><div class="side-footer"><button data-record-manager>记录与备份</button></div>`;
     $('#area-nav').innerHTML = Object.entries(areas).map(([id,name]) => `<a href="${areaPaths[id]}" ${route.realm === id ? 'aria-current="page"' : ''}>${name}</a>`).join('');
     $('#breadcrumbs').innerHTML = `<span>${areas[route.realm]}</span><span>/</span><a href="${path('overview')}">${esc(currentProject.name)}</a><span>/</span>${(route.item || route.topic) ? `<a href="${path(route.section)}">${sectionName()}</a><span>/</span><span class="crumb-current" aria-current="page">${esc((route.item || route.topic).title)}</span>` : `<span aria-current="page">${sectionName()}</span>`}`;
-    $('#context-tool').dataset.tool = route.realm === 'papers' ? 'continue' : 'tasks';
-    $('#context-tool').textContent = route.realm === 'papers' ? '继续阅读' : '任务看板';
-    $('#notes-tool').textContent = route.realm === 'papers' ? '阅读笔记' : '项目复盘';
+    if(route.realm==='courses')$('#project').previousElementSibling.textContent='学习课程';
+    $('#context-tool').dataset.tool = route.realm === 'courses' ? 'course-continue' : route.realm === 'papers' ? 'continue' : 'tasks';
+    $('#context-tool').textContent = route.realm === 'courses' ? '继续课程' : route.realm === 'papers' ? '继续阅读' : '任务看板';
+    $('#notes-tool').textContent = route.realm === 'courses' ? '我的笔记' : route.realm === 'papers' ? '阅读笔记' : '项目复盘';
     const related = visited.map(byKey).filter(x => belongs(x,route.project)).slice(0,4);
     $('#side-context').innerHTML = `<h2>${route.realm === 'papers' ? '最近阅读' : '最近查看'}</h2>${related.map(x => `<a href="${url(x)}">${esc(x.title)}</a>`).join('') || `<p>${route.realm === 'papers' ? '打开文献、概念或英语后显示在这里。' : '打开实验或代码记录后显示在这里。'}</p>`}`;
   }
@@ -88,6 +92,7 @@
     return rows.map(([key,n]) => `<button class="note-card" data-action="note" data-key="${esc(key)}"><strong>${esc(n.title)}</strong><p>${esc(n.text.slice(0,150))}</p></button>`).join('');
   }
   function overview() {
+    if(route.realm==='courses')return courseUI.overview();
     const own = items.filter(x => belongs(x,route.project)), isPaper = route.realm === 'papers';
     const resources = own.filter(x => sectionOf(x) === (isPaper ? 'reading' : 'experiments'));
     const ownTasks = tasks.filter(t => t.project === route.project), ownPlans = [...plans.values()].filter(p => p.project === route.project && p.date <= today());
@@ -98,6 +103,10 @@
   function notesPage() {
     const own = [...notes.entries()].filter(([key,n]) => (n.project === route.project || belongs(byKey(key),route.project)) && n.text.trim());
     $('#main').innerHTML = `${heading(sectionName(),'',`<button class="primary" data-project-note>${route.realm === 'papers' ? '新建阅读笔记' : '新建项目复盘'}</button>`)}<div class="note-list">${own.length ? noteRows(own) : `<div class="panel empty">${route.realm === 'papers' ? '暂无阅读笔记。在论文或概念页点击“笔记”记录理解与疑问。' : '暂无项目复盘。在实验或代码页点击“写复盘”记录过程与结论。'}</div>`}</div>`;
+    if(route.realm==='courses'){
+      $('#main [data-project-note]').textContent='新建课程笔记';
+      const empty=$('#main .empty');if(empty)empty.textContent='暂无个人笔记。章节页可记录理解、疑问与代码运行结果。';
+    }
   }
   function tasksPage() {
     const state = listState(), own = tasks.filter(t => t.project === route.project), filtered = own.filter(t => state.tab === 'all' || (state.tab === 'done' ? t.done : !t.done));
@@ -176,7 +185,10 @@
     if (location.hash !== canonical) history.replaceState(null,'',canonical);
     areaPaths[route.realm] = canonical; previousHash = canonical; document.body.classList.remove('focus');
     shell();
-    if (route.item) itemPage(route.item);
+    if (route.item?.kind === 'lesson') courseUI.itemPage(route.item);
+    else if (route.item) itemPage(route.item);
+    else if (route.realm === 'courses' && route.section === 'overview') courseUI.overview();
+    else if (route.realm === 'courses' && route.section === 'lessons') courseUI.list();
     else if (route.section === 'overview') overview();
     else if (route.section === 'tasks') tasksPage();
     else if (route.section === 'review') reviewPage();
@@ -196,6 +208,12 @@
   function noteDialog(key) {
     const x=byKey(key),old=notes.get(key),r=storage.record(key),isPaper=x?.kind==='paper',title=old?.title||x?.title||(route.realm==='papers'?'阅读笔记':'项目复盘');
     dialog(route.realm==='papers'?'阅读笔记':'项目复盘',`<form id="note-form" data-key="${esc(key)}"><label for="note-title">标题</label><input id="note-title" name="title" type="text" value="${esc(title)}" required>${isPaper?`<div class="paper-note-meta"><label>阅读状态<select name="status">${[['unread','未读'],['reading','在读'],['read','已读']].map(([v,t])=>`<option value="${v}" ${(r.status||x.raw.initialStatus)===v?'selected':''}>${t}</option>`).join('')}</select></label><label>阅读日期<input type="date" name="readDate" value="${esc(r.readDate||'')}"></label></div>${[['understanding','我的理解'],['evidence','证据与实验记录'],['questions','疑问与下一步']].map(([field,label])=>`<label>${label}<textarea name="${field}" rows="3">${esc(r[field]||'')}</textarea></label>`).join('')}`:''}<label for="note-text">${isPaper?'随读补充':route.realm==='papers'?'理解、问题与下一步':'过程、问题与结论'}</label><textarea id="note-text" name="text">${esc(isPaper?r.notes||'':r.notes??old?.text??'')}</textarea><p class="help">保存到当前浏览器；可导出备份。</p><button class="primary">${route.realm==='papers'?'保存笔记':'保存复盘'}</button></form>`);
+    if(route.realm==='courses'){
+      $('#dialog-title').textContent='课程笔记';
+      $('#note-form .primary').textContent='保存笔记';
+      $('#note-form label[for=note-text]').textContent='我的理解、疑问与运行记录';
+      if(!old&&!x)$('#note-title').value='课程笔记';
+    }
   }
   function taskDialog(key = '') {
     const own = items.filter(x => belongs(x,route.project));
@@ -205,7 +223,7 @@
     const own = items.filter(x => belongs(x,route.project));
     dialog('安排复习',`<form id="plan-form"><label for="plan-item">学习内容</label><select name="key" id="plan-item">${own.map(x => `<option value="${x.key}" ${x.key === key ? 'selected' : ''}>[${types[x.kind]}] ${esc(x.title)}</option>`).join('')}</select><label for="plan-date">复习日期（北京时间）</label><input type="date" id="plan-date" name="date" value="${esc(plans.get(key)?.date || today())}" required><p class="help">到期后列入“待复习”，日期由你自行安排。日期由你手动安排。</p><button class="primary">保存计划</button></form>`);
   }
-  function searchDialog() { dialog('搜索全部资料',`<input id="global-search" type="search" aria-label="搜索全部资料" placeholder="输入论文、概念、英文或实验关键词…" autocomplete="off"><div class="search-results" id="global-results"><p class="muted">搜索论文学习与项目实践，结果标明工作区和栏目。</p></div>`); $('#global-search').focus(); }
+  function searchDialog() { dialog('搜索全部资料',`<input id="global-search" type="search" aria-label="搜索全部资料" placeholder="输入论文、课程、概念、英文或实验关键词…" autocomplete="off"><div class="search-results" id="global-results"><p class="muted">搜索论文、项目与课程，结果标明工作区和栏目。</p></div>`); $('#global-search').focus(); }
   function searchResults() {
     const query = $('#global-search').value.trim().normalize('NFKC').toLocaleLowerCase(), tokens = query.split(/\s+/).filter(Boolean);
     const score = x => x.title.toLocaleLowerCase() === query ? 0 : x.title.toLocaleLowerCase().includes(query) ? 1 : 2;
@@ -221,7 +239,7 @@
     const oldContext = $('#side-context').innerHTML; shell(); if (route.item) $('#side-context').innerHTML = oldContext;
   }
   function saveWorkspace() {
-    const ok=storage.save({tasks,notes:[...notes],plans:[...plans],levels:[...levels],learning:learningUI.exportState(),lastReading,readingSize,visited});
+    const ok=storage.save({tasks,notes:[...notes],plans:[...plans],levels:[...levels],learning:learningUI.exportState(),courseProgress:courseUI.exportProgress(),lastReading,readingSize,visited});
     if(!ok)notify(storage.error||'记录未保存，请导出备份');
   }
   function recordManager() {
@@ -235,6 +253,7 @@
     if(document.visibilityState==='visible'&&'Notification'in window&&Notification.permission==='granted')for(const t of newly)try{new Notification('学习待办提醒',{body:t.title,tag:'zhiliang-todo-'+t.id});}catch(e){}
   }
   const learningUI = window.createStudyLearning({items,byKey,belongs,url,path,prose,formula,esc,source,levels,plans,today,dialog,closeDialog,lesson,englishBody,notify,projects,homeProject,assetBase,savedLearning:saved.learning,getRoute:() => route});
+  const courseUI = window.createStudyCourses({esc,prose,formula,url,path,byKey,action,assessControls,notify,getRoute:()=>route,getReadingSize:()=>readingSize,save:saveWorkspace,heading,savedProgress:saved.courseProgress});
   document.addEventListener('click', e => {
     const target = e.target.closest('button,a'); if (!target) return;
     if (learningUI.handleClick(target,e)) { saveWorkspace(); return; }
@@ -243,6 +262,7 @@
     if(target.hasAttribute('data-import-records'))$('#import-file').click();
     if (target.hasAttribute('data-close')) closeDialog();
     if (target.dataset.tool === 'search') searchDialog();
+    if (target.dataset.tool === 'course-continue') location.hash = url(byKey('lesson:'+courseUI.continueId()),'d2l');
     if (target.dataset.tool === 'continue') {
       if (!lastReading) { notify('先打开一篇文献'); return; }
       const destination = url(byKey(lastReading.key),lastReading.project), chapter = lastReading.chapter;
@@ -269,11 +289,13 @@
     if (target.dataset.deleteTask) { const index = tasks.findIndex(t => t.id === target.dataset.deleteTask); if (index >= 0) tasks.splice(index,1); refreshShell(); route.section === 'overview' ? overview() : tasksPage(); saveWorkspace(); }
   });
   document.addEventListener('input',e => {
+    if(e.target.id==='course-search'){courseUI.search(e.target.value);return;}
     if(learningUI.handleInput(e.target))return;
     if (e.target.id === 'list-search') { listState().q = e.target.value; listResults(); }
     if (e.target.id === 'global-search') searchResults();
   });
   document.addEventListener('change',e => {
+    if(courseUI.change(e.target))return;
     if (learningUI.handleChange(e.target)) { saveWorkspace(); return; }
     if (e.target.id === 'project') location.hash = path('overview','',e.target.value);
     if (e.target.id === 'english-group') { listState().group = e.target.value; listResults(); }

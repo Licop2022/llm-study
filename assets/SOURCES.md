@@ -21,3 +21,9 @@
 - 分发来源：https://cdn.jsdelivr.net/npm/katex@0.19.0/（镜像：https://unpkg.com/katex@0.19.0/）
 - JS 与 CSS 已核对官方文档公布的 SHA-384；60 个字体文件与 MIT 许可证位于 `vendor/katex/`。
 - 日常使用无需访问外部 CDN。
+# 课程笔记来源（2026-11-02）
+
+- 《动手学深度学习》中文官方教材：https://zh.d2l.ai/ 。课程章号按此教材，截图的NiN视频分P85.1对应本次笔记的教材7.3。
+- NiN：https://zh.d2l.ai/chapter_convolutional-modern/nin.html ，前置1×1通道运算：https://zh.d2l.ai/chapter_convolutional-neural-networks/channels.html 。AlexNet、VGG与LeNet来源在各章节“官方教材”链接。
+- 课程文字为教学归纳，手算及最小代码为教学示例，非用户个人笔记或实验记录；未复制完整教材、视频或截图中的无关浏览信息。
+

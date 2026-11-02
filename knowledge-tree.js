@@ -31,7 +31,7 @@ window.createKnowledgeExplorer = function(api) {
     'odlri-k-vs-r':['concept:outlier-channel-mask','concept:factor-bit-budget']
   };
   const foundations=Object.entries(learning.foundations).map(([key,f])=>({key,id:key,kind:'foundation',title:f.title,summary:f.summary,raw:f}));
-  const nodes=[...foundations,...items.filter(x=>x.kind!=='english')], lookup=key=>nodes.find(x=>x.key===key);
+  const nodes=[...foundations,...items.filter(x=>['paper','concept','case'].includes(x.kind))], lookup=key=>nodes.find(x=>x.key===key);
   const labels={foundation:'入门基础',concept:'概念',paper:'论文',case:'实践 / 代码'};
   const required = n => n.kind==='concept' ? prerequisites[n.id] || [] : n.kind==='paper' ? n.raw.concepts.filter(id=>n.id!=='attention-2017'||id.startsWith('tr-')).map(id=>'concept:'+id) : n.kind==='case' ? (n.id.startsWith('rag-') ? ['f-similarity','f-protocol'] : n.raw.kind==='code' ? ['f-matrix'] : ['concept:tensor-missing','concept:tensor-soh','f-protocol']) : ({'f-rank':['f-matrix'],'f-stat':['f-matrix'],'f-softmax':['f-matrix'],'f-ls':['f-matrix','f-rank'],'f-similarity':['f-matrix']}[n.id] || []);
   const groups=[
