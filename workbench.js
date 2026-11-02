@@ -34,6 +34,7 @@
   function belongs(x,project) {
     if (!x) return false;
     if (x.kind === 'case') return project === (x.id.startsWith('rag-') ? 'rag' : 'battery');
+    if (x.kind === 'english' && x.raw.sourceKind === 'capture' && x.raw.learningDomain === 'general') return ['quant','tensor'].includes(project);
     return ['quant','tensor'].includes(project) && refs(x).some(r => paper(r.paper)?.phase.startsWith(project === 'quant' ? 'P' : 'T'));
   }
   const homeProject = x => projects.find(p => belongs(x,p.id))?.id || 'quant';

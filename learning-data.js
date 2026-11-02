@@ -1,6 +1,6 @@
 /* Teaching routes: curated learning dependencies, not claims of paper genealogy. */
 window.STUDY_LEARNING = {
-  updatedAt:'2026-10-27',
+  updatedAt:'2026-11-02',
   foundations: {
     'f-matrix': {title:'向量、矩阵与线性映射',summary:'先看清输入、权重和输出的形状，再理解一个线性层做了什么。',latex:String.raw`x\in\mathbb{R}^{1\times m},\quad W\in\mathbb{R}^{m\times n},\quad y=xW\in\mathbb{R}^{1\times n}`,text:'输入行向量有 m 个特征。权重矩阵的每一列给出一个输出特征的线性组合；内维 m 必须相同，乘法才有定义。本文库统一使用行向量约定。',example:'令 x=[1,2]、W=diag(1,3)，输出是 [1,6]。若只修改第二行权重，对输出的影响还会乘上第二个输入分量 2。',check:'输入有 4 个特征，输出有 3 个特征，W 的形状是什么？',answer:'4×3。若一次有 N 个输入，X 为 N×4，XW 为 N×3。'},
     'f-rank': {title:'秩、范数与低秩近似',summary:'秩描述独立方向数，范数描述大小；两者不是一回事。',latex:String.raw`\|M\|_F^2=\sum_{i,j}M_{ij}^2,\qquad \operatorname{rank}(M)\leq\min(m,n)`,text:'矩阵的秩等于其线性独立列的数量。Frobenius 范数把所有元素的平方相加后开方。低秩约束限制可表达的方向数量，误差目标再决定保留哪些方向。',example:'diag(3,1) 的秩为 2，Frobenius 范数为 √10。保留 diag(3,0) 得到秩 1 近似，平方残差为 1。',check:'参数数值整体放大 2 倍，非零矩阵的秩与范数怎样变化？',answer:'秩不变，Frobenius 范数放大 2 倍，范数平方放大 4 倍。'},
@@ -11,12 +11,13 @@ window.STUDY_LEARNING = {
     'f-protocol': {title:'固定评测与控制变量',summary:'比较方法之前，先固定问题、数据和评测口径。',text:'一次对照只改变要研究的因素，并记录模型、语料、检索参数和评测口径。探索性案例可帮助发现问题，但不应混进事后修改过的固定测试集来报告提升。',example:'比较两种分块方式时，保持问题与生成模型一致，记录分块长度、重叠、召回和最终证据。既看答案，也看引用是否支持结论。',check:'一个挑出的成功案例，能代表固定测试集整体改善吗？',answer:'不能。案例用于解释机制，整体改善需要在一致协议下统计完整固定题集。'}
   },
   topics: [
-    {id:'caldera-path',title:'CALDERA：从补偿走向联合压缩',projects:['quant'],summary:'从码本与校准目标出发，理解低精度因子、联合优化和预算取舍。',target:'能解释CALDERA与固定主体补偿的区别，并按实际协议比较位数、质量与吞吐。',steps:[
+    {id:'caldera-path',title:'CALDERA 与 ODLRI：联合压缩与初始化',projects:['quant'],summary:'从低精度因子与联合优化，继续学习ODLRI的敏感通道初始化。',target:'能区分联合优化与初始化设计，并按实际协议比较位数、质量、吞吐及适用条件。',steps:[
       {title:'先读懂可表示集合',goal:'区分量化点、码本、格和量化器饱和。',materials:['concept:quantization-codebook','concept:lattice-codebook','concept:quantizer-saturation'],check:'向量码字的16比特索引，是否等于每分量16比特？',answer:'不一定。需除以一次编码包含的分量数，还要说明码本、缩放等额外开销。'},
       {title:'从校准输入到低秩回归',goal:'理解实际层输入、欠定方向与连续解析子问题。',materials:['concept:forward-pass','concept:rank-constrained-regression','concept:qera-exact'],check:'校准样本上输出相同，是否保证所有未见输入输出也相同？',answer:'不能。样本可能没有覆盖输入零空间方向；伪逆只是按准则选择一个解。'},
       {title:'理解联合更新与前处理',goal:'把RHT、LDLQ及低精度因子更新放在正确位置。',materials:['concept:rht','concept:ldlq-feedback','concept:quip-role','concept:caldera-joint','paper:caldera'],check:'完整CALDERA算法为何不能直接称为闭式全局最优？',answer:'闭式结论适用于取消离散约束的连续秩约束子问题；主体与因子受量化约束的交替联合问题没有同样保证。'},
       {title:'核对误差界条件',goal:'区别确定性截断结论、随机量化期望界与MP渐近近似。',materials:['concept:marchenko-pastur','concept:svd','paper:caldera'],check:'MP近似能直接保证有限维E8量化模型的实测误差吗？',answer:'不能。要保留独立同分布、量化器模型、归一化及大维近似等条件，真实实现可能不满足。'},
-      {title:'用同一口径比较质量与开销',goal:'核算因子预算，区分原始PTQ、RHT微调和任务适配。',materials:['concept:factor-bit-budget','concept:evaluation','paper:caldera','paper:qera','paper:zeroquant-v2'],check:'4比特因子比16比特因子节省表示，为什么仍可能更慢？',answer:'解码和内核融合成本会影响吞吐。CALDERA第10页表6在A10G、batch和序列长度均为1时出现16比特因子更快；该结果不能扩展为任意设备的排序。'}
+      {title:'用同一口径比较质量与开销',goal:'核算因子预算，区分原始PTQ、RHT微调和任务适配。',materials:['concept:factor-bit-budget','concept:evaluation','paper:caldera','paper:qera','paper:zeroquant-v2'],check:'4比特因子比16比特因子节省表示，为什么仍可能更慢？',answer:'解码和内核融合成本会影响吞吐。CALDERA第10页表6在A10G、batch和序列长度均为1时出现16比特因子更快；该结果不能扩展为任意设备的排序。'},
+      {title:'继续ODLRI：初始化如何分配角色',goal:'在相同交替框架中比较初值，区分敏感通道数、分解秩及统计条件。',materials:['concept:joint-initialization-roles','concept:outlier-channel-mask','concept:selective-whitening','concept:odlri-initialization','concept:odlri-k-vs-r','paper:odlri'],check:'ODLRI是否证明初始化后每个指标都改善，且受限Hessian总可逆？',answer:'没有。若干表项持平或退化；保留原尺寸的通道零掩码矩阵在k小于输入维度时必然秩不足，选中子空间、伪逆或正则化处理需核对。'}
     ]},
     {id:'qera-path',title:'读懂 QERA 与误差重构',projects:['quant'],summary:'从线性层与二阶矩出发，走到解析低秩补偿及方法对照。',target:'能够解释 QERA 在优化什么、为何先加权再截断，以及结论的适用边界。',steps:[
       {title:'看懂线性层与误差',goal:'能区分参数误差与实际输出误差。',materials:['f-matrix','concept:output-error'],check:'同样大小的权重误差，为什么输出影响可能不同？',answer:'输出还取决于输入幅度与相关性；输出误差包含输入对权重残差的作用。'},

@@ -23,7 +23,12 @@ window.createKnowledgeExplorer = function(api) {
     'forward-pass':['f-matrix','concept:calibration'],'quantizer-saturation':['concept:quantization-codebook'],
     'marchenko-pastur':['concept:eigendecomposition','concept:svd','f-stat'],'rht':['f-matrix','concept:gram-psd'],
     'ldlq-feedback':['concept:second-order','concept:rtn'],'caldera-joint':['concept:rank-constrained-regression','concept:ldlq-feedback','concept:factor-bit-budget'],
-    'factor-bit-budget':['concept:bit-packing','concept:low-rank']
+    'factor-bit-budget':['concept:bit-packing','concept:low-rank'],
+    'joint-initialization-roles':['concept:caldera-joint','concept:output-error'],
+    'outlier-channel-mask':['concept:autocorrelation','concept:saliency'],
+    'selective-whitening':['concept:outlier-channel-mask','concept:gram-psd','concept:rank-constrained-regression'],
+    'odlri-initialization':['concept:joint-initialization-roles','concept:outlier-channel-mask','concept:selective-whitening'],
+    'odlri-k-vs-r':['concept:outlier-channel-mask','concept:factor-bit-budget']
   };
   const foundations=Object.entries(learning.foundations).map(([key,f])=>({key,id:key,kind:'foundation',title:f.title,summary:f.summary,raw:f}));
   const nodes=[...foundations,...items.filter(x=>x.kind!=='english')], lookup=key=>nodes.find(x=>x.key===key);

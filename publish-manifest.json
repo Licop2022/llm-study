@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T12:26:52.611Z",
+  "generatedAt": "2026-11-02T07:06:06.583Z",
   "counts": {
-    "papers": 16,
-    "concepts": 68,
-    "terms": 153,
-    "phrases": 46,
-    "sentences": 21,
+    "papers": 17,
+    "concepts": 73,
+    "terms": 170,
+    "phrases": 51,
+    "sentences": 23,
     "experiments": 9
   },
   "files": [
     {
       "path": "index.html",
-      "bytes": 2159,
-      "sha256": "75e0e3f7533d75e9b1ac112c85ab326508db1b693bd0949d54598c0993490827"
+      "bytes": 1997,
+      "sha256": "59d6a92152fcdd562d1ab9a8e6c25bcf75a68fc1658ac1c22bf9b2094eb66a01"
     },
     {
       "path": "app.js",
@@ -22,13 +22,13 @@
     },
     {
       "path": "data.js",
-      "bytes": 378876,
-      "sha256": "b7fb33060b1c665c46af9ebe8b53d36648dafd031a6e0ade2711f7ec72f2353b"
+      "bytes": 406977,
+      "sha256": "1778bb7a9deb73c2fb5a193fb30f236df92fc9098a4b538927118a806843c6a2"
     },
     {
       "path": "english-data.js",
-      "bytes": 176401,
-      "sha256": "58b8ad9bf86ea8635c62ce95f4c22cf484c56977ab95726d663dd441c0e62473"
+      "bytes": 194088,
+      "sha256": "2836462432b1fcbd3dccf445dff7fb283d28d32a998cf5119dc64d2199891bce"
     },
     {
       "path": "todo-core.js",
@@ -67,13 +67,13 @@
     },
     {
       "path": "classic.html",
-      "bytes": 3533,
-      "sha256": "25b72abd480a904817cff8a060cb32d3779591ed9a82cb55ddbfdcbf5c801148"
+      "bytes": 3452,
+      "sha256": "2915186a691032d96ff80e8307f71d92bc6d97831ccdcc48d17ea4ce46f16288"
     },
     {
       "path": "workbench.js",
-      "bytes": 43308,
-      "sha256": "f7d7fa19072c63c1a4553100896630c3e7f670437d9455a58236bd038f9d03ae"
+      "bytes": 43456,
+      "sha256": "8db5e58b1a54da6f6b811038a99b0b96d42b45a7c97c885ff9e224da77e1b1fd"
     },
     {
       "path": "workbench-storage.js",
@@ -87,8 +87,8 @@
     },
     {
       "path": "learning-data.js",
-      "bytes": 24398,
-      "sha256": "ba70d34bcae4f78a16bc3acdac1d0b4fd7b0c958d7de070264f187f16d5e1f64"
+      "bytes": 25017,
+      "sha256": "a0a3f657c81fc1dddae294a672199e02520363e3ced0b855fa7e54c872ca2dad"
     },
     {
       "path": "learning-ui.js",
@@ -102,8 +102,8 @@
     },
     {
       "path": "knowledge-tree.js",
-      "bytes": 13342,
-      "sha256": "737baea32016fb1571beb239abc5935c614dcdde0534dc630ea93390b72f37ab"
+      "bytes": 13831,
+      "sha256": "2b90d21e4dab4d523a03e6474301903db4298e965df18d715311189fe136ca62"
     },
     {
       "path": "knowledge-tree.css",
@@ -529,6 +529,11 @@
       "path": "papers/P3_误差补偿进阶/CALDERA.pdf",
       "bytes": 1173315,
       "sha256": "3ac2c359e0bbb63fd0112f77426061cc3124fa7b79e8fd04348f95a960ad3fbb"
+    },
+    {
+      "path": "papers/P3_误差补偿进阶/ODLRI.pdf",
+      "bytes": 753500,
+      "sha256": "137895af67b2be87ca8a0ac3684519224f636f4ed56bdc1659411d2e6029c4c3"
     },
     {
       "path": "专有名词/ScreenShot_2026-10-16_143051_920.png",
@@ -1196,6 +1201,21 @@
       "sha256": "3b9562ddfe502b9b1f79a2fae4ad977b2e8a091e2c3de765570f15ccdba251cc"
     },
     {
+      "path": "语法与单词/ScreenShot_2026-10-27_195657_150.png",
+      "bytes": 1042,
+      "sha256": "5956fe73daf508f87414815ffbe5629ea2c0abf219160f38a7d941277e62b213"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_201636_310.png",
+      "bytes": 1021,
+      "sha256": "a337e5e35b72d44a735600cdb23bc967a1edd1027daa90cf7612f474a82afe6d"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_201728_214.png",
+      "bytes": 5261,
+      "sha256": "62740f45d9c8c1139d4ad927519adb193966397d455a4a8ad72701a28a068068"
+    },
+    {
       "path": "语法与单词/ScreenShot_2026-10-12_202436_153.png",
       "bytes": 35330,
       "sha256": "62cd792de771a147879bb20aec9489dfabbb44023ddef80126cbac645b140318"
@@ -1366,6 +1386,16 @@
       "sha256": "3c7cc24ff8ad501ddc7b6b4b1be6b57d0a7459d407fd7065d7ada22e117403b3"
     },
     {
+      "path": "语法与单词/ScreenShot_2026-10-27_195718_317.png",
+      "bytes": 880,
+      "sha256": "6ebbc3509f114fbdcad879d27ea836e41ad331ade964098110227866048d58b2"
+    },
+    {
+      "path": "语法与单词/ScreenShot_2026-10-27_201712_678.png",
+      "bytes": 4103,
+      "sha256": "5fa180bdc66e105866b0c6c8cdbd573f878e7c3b441c8a61df47cf280c549726"
+    },
+    {
       "path": "notes/experiments/实验日志/D2/预测基线/D2-GPU-261017-001.md",
       "bytes": 4281,
       "sha256": "c0c295f813b0a7d2b603c0a304d67e9d718b01860f547a92edb002e49221e0b8"
@@ -1527,18 +1557,8 @@
     },
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 1047,
-      "sha256": "71d2e69e7cb3112534d008b4ff6378ca4092c026c2ea009f9223ddaf5877b780"
-    },
-    {
-      "path": "site-links.js",
-      "bytes": 4738,
-      "sha256": "3a3ba4fd53de9c4fcdfe85f35b0bf20e3d4e2ce650a5cfbc6c9d2d669c30d06a"
-    },
-    {
-      "path": "scripts/inject-site-links.cjs",
-      "bytes": 2274,
-      "sha256": "e00778a081f7d1b2e1361e753b1a373999e90bb846a9146e3ca7bdf975a726e7"
+      "bytes": 905,
+      "sha256": "cd3c647d2a1e715002422b920e81911a3781aca1f4ad8f348fd07325a7218275"
     }
   ]
 }

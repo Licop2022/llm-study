@@ -1,6 +1,6 @@
 /* 原句节选已核对本地 PDF；example 为教学例句。按当前词义与学习用途区分英语范畴。 */
 window.STUDY_DATA.english = {
-  "updatedAt": "2026-10-27",
+  "updatedAt": "2026-11-02",
   "terms": [
     {
       "id": "en-quantization",
@@ -23,6 +23,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "caldera",
           "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 2
         }
       ],
       "importOrder": 1,
@@ -145,6 +149,14 @@ window.STUDY_DATA.english = {
         {
           "paper": "caldera",
           "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 12
         }
       ],
       "importOrder": 6,
@@ -207,6 +219,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "zeroquant-v2",
           "page": 2
+        },
+        {
+          "paper": "odlri",
+          "page": 4
         }
       ],
       "importOrder": 9,
@@ -289,6 +305,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "caldera",
           "page": 2
+        },
+        {
+          "paper": "odlri",
+          "page": 3
         }
       ],
       "importOrder": 12,
@@ -347,6 +367,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "caldera",
           "page": 4
+        },
+        {
+          "paper": "odlri",
+          "page": 3
         }
       ],
       "importOrder": 14,
@@ -1601,6 +1625,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "zeroquant-v2",
           "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 6
         }
       ],
       "captures": [
@@ -2883,6 +2911,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "caldera",
           "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 5
         }
       ],
       "importOrder": 132,
@@ -3103,6 +3135,10 @@ window.STUDY_DATA.english = {
         {
           "paper": "caldera",
           "page": 6
+        },
+        {
+          "paper": "odlri",
+          "page": 3
         }
       ],
       "importOrder": 142,
@@ -3368,6 +3404,321 @@ window.STUDY_DATA.english = {
       ],
       "importOrder": 154,
       "learningDomain": "academic"
+    },
+    {
+      "id": "en-initialization",
+      "name": "initialization",
+      "meaning": "初始化",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "给迭代算法设置起点；不是最终求得的解。",
+      "example": "Initialization can affect the final decomposition.",
+      "translation": "初始化可能影响最终分解。",
+      "caution": "教学例句，非论文原句。同一更新公式不必消除初值差异。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 155
+    },
+    {
+      "id": "en-role-assignment",
+      "name": "role assignment",
+      "meaning": "角色分工",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "本文特指量化主体和低秩分支承担的表示任务。",
+      "example": "Role assignment depends on the chosen initialization.",
+      "translation": "角色分工取决于所选初始化。",
+      "caution": "教学例句，非论文原句。范数比不是相加为1的贡献百分比。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 4
+        }
+      ],
+      "importOrder": 156
+    },
+    {
+      "id": "en-activation-sensitive",
+      "name": "activation-sensitive weights",
+      "meaning": "激活敏感权重",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "权重扰动的输出影响受到相应激活通道放大。",
+      "example": "The low-rank branch captures activation-sensitive weights.",
+      "translation": "低秩分支表示激活敏感权重。",
+      "caution": "教学例句，非论文原句。不能简单等同于绝对值最大的权重。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 157
+    },
+    {
+      "id": "en-selective-whitening",
+      "name": "selective whitening",
+      "meaning": "选择性白化",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "只对所选统计子空间构造变换。",
+      "example": "Selective whitening requires a clear subspace convention.",
+      "translation": "选择性白化需要明确子空间约定。",
+      "caution": "教学例句，非论文原句。零掩码完整矩阵可能奇异，普通逆需检查条件。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 13
+        }
+      ],
+      "importOrder": 158
+    },
+    {
+      "id": "en-restricted-hessian",
+      "name": "restricted Hessian",
+      "meaning": "受限Hessian统计",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "本文通过通道掩码保留所选二阶矩块。",
+      "example": "The restricted Hessian retains selected channel interactions.",
+      "translation": "受限Hessian保留选中通道之间的关系。",
+      "caution": "教学例句，非论文原句。通常是未中心化二阶矩，不应默认叫中心化协方差。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 12
+        }
+      ],
+      "importOrder": 159
+    },
+    {
+      "id": "en-normalized-activation-error",
+      "name": "normalized activation-aware error",
+      "meaning": "归一化激活感知误差",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "本文以重构输出平方误差除以原输出平方范数。",
+      "example": "Normalized activation-aware error compares layer reconstructions.",
+      "translation": "归一化激活感知误差用于比较层重构。",
+      "caution": "教学例句，非论文原句。不是最终任务错误率，分母口径不能省略。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 6
+        }
+      ],
+      "importOrder": 160
+    },
+    {
+      "id": "en-kv-cache",
+      "name": "KV cache",
+      "meaning": "键值缓存",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "自回归推理时缓存历史位置的key和value表示。",
+      "example": "KV cache quantization is outside the scope of this study.",
+      "translation": "KV缓存量化不在本研究范围内。",
+      "caution": "教学例句，非论文原句。权重压缩不能直接代表KV缓存也被压缩。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 9
+        }
+      ],
+      "importOrder": 161
+    },
+    {
+      "id": "en-distinct",
+      "name": "distinct",
+      "meaning": "不同的 / 明确区分的",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "distinct roles指各自不同的角色；distinction是名词。",
+      "example": "The two components serve distinct roles.",
+      "translation": "两个成分承担不同角色。",
+      "caution": "教学例句，非论文原句。distinct不自动表示完全独立。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 162
+    },
+    {
+      "id": "en-persistent",
+      "name": "persistent",
+      "meaning": "持续的 / 持续存在的",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "形容词；persist为动词。",
+      "example": "The difference remains persistent across iterations.",
+      "translation": "这一差异在迭代中持续存在。",
+      "caution": "教学例句，非论文原句。描述观测趋势不等于永久不变的定理。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 163
+    },
+    {
+      "id": "en-prioritize",
+      "name": "prioritize",
+      "meaning": "优先处理 / 优先考虑",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "prioritize A表示把A放在更优先位置。",
+      "example": "The initialization prioritizes sensitive directions.",
+      "translation": "该初始化优先处理敏感方向。",
+      "caution": "教学例句，非论文原句。优先不等于其他方向完全不参与后续更新。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 164
+    },
+    {
+      "id": "en-pronounced",
+      "name": "pronounced",
+      "meaning": "明显的 / 显著的",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "be particularly pronounced表示某现象尤其明显。",
+      "example": "The error is more pronounced at low precision.",
+      "translation": "该误差在低精度时更明显。",
+      "caution": "教学例句，非论文原句。此处不是发音的含义；也不自动表示统计显著。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 165
+    },
+    {
+      "id": "en-principled",
+      "name": "principled",
+      "meaning": "有明确依据的 / 有原则的",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "修饰approach或strategy，说明有设计依据。",
+      "example": "A principled strategy states its assumptions.",
+      "translation": "有明确依据的策略会说明假设。",
+      "caution": "教学例句，非论文原句。principled不是全局最优或严格证明的同义词。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 2
+        }
+      ],
+      "importOrder": 166
+    },
+    {
+      "id": "en-trajectory",
+      "name": "trajectory",
+      "meaning": "轨迹 / 演变路径",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "optimization trajectory指更新过程中经过的状态。",
+      "example": "Initialization changes the optimization trajectory.",
+      "translation": "初始化改变优化轨迹。",
+      "caution": "教学例句，非论文原句。这里是比喻性路径，不是独立的模型性能指标。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 8
+        }
+      ],
+      "importOrder": 167
+    },
+    {
+      "id": "en-confounding-effects",
+      "name": "confounding effects",
+      "meaning": "混杂影响",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "比较中还有别的因素随处理一起变化，难以单独归因。",
+      "example": "Different factor precisions can introduce confounding effects.",
+      "translation": "不同因子精度可能引入混杂影响。",
+      "caution": "教学例句，非论文原句。不能只凭两个结果不同便确定其因果来源。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 8
+        }
+      ],
+      "importOrder": 168
+    },
+    {
+      "id": "en-prohibitive",
+      "name": "prohibitive",
+      "meaning": "高得令人难以承受的",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "常修饰cost、size；此处强调成本或规模阻碍使用。",
+      "example": "The memory cost can be prohibitive.",
+      "translation": "内存成本可能高到难以承受。",
+      "caution": "教学例句，非论文原句。不必翻译成法律上的禁止。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 1
+        }
+      ],
+      "importOrder": 169,
+      "collected": true,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_195657_150.png"
+      ]
+    },
+    {
+      "id": "en-exacerbate",
+      "name": "exacerbate",
+      "meaning": "加剧 / 使恶化",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "及物动词，后接被加重的问题或影响。 来源为用户截图；在已收录论文中未定位到该词，不附猜测的原文页码。",
+      "example": "Poor calibration can exacerbate reconstruction error.",
+      "translation": "不合适的校准可能加剧重构误差。",
+      "caution": "教学例句，非论文原句。截图只给出词形；该教学例句为独立造句，不冒充来源页原句。",
+      "refs": [],
+      "importOrder": 170,
+      "collected": true,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_201636_310.png"
+      ],
+      "sourceKind": "capture",
+      "sourceNote": "来源为用户截图；在已收录论文中未定位到该词，不附猜测的原文页码。"
+    },
+    {
+      "id": "en-sram",
+      "name": "SRAM",
+      "meaning": "静态随机存取存储器",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "常用于片上缓存等；理解内存层次后再判断带宽瓶颈。",
+      "example": "SRAM and GPU global memory belong to different memory levels.",
+      "translation": "SRAM与GPU全局显存属于不同存储层次。",
+      "caution": "教学例句，非论文原句。CALDERA第9页讨论数据传输；不能把显卡标称24GB显存都叫片上SRAM。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 9
+        }
+      ],
+      "importOrder": 171,
+      "collected": true,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_201728_214.png"
+      ]
     }
   ],
   "phrases": [
@@ -4371,7 +4722,105 @@ window.STUDY_DATA.english = {
         }
       ],
       "importOrder": 46,
-      "learningDomain": "general"
+      "learningDomain": "general",
+      "collected": true,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_195718_317.png"
+      ]
+    },
+    {
+      "id": "en-at-expense-of",
+      "name": "at the expense of …",
+      "meaning": "以牺牲……为代价",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "说明某种收益伴随另一对象的损失。",
+      "example": "One component can dominate at the expense of the other.",
+      "translation": "一个成分可能以牺牲另一个成分为代价占据主导。",
+      "caution": "教学例句，非论文原句。不要把分工不均直接解释为所有任务都变差。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 47
+    },
+    {
+      "id": "en-through-lens-of",
+      "name": "through the lens of …",
+      "meaning": "从……角度观察",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "用lens的比喻引入分析视角。",
+      "example": "We examine the algorithm through the lens of initialization.",
+      "translation": "我们从初始化的角度分析算法。",
+      "caution": "教学例句，非论文原句。这是视角转换，不是自动增加了新的实验结果。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 48
+    },
+    {
+      "id": "en-mutually-exclusive",
+      "name": "mutually exclusive",
+      "meaning": "互斥的",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "本文指两种掩码输入的非零位置位于不同通道。",
+      "example": "The nonzero channel positions are mutually exclusive.",
+      "translation": "非零通道位置互斥。",
+      "caution": "教学例句，非论文原句。通道支持互斥不意味着不同通道在数据统计上独立。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 12
+        }
+      ],
+      "importOrder": 49
+    },
+    {
+      "id": "en-keeping-unchanged",
+      "name": "while keeping … unchanged",
+      "meaning": "同时保持……不变",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "academic",
+      "usage": "描述对照设计中保持其余配置。",
+      "example": "We change initialization while keeping the factor rank unchanged.",
+      "translation": "我们改变初始化，同时保持因子秩不变。",
+      "caution": "教学例句，非论文原句。原文用largely unchanged，还需核对具体参数、数据和内核。",
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 5
+        }
+      ],
+      "importOrder": 50
+    },
+    {
+      "id": "en-nevertheless",
+      "name": "nevertheless",
+      "meaning": "尽管如此 / 然而",
+      "group": "ODLRI / 阅读积累",
+      "learningDomain": "general",
+      "usage": "连接副词，表示前述不利条件下仍有后续结论。",
+      "example": "The factors add overhead; nevertheless, compression can still help.",
+      "translation": "因子带来开销；尽管如此，压缩仍可能有帮助。",
+      "caution": "教学例句，非论文原句。需结合实际开销测量，不能单凭转折词推导加速。",
+      "refs": [
+        {
+          "paper": "caldera",
+          "page": 9
+        }
+      ],
+      "importOrder": 51,
+      "collected": true,
+      "captures": [
+        "语法与单词/ScreenShot_2026-10-27_201712_678.png"
+      ]
     }
   ],
   "sentences": [
@@ -4911,6 +5360,54 @@ window.STUDY_DATA.english = {
       ],
       "importOrder": 21,
       "learningDomain": "academic"
+    },
+    {
+      "id": "en-sentence-odlri-initialization-view",
+      "name": "ODLRI · 动名词主语与分析视角",
+      "group": "ODLRI",
+      "learningDomain": "academic",
+      "paper": "odlri",
+      "page": 1,
+      "quote": "viewing this process through the lens of initialization reveals an underexplored aspect",
+      "meaning": "从初始化角度审视该过程，揭示了一个尚未充分研究的方面",
+      "analysis": [
+        "viewing …是动名词短语作主语，reveals使用第三人称单数。",
+        "through the lens of引出分析视角；underexplored说明研究缺口，不等于完全无人研究。"
+      ],
+      "focus": [
+        "句法与方法语境"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        }
+      ],
+      "importOrder": 22
+    },
+    {
+      "id": "en-sentence-odlri-factor-precision",
+      "name": "ODLRI · while对照与指代范围",
+      "group": "ODLRI",
+      "learningDomain": "academic",
+      "paper": "odlri",
+      "page": 5,
+      "quote": "the 16-Bit setting remains unquantized, while the 4-Bit setting undergoes quantization",
+      "meaning": "16比特设置不再量化，而4比特设置会进行量化",
+      "analysis": [
+        "while在此连接对照，不表示同时发生的时间关系。",
+        "句中设置特指低秩因子；主体仍为2比特，不可把前半句读成整个模型没有量化。"
+      ],
+      "focus": [
+        "句法与方法语境"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 5
+        }
+      ],
+      "importOrder": 23
     }
   ],
   "domains": {

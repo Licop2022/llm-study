@@ -1,7 +1,7 @@
 /* 稳定 ID 与 importOrder 保留个人记录和首次导入顺序。 */
 window.STUDY_DATA = {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-27",
+  "updatedAt": "2026-11-02",
   "title": "LLM 量化与张量学习",
   "notation": "统一采用行样本约定：X ∈ ℝᴺˣᵐ，W ∈ ℝᵐˣⁿ，Y = XW。Wq 表示量化并反量化后的浮点等效权重；原论文的矩阵朝向可能不同。引用页码均为 PDF 物理页码。",
   "papers": [
@@ -1205,6 +1205,112 @@ window.STUDY_DATA = {
         "limit": "离散非凸、校准覆盖、因子解码开销、理论简化和对照协议"
       },
       "source": "根据用户本地38页NeurIPS 2024原件整理，所有页码为PDF物理页。用户本次声明已读；未提供具体完成日期或个人理解，不填掌握程度与完成日期。"
+    },
+    {
+      "id": "odlri",
+      "name": "ODLRI",
+      "title": "Assigning Distinct Roles to Quantized and Low-Rank Matrices Toward Optimal Weight Decomposition",
+      "authors": "Yoonjun Cho, Soeun Kim, Dongjae Jeon, Kyelim Lee, Beomsoo Lee & Albert No",
+      "year": 2025,
+      "venue": "Findings of ACL 2025 · 14453–14470",
+      "arxiv": "2506.02077",
+      "phase": "P3",
+      "category": "误差补偿进阶",
+      "pdf": "papers/P3_误差补偿进阶/ODLRI.pdf",
+      "pages": 18,
+      "version": "本地ACL Anthology排版稿 · 18页（含附录）",
+      "initialStatus": "read",
+      "color": "teal",
+      "tags": [
+        "CALDERA初始化",
+        "激活敏感通道",
+        "角色分工",
+        "受限二阶矩"
+      ],
+      "concepts": [
+        "caldera-joint",
+        "autocorrelation",
+        "joint-initialization-roles",
+        "outlier-channel-mask",
+        "selective-whitening",
+        "odlri-initialization",
+        "odlri-k-vs-r"
+      ],
+      "tagline": "让低秩分支先承接激活敏感结构，再在CALDERA中联合更新量化主体与低秩因子。",
+      "question": "同一个Q+LR交替优化框架，为什么会因初始化不同而长期保留不同角色，能否按激活敏感性设计更好的低秩初值？",
+      "mechanism": "原文使用列样本：权重 \\(W_o\\in\\mathbb R^{m_o\\times n_o}\\)，校准输入 \\(X_o\\in\\mathbb R^{n_o\\times d}\\)。本站统一转置成行样本 \\(X=X_o^\\top\\)、\\(W=W_o^\\top\\)、\\(A=R^\\top\\)、\\(B=L^\\top\\)。按 \\(H=X^\\top X\\) 的对角选择高能量输入通道，以掩码统计 \\(H_I=P_IHP_I\\) 指导初始低秩项 \\(A_0B_0\\)，先量化 \\(W-A_0B_0\\)，然后继续CALDERA式主体/因子交替优化。低秩分支初始化用于承接敏感结构，后续仍优化完整层的表示。",
+      "formula": "先用敏感通道初始化低秩项，再量化剩余权重并联合更新；k为选择通道数，r为分解秩。",
+      "latex": "H=X^\\top X,\\quad H_I=P_IHP_I,\\quad Q_1=\\operatorname{Quantize}(W-A_0B_0),\\quad\\widehat Y=XQ+(XA)B",
+      "evidence": "PDF第7页表2：Llama2-7B、2比特主体、4比特因子、rank256、平均2.4比特，WikiText2 PPL由CALDERA的6.47降至+ODLRI的6.33，C4由8.47降至8.27。第8页表4：Llama3-8B、rank256时WikiText2由8.70降至8.12，C4由9.77降至9.33；但rank128的C4由10.21升至10.32。第8页表5固定rank256、4比特因子时，选择k=16的WikiText2/C4为6.33/8.27，k=256为6.46/8.52。",
+      "caveat": "这是初始化改进的实证工作，不是完整离散联合问题的全局最优保证；若干表项持平或退化，不能把consistently理解为每个设置、每个任务都改善。第12页写明多数实验两随机种子、70B仅一种；Llama2使用预计算Hessian，第13页列出6144样本来源，不能把全部模型统写成256样本。第12–13页的Ho一方面定义为原尺寸零掩码矩阵，另一方面使用Cholesky和普通逆；当k小于输入维度时前者必然奇异，选中子空间/伪逆/正则化处理需回查实现。原文还以未注明范数的PSD矩阵范数书写目标；与平方输出误差严格等价的是迹表达，教学讲解已区分。只研究权重量化，不覆盖激活或KV缓存量化；本文没有给出可直接归因于ODLRI的独立推理加速实测。",
+      "reading": [
+        {
+          "page": 1,
+          "label": "研究问题 · 初始化与分工"
+        },
+        {
+          "page": 3,
+          "label": "算法1 · 统一交替更新"
+        },
+        {
+          "page": 4,
+          "label": "图1与表1 · 初始化角色"
+        },
+        {
+          "page": 5,
+          "label": "敏感通道目标与实验设置"
+        },
+        {
+          "page": 6,
+          "label": "图2–3 · scale与归一化误差"
+        },
+        {
+          "page": 7,
+          "label": "表2–3 · 4比特与16比特因子"
+        },
+        {
+          "page": 8,
+          "label": "表4–5 · 新模型与k/r消融"
+        },
+        {
+          "page": 9,
+          "label": "研究范围与限制"
+        },
+        {
+          "page": 12,
+          "label": "附录A/B.1 · 运行配置与受限统计"
+        },
+        {
+          "page": 13,
+          "label": "附录B.1 · 白化、SVD与逆的边界"
+        },
+        {
+          "page": 14,
+          "label": "附录B.2 · 选通道比例"
+        },
+        {
+          "page": 15,
+          "label": "附录C.3 · 替换量化器的协议"
+        }
+      ],
+      "checks": [
+        "ODLRI改动了CALDERA的哪一部分，哪些更新仍被保留？",
+        "原文列输入中的敏感权重列，转成本站行样本后对应什么？",
+        "按H对角选通道，与按奇异值选低秩方向有何不同？",
+        "k=16和r=256分别限制什么？",
+        "Ho被零掩码后为什么不能直接使用普通逆？",
+        "为什么不能把本文CALDERA复现实验的数值与CALDERA原论文表格跨协议相减？"
+      ],
+      "comparison": {
+        "target": "2比特主体；4或16比特低秩因子",
+        "objective": "给联合Q+LR优化设计激活敏感的低秩初值",
+        "statistic": "按H对角Top-k选通道，使用受限非中心二阶矩",
+        "operation": "敏感低秩初始化 → 残差量化 → CALDERA式交替更新",
+        "calibration": "Llama2预计算统计；其他模型采集细节见第12–13页",
+        "extra": "保持原秩与位宽配置；新增通道选择和初始化步骤",
+        "limit": "Ho奇异处理待核对；少量种子；指标不逐项单调；权重量化范围"
+      },
+      "source": "用户本地Findings of ACL 2025排版原件，PDF18页，印刷页14453–14470。用户声明已读；未提供具体完成日期、掌握程度或实验记录，故不代填。"
     }
   ],
   "concepts": [
@@ -1468,6 +1574,14 @@ window.STUDY_DATA = {
         {
           "paper": "smoothquant",
           "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 1
+        },
+        {
+          "paper": "odlri",
+          "page": 5
         }
       ],
       "importOrder": 4,
@@ -1668,6 +1782,14 @@ window.STUDY_DATA = {
         },
         {
           "paper": "awq",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 2
+        },
+        {
+          "paper": "odlri",
           "page": 5
         }
       ],
@@ -2005,6 +2127,14 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 4
         }
       ],
       "captures": [
@@ -2179,6 +2309,14 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 4
+        },
+        {
+          "paper": "odlri",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 12
         }
       ],
       "importOrder": 13,
@@ -2258,6 +2396,10 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 24
+        },
+        {
+          "paper": "odlri",
+          "page": 3
         }
       ],
       "importOrder": 14,
@@ -2437,6 +2579,18 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 10
+        },
+        {
+          "paper": "odlri",
+          "page": 7
+        },
+        {
+          "paper": "odlri",
+          "page": 8
+        },
+        {
+          "paper": "odlri",
+          "page": 12
         }
       ],
       "captures": [
@@ -5779,6 +5933,10 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 28
+        },
+        {
+          "paper": "odlri",
+          "page": 12
         }
       ],
       "importOrder": 65,
@@ -5937,6 +6095,14 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 24
+        },
+        {
+          "paper": "odlri",
+          "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 5
         }
       ],
       "importOrder": 67,
@@ -6017,6 +6183,14 @@ window.STUDY_DATA = {
         {
           "paper": "caldera",
           "page": 27
+        },
+        {
+          "paper": "odlri",
+          "page": 7
+        },
+        {
+          "paper": "odlri",
+          "page": 8
         }
       ],
       "importOrder": 68,
@@ -6057,6 +6231,374 @@ window.STUDY_DATA = {
         "check": {
           "question": "低秩因子用4比特后，真实推理一定比16比特更快吗？",
           "answer": "不一定。解码与内核开销可能抵消带宽收益；CALDERA表6在给定硬件上就出现16比特因子更快的情况。"
+        }
+      }
+    },
+    {
+      "id": "joint-initialization-roles",
+      "name": "联合分解的初始化与角色分工",
+      "english": "Initialization and role assignment",
+      "group": "误差重构",
+      "summary": "先量化还是先做低秩近似，可以理解为给同一个交替框架选择不同的初始低秩项。",
+      "explanation": "同样的交替更新步骤不一定会消除初始差异。如果低秩项从零出发，量化主体往往先承担主要表示；如果从权重的低秩近似出发，低秩分支就可能先承担主要结构。ODLRI 将这个观察变成初始化设计问题，而不是假定多迭代几次一定到达同一个分解。",
+      "formula": "先量化还是先做低秩近似，可以理解为给同一个交替框架选择不同的初始低秩项。",
+      "latex": "W\\approx Q+C,\\quad\\operatorname{rank}(C)\\le r",
+      "misconception": "不保证。量化约束、非凸因子化及有限迭代都会保留初始化影响；表1也不证明所有层或所有初值必然遵循相同规律。",
+      "question": "迭代公式相同，是否保证不同初始化得到同一个解？",
+      "related": [
+        "caldera-joint",
+        "low-rank",
+        "output-error"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 1
+        },
+        {
+          "paper": "odlri",
+          "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 4
+        },
+        {
+          "paper": "odlri",
+          "page": 16
+        }
+      ],
+      "importOrder": 69,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "同样的交替更新步骤不一定会消除初始差异。如果低秩项从零出发，量化主体往往先承担主要表示；如果从权重的低秩近似出发，低秩分支就可能先承担主要结构。ODLRI 将这个观察变成初始化设计问题，而不是假定多迭代几次一定到达同一个分解。",
+        "symbols": [
+          [
+            "\\(Q_t\\)",
+            "第t轮的量化主体，采用本站行样本约定。"
+          ],
+          [
+            "\\(C_t=A_tB_t\\)",
+            "第t轮低秩项，A为输入维度乘秩，B为秩乘输出维度。"
+          ],
+          [
+            "\\(X\\)",
+            "按行排列的校准输入。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "把更新顺序重写成初始条件",
+            "text": "若低秩项初始为零，第一次主体更新就是直接量化W。若先构造权重的低秩近似，第一次主体量化的则是移除该近似后的残差。之后可以使用相同形式的交替更新，但到达的候选仍可能不同。",
+            "latex": "Q_t=\\operatorname{Quantize}(W-C_{t-1}),\\qquad C_t=\\operatorname{LRApprox}(W-Q_t)"
+          },
+          {
+            "title": "用输出范数观察角色，避免当成贡献百分比",
+            "text": "原文表1用各分支输出范数除以原输出范数，观察分工随迭代是否保留。这些量不是可加的份额，因为两个分支输出还存在内积交叉项；比例不必相加等于1。",
+            "latex": "\\|X(Q+C)\\|_F^2=\\|XQ\\|_F^2+\\|XC\\|_F^2+2\\langle XQ,XC\\rangle_F"
+          }
+        ],
+        "example": {
+          "text": "教学算例：某标量层目标输出为1，两个分支分别输出0.8和0.4。它们的范数比相加为1.2，合成输出也是1.2，并不精确重构原层。这说明范数比可用于诊断分工，却不是自动归一的贡献百分比。",
+          "latex": "0.8^2+0.4^2+2(0.8)(0.4)=1.2^2"
+        },
+        "connection": "CALDERA提供联合优化框架，ODLRI考察初值怎样分配角色；QERA通常在固定量化主体后重构残差。角色分工是实验观察，不是完整非凸问题的全局最优定理。",
+        "check": {
+          "question": "迭代公式相同，是否保证不同初始化得到同一个解？",
+          "answer": "不保证。量化约束、非凸因子化及有限迭代都会保留初始化影响；表1也不证明所有层或所有初值必然遵循相同规律。"
+        }
+      }
+    },
+    {
+      "id": "outlier-channel-mask",
+      "name": "激活敏感通道与受限二阶矩",
+      "english": "Outlier-channel mask and restricted second moment",
+      "group": "激活感知",
+      "summary": "按校准输入二阶矩的对角选出高能量输入通道，再用掩码保留这些通道及其交叉项。",
+      "explanation": "这里选择的是输入通道，不是直接挑最大的权重元素，也不是按奇异值挑主成分。一个输入通道能量很高时，与它连接的权重误差可能被放大。ODLRI 用校准二阶矩找这些通道，让初始化的低秩项先处理最敏感的部分。",
+      "formula": "按校准输入二阶矩的对角选出高能量输入通道，再用掩码保留这些通道及其交叉项。",
+      "latex": "I=\\operatorname{TopK}_j(H_{jj}),\\quad H_o=P_IHP_I",
+      "misconception": "不是。本文按输入二阶矩对角选通道；权重幅度和奇异方向是不同的排序对象。",
+      "question": "Top-k通道是否就是最大的k个权重或最大的k个奇异方向？",
+      "related": [
+        "autocorrelation",
+        "saliency",
+        "gram-psd"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 4
+        },
+        {
+          "paper": "odlri",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 12
+        },
+        {
+          "paper": "odlri",
+          "page": 14
+        }
+      ],
+      "importOrder": 70,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "这里选择的是输入通道，不是直接挑最大的权重元素，也不是按奇异值挑主成分。一个输入通道能量很高时，与它连接的权重误差可能被放大。ODLRI 用校准二阶矩找这些通道，让初始化的低秩项先处理最敏感的部分。",
+        "symbols": [
+          [
+            "\\(X\\in\\mathbb R^{N\\times m}\\)",
+            "本站行样本输入；原文输入矩阵朝向相反。"
+          ],
+          [
+            "\\(H=X^\\top X\\)",
+            "未除样本数的非中心二阶矩，非默认中心化协方差。"
+          ],
+          [
+            "\\(P_I\\)",
+            "选中通道为1、其余为0的m×m对角掩码。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "对角元素给出通道平方能量",
+            "text": "H的第j个对角元素是该输入通道在全部样本上的平方和。若使用统一除以样本数的版本，Top-k排序不变，但误差数值的归一化口径随之变化。均值不为零时，不能把这个量当作方差。",
+            "latex": "H_{jj}=\\sum_{i=1}^NX_{ij}^2"
+          },
+          {
+            "title": "同时遮蔽行列，保留选中通道间关系",
+            "text": "行样本约定下，选中输入为XP，剩余输入为X(I−P)。它们保持原形状，只在不同通道位置非零。受限二阶矩保留选中通道对应的行与列；它一般不是只取对角，也不是原H的完整替代。",
+            "latex": "X_o=XP_I,\\quad X_r=X(I-P_I),\\quad H_o=P_IHP_I"
+          }
+        ],
+        "example": {
+          "text": "教学算例：设两条输入为 [1,2,0] 和 [1,−2,3]，三通道能量为2、8、9。选k=1会选第3通道；该通道有非零均值，所以它的平方能量与中心化方差并不相同。",
+          "latex": "\\operatorname{diag}(X^\\top X)=(2,8,9),\\quad P_I=\\operatorname{diag}(0,0,1)"
+        },
+        "connection": "该选择与AWQ的激活感知思想有关，但后续操作不同：ODLRI把敏感结构交给低秩初始化，而不是直接复用AWQ的缩放算法。",
+        "check": {
+          "question": "Top-k通道是否就是最大的k个权重或最大的k个奇异方向？",
+          "answer": "不是。本文按输入二阶矩对角选通道；权重幅度和奇异方向是不同的排序对象。"
+        }
+      }
+    },
+    {
+      "id": "selective-whitening",
+      "name": "选择性白化与奇异矩阵边界",
+      "english": "Selective whitening and singular-matrix conditions",
+      "group": "线性代数",
+      "summary": "只在选中通道的统计度量中构造低秩初值；求逆前必须确认使用的是哪个可逆子空间。",
+      "explanation": "白化相关推导可以把带输入度量的逼近转换为普通矩阵逼近，但被遮蔽的二阶矩会有零行零列。阅读ODLRI附录时，要区分保留原尺寸的掩码矩阵和抽出的较小子矩阵；只有明确维度、正定性与映回方式，才能合法使用普通逆。",
+      "formula": "只在选中通道的统计度量中构造低秩初值；求逆前必须确认使用的是哪个可逆子空间。",
+      "latex": "H_o=P_IHP_I",
+      "misconception": "不能。完整矩阵秩不足；需要明确选中子空间、伪逆或正则化，并说明映回权重和目标是否改变。",
+      "question": "把Ho中未选中通道置零后，能否直接写Ho的普通逆？",
+      "related": [
+        "outlier-channel-mask",
+        "qera-exact",
+        "rank-constrained-regression"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 12
+        },
+        {
+          "paper": "odlri",
+          "page": 13
+        }
+      ],
+      "importOrder": 71,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "白化相关推导可以把带输入度量的逼近转换为普通矩阵逼近，但被遮蔽的二阶矩会有零行零列。阅读ODLRI附录时，要区分保留原尺寸的掩码矩阵和抽出的较小子矩阵；只有明确维度、正定性与映回方式，才能合法使用普通逆。",
+        "symbols": [
+          [
+            "\\(J\\in\\mathbb R^{m\\times k}\\)",
+            "由选中输入通道对应的标准基列组成，P=JJᵀ。"
+          ],
+          [
+            "\\(H_{II}=J^\\top HJ\\)",
+            "选中通道的k×k统计子矩阵。"
+          ],
+          [
+            "\\(S\\)",
+            "若HII正定，取其Cholesky因子，使HII=SSᵀ。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "把半正定掩码与正定子块分开",
+            "text": "完整掩码二阶矩的秩至多为k。只要k小于输入维度，它就不可能具有普通逆；选中子块也需要检查数据是否独立。正则化或伪逆可以处理部分困难，但应说明对应目标和未观测方向如何选择。",
+            "latex": "H_o=JH_{II}J^\\top,\\quad \\operatorname{rank}(H_o)\\le k<m"
+          },
+          {
+            "title": "从平方输出误差得到严格的迹表达",
+            "text": "记D为权重残差。在行样本约定下，输出平方Frobenius误差等于迹，而不是未指明范数的PSD矩阵范数。原文第12–13页写出矩阵范数及S的逆，但未充分说明遮蔽后零方向的处理；这里的等式为教学核对，不声称作者实现采用了某个修补方案。",
+            "latex": "\\|X_oD\\|_F^2=\\operatorname{tr}(D^\\top H_oD)=\\|S^\\top J^\\top D\\|_F^2\\quad(H_{II}=SS^\\top)"
+          }
+        ],
+        "example": {
+          "text": "教学算例：输入维度3、只选第1通道时，Ho=diag(9,0,0)没有普通逆。缩到选中子空间后HII=[9]、S=[3]可以求逆；但映回后的其他两通道仍需指定，不能假装已经从这些样本恢复。",
+          "latex": "H_o=\\begin{bmatrix}9&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix},\\quad H_{II}=[9]"
+        },
+        "connection": "与QERA的加权截断及CALDERA的连续回归子问题对照时，先核对统计矩阵的可逆条件，再讨论最优性；添加正则化属于明确的方法选择。",
+        "check": {
+          "question": "把Ho中未选中通道置零后，能否直接写Ho的普通逆？",
+          "answer": "不能。完整矩阵秩不足；需要明确选中子空间、伪逆或正则化，并说明映回权重和目标是否改变。"
+        }
+      }
+    },
+    {
+      "id": "odlri-initialization",
+      "name": "ODLRI：异常通道驱动的低秩初始化",
+      "english": "Outlier-Driven Low-Rank Initialization",
+      "group": "误差重构",
+      "summary": "先让低秩分支表示激活敏感结构，再量化剩余权重，随后继续完整的联合更新。",
+      "explanation": "零初始化把低秩项当作量化后的补丁，整权重低秩初始化又可能把大部分结构先交给低秩项。ODLRI选择第三种分工：用少量高能量输入通道指导初值，给量化主体留下更适合低比特表示的剩余结构，再在CALDERA框架内共同优化。",
+      "formula": "先让低秩分支表示激活敏感结构，再量化剩余权重，随后继续完整的联合更新。",
+      "latex": "W\\approx Q+AB",
+      "misconception": "不是。本文主要更换低秩初值，保留CALDERA式联合优化；不保证任意任务或每个配置都提升，也没有给出离散联合问题的全局最优证明。",
+      "question": "ODLRI是否替代CALDERA全部量化与因子更新步骤？",
+      "related": [
+        "joint-initialization-roles",
+        "outlier-channel-mask",
+        "selective-whitening",
+        "caldera-joint"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 3
+        },
+        {
+          "paper": "odlri",
+          "page": 4
+        },
+        {
+          "paper": "odlri",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 13
+        }
+      ],
+      "importOrder": 72,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "零初始化把低秩项当作量化后的补丁，整权重低秩初始化又可能把大部分结构先交给低秩项。ODLRI选择第三种分工：用少量高能量输入通道指导初值，给量化主体留下更适合低比特表示的剩余结构，再在CALDERA框架内共同优化。",
+        "symbols": [
+          [
+            "\\(C_0=A_0B_0\\)",
+            "激活敏感的初始低秩项。"
+          ],
+          [
+            "\\(Q_1\\)",
+            "第一次量化主体，针对移除初始低秩项后的剩余权重。"
+          ],
+          [
+            "\\(H_o\\)",
+            "仅保留选中通道的非中心二阶矩。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "先定义敏感部分的初始化目标",
+            "text": "按校准能量选出通道，并在这些通道的输出误差度量中求初始低秩表示。本文第5页目标的矩阵范数记法有待核对，本站教学采用相应的平方输出误差与迹表达，同时保留选择性白化的奇异条件提醒。",
+            "latex": "\\min_{\\operatorname{rank}(C_0)\\le r}\\operatorname{tr}\\!\\left((W-C_0)^\\top H_o(W-C_0)\\right)"
+          },
+          {
+            "title": "再量化残差并继续全目标更新",
+            "text": "初始低秩项构造之后，对W−C0运行原主体量化器。之后仍交替更新主体和低秩项，并未把原模型中的异常权重永久删掉，也不是只在少数通道上评估整个模型。",
+            "latex": "Q_1=\\operatorname{Quantize}(W-C_0),\\quad \\widehat Y=XQ_t+X A_tB_t"
+          }
+        ],
+        "example": {
+          "text": "教学算例：若某个敏感输入通道对应的权重行由低秩项先表示，主体第一次量化的就不再是这整行原值，而是减去该表示后的剩余项。此时量化范围可能缩小，但若因子精度不足或其他方向残差变大，仍需看完整误差和任务指标。",
+          "latex": "W=\\begin{bmatrix}8&4\\\\1&1\\end{bmatrix},\\ C_0=\\begin{bmatrix}8&4\\\\0&0\\end{bmatrix},\\ W-C_0=\\begin{bmatrix}0&0\\\\1&1\\end{bmatrix}"
+        },
+        "connection": "ODLRI是CALDERA中的初始化改动；QERA是固定主体后的统计加权重构。两者都使用输入信息，但优化变量、初始化角色与迭代协议不同，不能仅凭相似加权公式判作同一方法。",
+        "check": {
+          "question": "ODLRI是否替代CALDERA全部量化与因子更新步骤？",
+          "answer": "不是。本文主要更换低秩初值，保留CALDERA式联合优化；不保证任意任务或每个配置都提升，也没有给出离散联合问题的全局最优证明。"
+        }
+      }
+    },
+    {
+      "id": "odlri-k-vs-r",
+      "name": "选中通道数k与分解秩r",
+      "english": "Selected-channel count versus factor rank",
+      "group": "误差重构",
+      "summary": "k是初始化关注的输入通道数量，r是低秩因子的表示预算；本文采用k小于r。",
+      "explanation": "两个参数都写成较小整数，容易被当成同一个“保留多少维”。实际上，k控制最初用哪些输入坐标定义敏感目标，r控制低秩分支最多能提供多少独立方向。它们的对象不同；进入后续全目标更新后，分支也不被简单限制为只处理最初的k个坐标。",
+      "formula": "k是初始化关注的输入通道数量，r是低秩因子的表示预算；本文采用k小于r。",
+      "latex": "\\#(A,B)=r(m+n)",
+      "misconception": "不能。按论文配置保存的因子内部宽度仍为256；只有实际改变因子形状或压缩格式后，存储预算才相应改变。",
+      "question": "k=16、r=256时，能否按rank16直接计算低秩分支存储？",
+      "related": [
+        "outlier-channel-mask",
+        "factor-bit-budget",
+        "low-rank"
+      ],
+      "refs": [
+        {
+          "paper": "odlri",
+          "page": 5
+        },
+        {
+          "paper": "odlri",
+          "page": 8
+        },
+        {
+          "paper": "odlri",
+          "page": 14
+        }
+      ],
+      "importOrder": 73,
+      "lesson": {
+        "kind": "teaching",
+        "intuition": "两个参数都写成较小整数，容易被当成同一个“保留多少维”。实际上，k控制最初用哪些输入坐标定义敏感目标，r控制低秩分支最多能提供多少独立方向。它们的对象不同；进入后续全目标更新后，分支也不被简单限制为只处理最初的k个坐标。",
+        "symbols": [
+          [
+            "\\(k=|I|\\)",
+            "按二阶矩对角选中的输入通道数。"
+          ],
+          [
+            "\\(r\\)",
+            "两个低秩因子的内部宽度，也是乘积秩的上限。"
+          ],
+          [
+            "\\(p\\)",
+            "本文按r选择的通道百分比，具体比例为实验设置。"
+          ]
+        ],
+        "steps": [
+          {
+            "title": "百分比由输入维度换算",
+            "text": "附录B.2对r=64、128、256分别采用0.1%、0.2%、0.4%的输入通道。k必须是整数；论文给出近似示例，但未在文字中完整规定所有维度下的取整规则，复现时应核对实现。",
+            "latex": "k\\approx p\\,m,\\quad r=256:\\ p=0.004"
+          },
+          {
+            "title": "区分初始目标秩与后续容量",
+            "text": "掩码Ho的秩至多为k，所以初始化的敏感加权矩阵也至多含k个非零方向。取r大于k不意味着初始SVD会产生r个非零敏感成分；后续使用完整统计及量化更新时，剩余预算的作用需要按实际算法核对。",
+            "latex": "\\operatorname{rank}(H_o)\\le k<r,\\qquad \\operatorname{rank}(AB)\\le r"
+          }
+        ],
+        "example": {
+          "text": "教学算例：4096个输入通道、r=256时，0.4%乘4096得到16.384，论文示例约取16个通道。r仍然是256，不能把附加分支参数量算成只需rank16，也不能把16误读为16比特。",
+          "latex": "0.004\\times4096=16.384\\approx16"
+        },
+        "connection": "第8页表5用k=256和k=16比较初始化，r都为256。应结合已有因子比特预算卡片计算存储，再分别看初始化效果，而非把通道选择数当作压缩秩。",
+        "check": {
+          "question": "k=16、r=256时，能否按rank16直接计算低秩分支存储？",
+          "answer": "不能。按论文配置保存的因子内部宽度仍为256；只有实际改变因子形状或压缩格式后，存储预算才相应改变。"
         }
       }
     }
