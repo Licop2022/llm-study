@@ -1,7 +1,7 @@
 /* 稳定 ID 与 importOrder 保留个人记录和首次导入顺序。 */
 window.STUDY_DATA = {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02",
+  "updatedAt": "2026-11-23",
   "title": "LLM 量化与张量学习",
   "notation": "统一采用行样本约定：X ∈ ℝᴺˣᵐ，W ∈ ℝᵐˣⁿ，Y = XW。Wq 表示量化并反量化后的浮点等效权重；原论文的矩阵朝向可能不同。引用页码均为 PDF 物理页码。",
   "papers": [
@@ -1311,6 +1311,82 @@ window.STUDY_DATA = {
         "limit": "Ho奇异处理待核对；少量种子；指标不逐项单调；权重量化范围"
       },
       "source": "用户本地Findings of ACL 2025排版原件，PDF18页，印刷页14453–14470。用户声明已读；未提供具体完成日期、掌握程度或实验记录，故不代填。"
+    },
+    {
+      "id": "gear",
+      "name": "GEAR",
+      "title": "GEAR: An Efficient KV Cache Compression Recipe for Near-Lossless Generative Inference of LLM",
+      "authors": "Hao Kang et al.",
+      "year": 2024,
+      "venue": "NeurIPS ENLSP Workshop 2024",
+      "arxiv": "2403.05527",
+      "phase": "P3",
+      "category": "KV 缓存压缩",
+      "pdf": "https://arxiv.org/pdf/2403.05527",
+      "pages": 28,
+      "version": "arXiv 预印本",
+      "color": "teal",
+      "tags": [
+        "KV 缓存",
+        "低比特量化",
+        "低秩误差补偿",
+        "离群值"
+      ],
+      "concepts": [],
+      "tagline": "用低比特量化、低秩残差和稀疏离群项压缩推理时的 KV 缓存。",
+      "question": "怎样降低自回归推理中 KV 缓存的显存占用，同时控制压缩误差？",
+      "mechanism": "将大多数缓存元素量化到低精度，用低秩矩阵近似量化残差，并用稀疏项校正离群值。",
+      "evidence": "论文比较了低比特缓存的任务表现，并报告了相对 FP16 缓存的峰值显存和吞吐量。",
+      "caveat": "显存和吞吐量结果受模型、缓存位宽和推理配置影响。",
+      "initialStatus": "read",
+      "formula": "",
+      "latex": "",
+      "reading": [
+        {
+          "page": 1,
+          "label": "论文摘要"
+        }
+      ],
+      "checks": [],
+      "source": "原文：arXiv:2403.05527。"
+    },
+    {
+      "id": "projq",
+      "name": "ProjQ",
+      "title": "ProjQ: Project-and-Quantize for Adapter-Aware LLM Compression",
+      "authors": "Wenya Yu et al.",
+      "year": 2026,
+      "venue": "ICML 2026",
+      "arxiv": "2606.00494",
+      "phase": "P3",
+      "category": "误差补偿进阶",
+      "pdf": "https://arxiv.org/pdf/2606.00494",
+      "pages": 16,
+      "version": "arXiv 预印本",
+      "color": "teal",
+      "tags": [
+        "权重量化",
+        "LoRA",
+        "子空间投影",
+        "低秩误差补偿"
+      ],
+      "concepts": [],
+      "tagline": "用正交子空间投影塑造权重量化误差，使主要误差更容易由后续的低秩适配器补偿。",
+      "question": "如何在量化阶段控制误差结构，为后续 LoRA 微调保留更多适配能力？",
+      "mechanism": "交替执行子空间投影和量化，将主要误差集中到适配器可补偿的低秩子空间，并压低正交子空间中的残余误差。",
+      "evidence": "论文在 LLaMA-2、Qwen2.5 和 Qwen3 上评估了量化误差补偿与下游任务微调。",
+      "caveat": "实验结论对应论文评估的模型、位宽和适配器配置。",
+      "initialStatus": "read",
+      "formula": "",
+      "latex": "",
+      "reading": [
+        {
+          "page": 1,
+          "label": "论文摘要"
+        }
+      ],
+      "checks": [],
+      "source": "原文：arXiv:2606.00494。"
     }
   ],
   "concepts": [
@@ -6610,6 +6686,20 @@ window.STUDY_DATA = {
       "date": "2026-10-10",
       "title": "阅读 QERA",
       "text": "今天阅读了 QERA。具体理解、问题与对话内容尚未提供。"
+    },
+    {
+      "id": "read-gear-2026-11-23",
+      "paper": "gear",
+      "date": "2026-11-23",
+      "title": "阅读 GEAR",
+      "text": "读完 GEAR。"
+    },
+    {
+      "id": "read-projq-2026-11-23",
+      "paper": "projq",
+      "date": "2026-11-23",
+      "title": "阅读 ProjQ",
+      "text": "读完 ProjQ。"
     }
   ],
   "experimentLearning": {
