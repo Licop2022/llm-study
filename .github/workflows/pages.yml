@@ -13,12 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      actions: read
       pages: write
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/configure-pages@v5
@@ -26,25 +25,22 @@ jobs:
         run: |
           mkdir -p /tmp/learning-site
           tar --exclude='./.git' --exclude='./.github' --exclude='./.gitignore' --exclude='./README.md' -cf - . | tar -xf - -C /tmp/learning-site
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           name: github-pages-${{ github.run_attempt }}
           path: /tmp/learning-site
-      - name: Wait for the Pages artifact
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ARTIFACT_NAME: github-pages-${{ github.run_attempt }}
-        run: |
-          for attempt in {1..12}; do
-            if count="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=$ARTIFACT_NAME" --jq '.total_count')" && [[ "$count" == 1 ]]; then
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "::error::GitHub Actions did not list the Pages artifact within 60 seconds."
-          exit 1
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
+      - name: Wait before retrying deployment
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 15
+      - name: Retry deployment
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v5
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
