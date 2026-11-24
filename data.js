@@ -1,7 +1,7 @@
 /* 稳定 ID 与 importOrder 保留个人记录和首次导入顺序。 */
 window.STUDY_DATA = {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-23",
+  "updatedAt": "2026-11-24",
   "title": "LLM 量化与张量学习",
   "notation": "统一采用行样本约定：X ∈ ℝᴺˣᵐ，W ∈ ℝᵐˣⁿ，Y = XW。Wq 表示量化并反量化后的浮点等效权重；原论文的矩阵朝向可能不同。引用页码均为 PDF 物理页码。",
   "papers": [
@@ -1387,6 +1387,81 @@ window.STUDY_DATA = {
       ],
       "checks": [],
       "source": "原文：arXiv:2606.00494。"
+    },
+    {
+      "id": "slim",
+      "name": "SLiM",
+      "title": "SLiM: One-shot Quantization and Sparsity with Low-rank Approximation for LLM Weight Compression",
+      "authors": "Mohammad Mozaffari et al.",
+      "year": 2025,
+      "venue": "ICML 2025",
+      "arxiv": "2410.09615",
+      "phase": "P3",
+      "category": "误差补偿进阶",
+      "pages": 26,
+      "tags": [
+        "权重量化",
+        "结构化稀疏",
+        "低秩误差补偿"
+      ],
+      "tagline": "把低比特量化、结构化稀疏和低秩近似组合到一次性权重压缩流程中。",
+      "question": "如何在无需重新训练的情况下，结合量化与稀疏化压缩语言模型权重？",
+      "mechanism": "SLiM 在一次性压缩中使用硬件友好的量化和结构化稀疏，并用低秩分量补偿压缩带来的信息损失。",
+      "evidence": "论文评估了多种稀疏与量化设置下的模型表现，并比较了加入低秩补偿前后的效果。",
+      "caveat": "实际加速取决于推理硬件和算子对所用稀疏模式、量化格式的支持。",
+      "pdf": "https://arxiv.org/pdf/2410.09615",
+      "version": "arXiv 预印本",
+      "initialStatus": "read",
+      "color": "teal",
+      "concepts": [],
+      "formula": "",
+      "latex": "",
+      "reading": [
+        {
+          "page": 1,
+          "label": "论文摘要"
+        }
+      ],
+      "checks": [],
+      "source": "原文：arXiv:2410.09615。"
+    },
+    {
+      "id": "lq-lora",
+      "name": "LQ-LoRA",
+      "title": "LQ-LoRA: Low-rank Plus Quantized Matrix Decomposition for Efficient Language Model Finetuning",
+      "authors": "Han Guo et al.",
+      "year": 2024,
+      "venue": "ICLR 2024",
+      "arxiv": "2311.12023",
+      "phase": "P3",
+      "category": "误差补偿进阶",
+      "pages": 17,
+      "tags": [
+        "权重量化",
+        "LoRA",
+        "低秩分解",
+        "混合精度"
+      ],
+      "tagline": "将预训练权重分解成冻结的量化矩阵与可训练的低秩分量，以降低微调开销。",
+      "question": "如何利用低秩分量减轻低比特权重量化对语言模型微调的影响？",
+      "mechanism": "在微调前交替估计低秩项与量化项。微调期间冻结量化项并训练低秩因子。论文还研究了按经验 Fisher 信息加权的分解。",
+      "evidence": "论文在 RoBERTa 和 LLaMA-2（7B、70B）上评估了下游微调和不同位宽下的表现。",
+      "caveat": "微调结果取决于模型、任务、低秩分量的秩以及量化配置。",
+      "pdf": "https://arxiv.org/pdf/2311.12023",
+      "version": "arXiv 预印本",
+      "initialStatus": "read",
+      "color": "teal",
+      "concepts": [],
+      "formula": "",
+      "latex": "",
+      "reading": [
+        {
+          "page": 1,
+          "label": "论文摘要"
+        }
+      ],
+      "checks": [],
+      "source": "原文：arXiv:2311.12023。"
     }
   ],
   "concepts": [
@@ -6700,6 +6775,20 @@ window.STUDY_DATA = {
       "date": "2026-11-23",
       "title": "阅读 ProjQ",
       "text": "读完 ProjQ。"
+    },
+    {
+      "id": "read-slim-2026-11-24",
+      "paper": "slim",
+      "date": "2026-11-24",
+      "title": "阅读 SLiM",
+      "text": "读完 SLiM。"
+    },
+    {
+      "id": "read-lq-lora-2026-11-24",
+      "paper": "lq-lora",
+      "date": "2026-11-24",
+      "title": "阅读 LQ-LoRA",
+      "text": "读完 LQ-LoRA。"
     }
   ],
   "experimentLearning": {
